@@ -26,10 +26,12 @@ var P={
  chat:'<path d="M4 20l1.4-4.2A8 8 0 1 1 8.4 18.8z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-2-1-.9.6a4 4 0 0 1-1.8-1.8l.6-.9-1-2z"/>',
  phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ cake:'<path d="M4 20h16v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2z"/><path d="M4 15c2 1.4 3.5 1.4 5 0s3-1.4 5 0 3.5 1.4 5 0"/><path d="M12 10V7"/><path d="M12 5.5c.8-1 .8-1.6 0-2.5-.8.9-.8 1.5 0 2.5z"/>',
  shop:'<path d="M4 9l1.5-5h13L20 9"/><path d="M4 9a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0A2.7 2.7 0 0 0 20 9"/><path d="M5 12v8h14v-8"/>'
 };
 function I(n){return '<svg class="i" viewBox="0 0 24 24" aria-hidden="true">'+P[n]+'</svg>'}
 
+function G(g,list){return list.map(function(x){return [x[0],x[1],g]})}
 var SHOPS=[
  {id:"khan-food-point",name:"Khan Food Point",cat:"Food & Grocery",hue:24,ic:"bowl",kind:"product",
   blurb:"Fresh dairy and desi breakfast items.",address:"Jhang Mor",area:"Jhang Mor",
@@ -41,11 +43,11 @@ var SHOPS=[
   blurb:"Pods, vapes and flavours.",address:"Opposite Suhail Petroleum Pump, Makkah Plaza",area:"Makkah Plaza",
   note:"Sold to adults 18 and over only.",
   items:[["Pods",""],["Vapes",""],["Flavours",""]]},
- {id:"warda-drink-corner",name:"Warda Drink Corner",cat:"Drinks & Smoke",hue:190,ic:"cup",kind:"product",
+ {id:"warda-drink-corner",name:"Warda Drink Corner",cat:"Drinks & Smoke",hue:175,ic:"cup",kind:"product",
   blurb:"Cold drinks and snacks.",address:"Purani Ghass Mandi Chowk, Tabakhiyan",area:"Purani Ghass Mandi Chowk",
   note:"Cigarettes are sold to adults 18 and over only.",
   items:[["Cold drinks","Thandi bottle"],["Cigarettes",""],["Snacks",""]]},
- {id:"ali-tailors",name:"Ali Tailor's",cat:"Tailor & Beauty",hue:212,ic:"scissors",kind:"service",
+ {id:"ali-tailors",name:"Ali Tailor's",cat:"Tailor & Beauty",hue:250,ic:"scissors",kind:"service",
   blurb:"Stitching for men and women.",address:"Near the water plant",area:"Water plant",
   items:[["Gents suits","Stitching"],["Ladies suits","Stitching"],["Waistcoat stitching",""],["Coat stitching",""],["Shirt stitching",""]]},
  {id:"shades-beauty-parlour",name:"Shade's Beauty Parlour",cat:"Tailor & Beauty",hue:326,ic:"sparkle",kind:"service",
@@ -54,15 +56,23 @@ var SHOPS=[
  {id:"kashmiri-tuition-center",name:"Kashmiri Tuition Center",cat:"Health & Learning",hue:150,ic:"book",kind:"service",
   blurb:"Tuition classes for girls and boys.",address:"Near Kashmiri Chowk",area:"Kashmiri Chowk",
   items:[["Girls classes","Prep Group (PG) to Matric"],["Boys classes","Prep Group (PG) to 5th"]]},
- {id:"al-nasir-homeo-clinic",name:"Al-Nasir Homeo Clinic",cat:"Health & Learning",hue:172,ic:"cross",kind:"product",
+ {id:"al-nasir-homeo-clinic",name:"Al-Nasir Homeo Clinic",cat:"Health & Learning",hue:205,ic:"cross",kind:"product",
   blurb:"A 12-hour doctor and a full range of medicines.",address:"Tida, Karimabad",area:"Tida, Karimabad",
   items:[["All varieties of medicine",""],["Homeopathic medicine",""],["Doctor visit","Doctor available 12 hours"]]},
  {id:"abbas-electronics-workshop",name:"Abbas Electronics Workshop",cat:"Electronics",hue:38,ic:"wrench",kind:"service",
   blurb:"Repair and installation for TVs, appliances and audio.",address:"Kashmiri Chowk",area:"Kashmiri Chowk",
   items:[["LED / LCD repairing",""],["Microwave oven repairing",""],["Beauty equipment repairing",""],["Professional LED installation",""],["Audio speaker and mic repairing",""]]},
- {id:"hashmi-electronics",name:"Hashmi Electronics",cat:"Electronics",hue:232,ic:"tv",kind:"product",
+ {id:"hashmi-electronics",name:"Hashmi Electronics",cat:"Electronics",hue:215,ic:"tv",kind:"product",
   blurb:"LED TVs, Q-LED TVs and Audionic speakers.",address:"Qinwan Chowk",area:"Qinwan Chowk",
-  items:[["LED TV","All varieties"],["Q-LED TV","All varieties"],["Audionic speakers","All varieties"]]}
+  items:[["LED TV","All varieties"],["Q-LED TV","All varieties"],["Audionic speakers","All varieties"]]},
+ {id:"mamas-bake",name:"Mama's Bake",cat:"Food & Grocery",hue:295,ic:"cake",kind:"product",
+  blurb:"Fresh and tasty cakes, cupcakes, brownies, donuts and gluten-free bakes.",address:"Opposite Police Welfare Petrol Pump, Jhang Mor, Muzaffargarh",area:"Jhang Mor",
+  items:G("Cakes",[["Simple vanilla cake","Rs. 800"],["Pineapple cake","Rs. 800"],["Vanilla strawberry cake","Rs. 800"],["Vanilla pineapple cake","Rs. 800"],["Vanilla careem","Rs. 800"],["Vanilla caramel cake","Rs. 1,000"],["Vanilla and chocolate 2 in 1 cake","Rs. 1,200"],["Vanilla butterfly theme cake","Rs. 1,000"],["Vintage cake","Rs. 800"],["Simple fruit cake","Rs. 700"],["Marble tea cake","Rs. 800"],["Almond cake","Rs. 800"],["Almond macron cake","Rs. 1,000"],["Three milk cake","Rs. 1,500"],["Three milk lotus spread cake","Rs. 2,000"],["Simple vanilla pineapple cake, 3 pound","Rs. 2,500"],["Two tier cake","Rs. 1,000"],["Banto cake","Rs. 500"],["Event cake","Rs. 1,200"],["Anniversary theme cake","Rs. 1,200"],["Umrah mubarak cake","Rs. 1,200"],["Umrah theme cake","Rs. 1,200"],["Chocolate hajj cake","Rs. 1,200"],["White chocolate decorate cake","Rs. 1,500"]])
+   .concat(G("Chocolate cakes",[["Simple chocolate cream cake","Rs. 1,000"],["Chocolate mud cake","Rs. 1,200"],["Chocolate ganash cake","Rs. 1,200"],["Chocolate fudge cake","Rs. 1,500"],["Death by chocolate cake","Rs. 1,500"],["Chocolate chip cake","Rs. 1,000"],["Fudge cake","Rs. 2,000 per pound"]]))
+   .concat(G("Brownies",[["Fudge brownie","Rs. 150"],["Cakie brownie","Rs. 100"]]))
+   .concat(G("Cupcakes",[["Chocolate fudge + filling cupcake","Rs. 200"],["Chocolate fudge simple","Rs. 150"],["Chocolate filling cupcakes","Rs. 120"],["Chocolate cream cupcake","Rs. 100"],["Vanilla cupcakes with caramel filling","Rs. 120"],["Vanilla cream + filling","Rs. 100"],["Vanilla simple","Rs. 80"]]))
+   .concat(G("Donuts",[["Baked donut sprinkle","Rs. 80"],["Drizzling baked donut","Rs. 100"]]))
+   .concat(G("Gluten-free items",[["Gluten free muffins","Rs. 120"],["Gluten free homemade buttercream cupcakes","Rs. 150"],["Gluten free homemade buttercream cake","Rs. 1,500"],["Gluten free tea cake","Rs. 1,000"]]))}
 ];
 var DEL=[["truck","Delivery on orders of Rs. 500 or more. Delivery charges depend on distance."],["tag","For product prices, contact the shop."]];
 var INFO={
@@ -79,7 +89,10 @@ var INFO={
  "kashmiri-tuition-center":{tags:["Admission on contact"],facts:[["book","For admission, contact the center."]],close:"Please tell me about admission and fees.",msg:"Hello Kashmiri Tuition Center, I found you on Markezo. I want to ask about admission."},
  "al-nasir-homeo-clinic":{phone:"923094658416",disp:"0309-4658416",tags:["12-hour doctor"],facts:[["clock","A doctor is available for 12 hours."],["phone","For an appointment, contact the clinic."]],close:"Please tell me about the appointment time.",msg:"Hello Al-Nasir Homeo Clinic, I found you on Markezo. I want to book an appointment."},
  "abbas-electronics-workshop":{tags:["Appointment on contact"],facts:[["phone","For an appointment, contact the workshop."]],close:"Please tell me about the appointment time.",msg:"Hello Abbas Electronics Workshop, I found you on Markezo. I want to book an appointment for a repair."},
- "hashmi-electronics":{close:"Please tell me the price.",msg:"Hello Hashmi Electronics, I found you on Markezo. I want to ask about LED TVs and speakers."}
+ "hashmi-electronics":{close:"Please tell me the price.",msg:"Hello Hashmi Electronics, I found you on Markezo. I want to ask about LED TVs and speakers."},
+ "mamas-bake":{phone:"923318811235",disp:"0331-8811235",tags:["Home delivery","Pay first"],
+  facts:[["truck","Home delivery is available."],["alert","Payment is taken first, before delivery."],["tag","Prices are from the shop's WhatsApp catalogue. Please confirm with the shop."]],
+  close:"Please tell me the total price, the delivery charge and how to pay.",msg:"Hello Mama's Bake, I found you on Markezo. I want to order. Please tell me about delivery and payment."}
 };
 SHOPS.forEach(function(s){var x=INFO[s.id]||{};for(var k in x)s[k]=x[k]});
 var CATS=["All"].concat(SHOPS.map(function(s){return s.cat}).filter(function(c,i,a){return a.indexOf(c)===i}));
@@ -88,7 +101,12 @@ var cart={}, cat="All", q="", toastT=null;
 
 function $(s){return document.querySelector(s)}
 function byId(id){return SHOPS.filter(function(s){return s.id===id})[0]}
-function mapUrl(s){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(s.name+", "+s.address)}
+function mapUrl(s){
+  if(s.maplink)return s.maplink;
+  var q=s.name+", "+s.address;
+  if(!/muzaffargarh/i.test(q))q+=", Muzaffargarh";
+  return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q+", Pakistan");
+}
 function total(){var n=0;for(var k in cart)n+=cart[k];return n}
 function st(s){return '--h:'+s.hue}
 
@@ -109,8 +127,18 @@ function contactHtml(s){
 }
 function syncWa(){var a=document.querySelectorAll("a[data-wa]");for(var i=0;i<a.length;i++){var s=byId(a[i].dataset.wa);a[i].href=waUrl(s,waText(s))}}
 function logoBox(s,cls){
-  var c=(s.id==="khan-food-point")?" contain":"";
+  var c=(s.id==="khan-food-point"||s.id==="mamas-bake")?" contain":"";
   return '<div class="'+cls+c+'"><span class="fb">'+I(s.ic)+'</span><img src="logos/'+s.id+'.webp" alt="'+s.name+' logo"></div>';
+}
+function storeCard(s){
+  var n=s.items.length, label=n+(s.kind==="service"?" services":" items");
+  var tags=(s.tags&&s.tags.length)?'<div class="ctags">'+s.tags.map(function(t){return '<span>'+t+'</span>'}).join("")+'</div>':'';
+  return '<a class="card sg" href="#shop-'+s.id+'" style="'+st(s)+'">'+
+    '<div class="lg2" style="--logo:url(logos/'+s.id+'.webp)"><img src="logos/'+s.id+'.webp" alt="'+s.name+' logo"></div>'+
+    '<div class="cbody"><div class="crow"><span class="ccat">'+s.cat+'</span><span class="cn">'+label+'</span></div>'+
+    '<h3>'+s.name+'</h3><p class="cdesc">'+s.blurb+'</p>'+tags+
+    '<div class="cloc">'+I("pin")+'<span>'+s.address+'</span></div>'+
+    '<span class="visit">Visit store'+I("arrow")+'</span></div></a>';
 }
 function shopCard(s,big){
   var pv=big?'<div class="pv">'+s.items.slice(0,4).map(function(i){return '<span>'+i[0]+'</span>'}).join("")+'</div>':'';
@@ -125,16 +153,17 @@ function areaBlocks(){
     return '<div class="area"><h3>'+I("pin")+a+'</h3>'+list.map(function(s){return '<a href="#shop-'+s.id+'">'+s.name+'<span>'+s.cat+'</span></a>'}).join("")+'</div>';
   }).join("");
 }
+function pick3(){var a=SHOPS.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a.slice(0,3)}
 function homeView(){
-  var stack=[SHOPS[0],SHOPS[9],SHOPS[5]].map(function(s,i){
+  var stack=pick3().map(function(s,i){
     return '<a class="mini sg" href="#shop-'+s.id+'" style="'+st(s)+';background:linear-gradient(145deg,var(--c1),var(--c2))"><span class="ic">'+I(s.ic)+'</span><span><b>'+s.name+'</b><span>'+s.address+'</span></span></a>';
   }).join("");
   $("#view").innerHTML=
-   '<div class="wrap"><section class="hero"><div><span class="eyebrow"><i></i>10 local shops are open</span>'+
+   '<div class="wrap"><section class="hero"><div><span class="eyebrow"><i></i>11 local shops, one bazaar</span>'+
    '<h1>Your whole <em>bazaar</em>, in one place.</h1>'+
    '<p>Browse each shop\'s store, see what they sell, and find exactly where they are.</p>'+
    '<label class="search">'+I("search")+'<input id="q" type="search" placeholder="Search a shop, product or area" aria-label="Search shops"></label>'+
-   '<div class="stats"><div><b>10</b><span>Shops</span></div><div><b>8</b><span>Areas</span></div><div><b>40+</b><span>Products and services</span></div></div></div>'+
+   '<div class="stats"><div><b>11</b><span>Shops</span></div><div><b>8</b><span>Areas</span></div><div><b>80+</b><span>Products and services</span></div></div></div>'+
    '<div class="stack">'+stack+'</div></section>'+
    '<div class="cats" id="cats"></div>'+
    '<div class="head"><h2 id="gt">All stores</h2><span class="count" id="count"></span></div>'+
@@ -157,8 +186,8 @@ function filterGrid(){
     var hay=(s.name+" "+s.cat+" "+s.address+" "+s.blurb+" "+s.items.map(function(i){return i[0]+" "+i[1]}).join(" ")).toLowerCase();
     return hay.indexOf(t)>-1;
   });
-  var bigAt=plain?{0:1,5:1}:{};
-  $("#grid").innerHTML=list.length?list.map(function(s,i){return shopCard(s,!!bigAt[i])}).join(""):'<p class="empty">No shop matches that search. Try another word.</p>';
+  var bigAt=plain?{0:1,3:1,7:1,10:1}:{};
+  $("#grid").innerHTML=list.length?list.map(function(s,i){return storeCard(s)}).join(""):'<p class="empty">No shop matches that search. Try another word.</p>';
   $("#count").textContent=list.length+(list.length===1?" shop":" shops");
   $("#gt").textContent=cat==="All"?"All stores":cat;
 }
@@ -185,9 +214,10 @@ function shopView(s){
   $("#copyAddr").addEventListener("click",function(e){copyText(s.name+", "+s.address,e.currentTarget)});
 }
 function drawProducts(s){
-  syncWa();var el=$("#plist"); if(!el)return;
+  syncWa();var el=$("#plist"); if(!el)return;var lastG="";
   el.innerHTML=s.items.map(function(it,i){
-    return '<div class="prod"><div class="top"><span class="b">'+I(s.ic)+'</span><div><h3>'+it[0]+'</h3>'+(it[1]?'<small>'+it[1]+'</small>':'')+'</div></div>'+prodControl(s,i)+'</div>';
+    var gh=(it[2]&&it[2]!==lastG)?'<h3 class="gh">'+(lastG=it[2])+'</h3>':'';
+    return gh+'<div class="prod"><div class="top"><span class="b">'+I(s.ic)+'</span><div><h3>'+it[0]+'</h3>'+(it[1]?'<small>'+it[1]+'</small>':'')+'</div></div>'+prodControl(s,i)+'</div>';
   }).join("");
 }
 function route(){
