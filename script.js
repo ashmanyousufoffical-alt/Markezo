@@ -21,6 +21,7 @@ var P={
  alert:'<circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/>',
  copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',
  plus:'<path d="M12 5v14M5 12h14"/>',
+ speaker:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>',
  truck:'<path d="M3 6h11v9H3z"/><path d="M14 9h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>',
  tag:'<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.2"/>',
  chat:'<path d="M4 20l1.4-4.2A8 8 0 1 1 8.4 18.8z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-2-1-.9.6a4 4 0 0 1-1.8-1.8l.6-.9-1-2z"/>',
@@ -59,9 +60,6 @@ var SHOPS=[
  {id:"al-nasir-homeo-clinic",name:"Al-Nasir Homeo Clinic",cat:"Health & Learning",hue:205,ic:"cross",kind:"product",
   blurb:"A 12-hour doctor and a full range of medicines.",address:"Tida, Karimabad",area:"Tida, Karimabad",
   items:[["All varieties of medicine",""],["Homeopathic medicine",""],["Doctor visit","Doctor available 12 hours"]]},
- {id:"abbas-electronics-workshop",name:"Abbas Electronics Workshop",cat:"Electronics",hue:38,ic:"wrench",kind:"service",
-  blurb:"Repair and installation for TVs, appliances and audio.",address:"Kashmiri Chowk",area:"Kashmiri Chowk",
-  items:[["LED / LCD repairing",""],["Microwave oven repairing",""],["Beauty equipment repairing",""],["Professional LED installation",""],["Audio speaker and mic repairing",""]]},
  {id:"hashmi-electronics",name:"Hashmi Electronics",cat:"Electronics",hue:215,ic:"tv",kind:"product",
   blurb:"LED TVs, Q-LED TVs and Audionic speakers.",address:"Qinwan Chowk",area:"Qinwan Chowk",
   items:[["LED TV","All varieties"],["Q-LED TV","All varieties"],["Audionic speakers","All varieties"]]},
@@ -72,12 +70,20 @@ var SHOPS=[
    .concat(G("Brownies",[["Fudge brownie","Rs. 150"],["Cakie brownie","Rs. 100"]]))
    .concat(G("Cupcakes",[["Chocolate fudge + filling cupcake","Rs. 200"],["Chocolate fudge simple","Rs. 150"],["Chocolate filling cupcakes","Rs. 120"],["Chocolate cream cupcake","Rs. 100"],["Vanilla cupcakes with caramel filling","Rs. 120"],["Vanilla cream + filling","Rs. 100"],["Vanilla simple","Rs. 80"]]))
    .concat(G("Donuts",[["Baked donut sprinkle","Rs. 80"],["Drizzling baked donut","Rs. 100"]]))
-   .concat(G("Gluten-free items",[["Gluten free muffins","Rs. 120"],["Gluten free homemade buttercream cupcakes","Rs. 150"],["Gluten free homemade buttercream cake","Rs. 1,500"],["Gluten free tea cake","Rs. 1,000"]]))}
+   .concat(G("Gluten-free items",[["Gluten free muffins","Rs. 120"],["Gluten free homemade buttercream cupcakes","Rs. 150"],["Gluten free homemade buttercream cake","Rs. 1,500"],["Gluten free tea cake","Rs. 1,000"]]))},
+ {id:"al-khair-pharmacy",name:"Al-Khair Pharmacy",cat:"Health & Learning",hue:105,ic:"cross",kind:"product",
+  blurb:"Pharmacy with delivery.",address:"Committee Chowk, Muzaffargarh",area:"Committee Chowk",
+  items:[["Medicines","Ask the shop for price and stock"]]}
 ];
 var DEL=[["truck","Delivery on orders of Rs. 500 or more. Delivery charges depend on distance."],["tag","For product prices, contact the shop."]];
 var INFO={
- "khan-food-point":{tags:["Delivery from Rs. 500"],facts:DEL,close:"Please tell me the prices and the delivery charge.",msg:"Hello Khan Food Point, I found you on Markezo. I want to place an order. Please tell me the prices and the delivery charge."},
- "khan-karyana-store":{phone:"923012846162",disp:"0301-2846162",tags:["Delivery from Rs. 500"],facts:DEL,close:"Please tell me the prices and the delivery charge.",msg:"Hello Khan Karyana Store, I found you on Markezo. I want to place an order. Please tell me the prices and the delivery charge."},
+ "khan-food-point":{tags:["Delivery from Rs. 500"],facts:[DEL[0],["tag","Prices are given by the shop and can change. Please confirm when you order."]],
+  items:[["Honey","Rs. 5,000 per kg"],["Desi Ghee","Rs. 3,200 per kg"],["Milk","Rs. 200 per litre"],["Butter","Rs. 1,800 per kg"],["Yogurt","Rs. 240 per kg"],["Shon Halwa","Rs. 1,400 per kg"],["Paratha Chana",""]],close:"Please tell me the prices and the delivery charge.",msg:"Hello Khan Food Point, I found you on Markezo. I want to place an order. Please tell me the prices and the delivery charge."},
+ "khan-karyana-store":{phone:"923012846162",disp:"0301-2846162",tags:["Delivery from Rs. 500"],facts:[DEL[0],["tag","Prices are given by the shop and can change. Please confirm when you order."]],
+  items:G("Karyana products",[["Ata","Rs. 170 per kg"],["Maida","Rs. 170 per kg"],["Baisan","Rs. 210 per kg"],["Sugar","Rs. 130 per kg"],["Salt","Rs. 20 per kg"],["Cooking oil","Rs. 500 to 600 per litre"],["Ghee","Rs. 500 to 580 per kg"]])
+   .concat(G("Spices",[["Mirch powder (red chilli powder)","Rs. 600 per kg"],["Mirch danadar (whole red chilli)","Rs. 600 per kg"],["Haldi (turmeric)","Rs. 600 per kg"],["Zira (cumin)","Rs. 1,000 per kg"]]))
+   .concat(G("Home care",[["Soap","From Rs. 130"],["Tooth paste","From Rs. 50"],["Surf (detergent) 1/2 kg","Rs. 300"],["Surf (detergent) 1 kg","Rs. 600"]]))
+   .concat(G("Also available",[["Confectionery","Sweets and candy"],["Stationery","Copies, pens, school items"]])),close:"Please tell me the prices and the delivery charge.",msg:"Hello Khan Karyana Store, I found you on Markezo. I want to place an order. Please tell me the prices and the delivery charge."},
  "smoke-bar":{maplink:"https://www.google.com/maps/search/?api=1&query=30.0701085,71.1965805",phone:"923236255683",disp:"0323-6255683",tags:["No delivery","18+"],
   items:[["Pods",""],["Vapes",""],["Flavours","Tokyo, Oxwa, Crush"],["Accessories",""]],
   facts:[["alert","No delivery."],["clock","Contact the shop to know if it is open or closed."],["tag","For pods and vapes prices, contact the shop."]],
@@ -88,11 +94,11 @@ var INFO={
  "shades-beauty-parlour":{phone:"923024264499",disp:"0302-4264499",tags:["Ladies only"],facts:[["alert","This parlour is only for ladies."]],close:"Please tell me the price and the appointment time.",msg:"Hello Shades Beauty Parlour, I found you on Markezo. I would like to book an appointment."},
  "kashmiri-tuition-center":{tags:["Admission on contact"],facts:[["book","For admission, contact the center."]],close:"Please tell me about admission and fees.",msg:"Hello Kashmiri Tuition Center, I found you on Markezo. I want to ask about admission."},
  "al-nasir-homeo-clinic":{phone:"923094658416",disp:"0309-4658416",tags:["12-hour doctor"],facts:[["clock","A doctor is available for 12 hours."],["phone","For an appointment, contact the clinic."]],close:"Please tell me about the appointment time.",msg:"Hello Al-Nasir Homeo Clinic, I found you on Markezo. I want to book an appointment."},
- "abbas-electronics-workshop":{tags:["Appointment on contact"],facts:[["phone","For an appointment, contact the workshop."]],close:"Please tell me about the appointment time.",msg:"Hello Abbas Electronics Workshop, I found you on Markezo. I want to book an appointment for a repair."},
  "hashmi-electronics":{close:"Please tell me the price.",msg:"Hello Hashmi Electronics, I found you on Markezo. I want to ask about LED TVs and speakers."},
  "mamas-bake":{phone:"923318811235",disp:"0331-8811235",tags:["Home delivery","Pay first"],
   facts:[["truck","Home delivery is available."],["alert","Payment is taken first, before delivery."],["tag","Prices are from the shop's WhatsApp catalogue. Please confirm with the shop."]],
-  close:"Please tell me the total price, the delivery charge and how to pay.",msg:"Hello Mama's Bake, I found you on Markezo. I want to order. Please tell me about delivery and payment."}
+  close:"Please tell me the total price, the delivery charge and how to pay.",msg:"Hello Mama's Bake, I found you on Markezo. I want to order. Please tell me about delivery and payment."},
+ "al-khair-pharmacy":{phone:"923028551000",disp:"0302-8551000",tags:["Delivery"],facts:[["truck","Delivery is available."],["tag","Please ask the shop for medicine prices and stock."]],close:"Please tell me the price and the delivery details.",msg:"Hello Al-Khair Pharmacy, I found you on Markezo. I want to ask about a medicine and delivery."}
 };
 SHOPS.forEach(function(s){var x=INFO[s.id]||{};for(var k in x)s[k]=x[k]});
 var CATS=["All"].concat(SHOPS.map(function(s){return s.cat}).filter(function(c,i,a){return a.indexOf(c)===i}));
@@ -127,18 +133,18 @@ function contactHtml(s){
 }
 function syncWa(){var a=document.querySelectorAll("a[data-wa]");for(var i=0;i<a.length;i++){var s=byId(a[i].dataset.wa);a[i].href=waUrl(s,waText(s))}}
 function logoBox(s,cls){
-  var c=(s.id==="khan-food-point"||s.id==="mamas-bake")?" contain":"";
+  var c=(s.id==="khan-food-point"||s.id==="mamas-bake"||s.id==="al-khair-pharmacy")?" contain":"";
   return '<div class="'+cls+c+'"><span class="fb">'+I(s.ic)+'</span><img src="logos/'+s.id+'.webp" alt="'+s.name+' logo"></div>';
 }
 function storeCard(s){
-  var n=s.items.length, label=n+(s.kind==="service"?" services":" items");
+  var n=s.items.length, label=n+(s.kind==="service"?(n===1?" service":" services"):(n===1?" item":" items"));
   var tags=(s.tags&&s.tags.length)?'<div class="ctags">'+s.tags.map(function(t){return '<span>'+t+'</span>'}).join("")+'</div>':'';
   return '<a class="card sg" href="#shop-'+s.id+'" style="'+st(s)+'">'+
-    '<div class="lg2" style="--logo:url(logos/'+s.id+'.webp)"><img src="logos/'+s.id+'.webp" alt="'+s.name+' logo"></div>'+
+    '<div class="lg2" style="--logo:url(logos/'+s.id+'.webp)"><img src="logos/'+s.id+'.webp" alt="'+s.name+' logo"><span class="cbadge">'+I(s.ic)+'</span></div>'+
     '<div class="cbody"><div class="crow"><span class="ccat">'+s.cat+'</span><span class="cn">'+label+'</span></div>'+
     '<h3>'+s.name+'</h3><p class="cdesc">'+s.blurb+'</p>'+tags+
     '<div class="cloc">'+I("pin")+'<span>'+s.address+'</span></div>'+
-    '<span class="visit">Visit store'+I("arrow")+'</span></div></a>';
+    '<span class="visit">Visit store<i class="va">'+I("arrow")+'</i></span></div></a>';
 }
 function shopCard(s,big){
   var pv=big?'<div class="pv">'+s.items.slice(0,4).map(function(i){return '<span>'+i[0]+'</span>'}).join("")+'</div>':'';
@@ -163,7 +169,7 @@ function homeView(){
    '<h1>Your whole <em>bazaar</em>, in one place.</h1>'+
    '<p>Browse each shop\'s store, see what they sell, and find exactly where they are.</p>'+
    '<label class="search">'+I("search")+'<input id="q" type="search" placeholder="Search a shop, product or area" aria-label="Search shops"></label>'+
-   '<div class="stats"><div><b>11</b><span>Shops</span></div><div><b>8</b><span>Areas</span></div><div><b>80+</b><span>Products and services</span></div></div></div>'+
+   '<div class="stats"><div><b>11</b><span>Shops</span></div><div><b>9</b><span>Areas</span></div><div><b>80+</b><span>Products and services</span></div></div></div>'+
    '<div class="stack">'+stack+'</div></section>'+
    '<div class="cats" id="cats"></div>'+
    '<div class="head"><h2 id="gt">All stores</h2><span class="count" id="count"></span></div>'+
@@ -190,6 +196,7 @@ function filterGrid(){
   $("#grid").innerHTML=list.length?list.map(function(s,i){return storeCard(s)}).join(""):'<p class="empty">No shop matches that search. Try another word.</p>';
   $("#count").textContent=list.length+(list.length===1?" shop":" shops");
   $("#gt").textContent=cat==="All"?"All stores":cat;
+  botSay(homeText(list.length));
 }
 function prodControl(s,i){
   var k=s.id+"|"+i,n=cart[k]||0;
@@ -202,7 +209,7 @@ function shopView(s){
   $("#view").innerHTML=
    '<div class="wrap"><a class="crumb" href="#home">'+I("back")+'All shops</a>'+
    '<div class="sh sg" style="'+st(s)+'">'+logoBox(s,"big")+'<div><span class="tag">'+s.cat+'</span><h1>'+s.name+'</h1><p>'+s.blurb+'</p>'+
-   '<div class="pills"><span>'+I("bag")+s.items.length+(s.kind==="service"?' services':' items')+'</span><span>'+I("pin")+s.area+'</span>'+(s.tags||[]).map(function(t){return '<span>'+t+'</span>'}).join("")+'</div>'+waBtn(s,"wabig")+'</div></div>'+
+   '<div class="pills"><span>'+I("bag")+s.items.length+(s.kind==="service"?(s.items.length===1?' service':' services'):(s.items.length===1?' item':' items'))+'</span><span>'+I("pin")+s.area+'</span>'+(s.tags||[]).map(function(t){return '<span>'+t+'</span>'}).join("")+'</div>'+waBtn(s,"wabig")+'</div></div>'+
    '<div class="layout sg" style="'+st(s)+'"><div>'+(s.note?'<div class="note">'+I("alert")+s.note+'</div>':'')+factsHtml(s)+
    '<h2 class="sec2">'+(s.kind==="service"?"Services":"Products")+'</h2><div class="plist" id="plist"></div></div>'+
    '<aside class="loc"><div class="map">'+map+'<span class="pin"><i></i></span></div><div class="in"><h2>Location</h2><p class="addr">'+s.address+'</p><div class="btns">'+
@@ -212,6 +219,7 @@ function shopView(s){
    '</div></aside></div></div>';
   drawProducts(s);
   $("#copyAddr").addEventListener("click",function(e){copyText(s.name+", "+s.address,e.currentTarget)});
+  botCur=s;botSay(shopText(s));
 }
 function drawProducts(s){
   syncWa();var el=$("#plist"); if(!el)return;var lastG="";
@@ -220,11 +228,32 @@ function drawProducts(s){
     return gh+'<div class="prod"><div class="top"><span class="b">'+I(s.ic)+'</span><div><h3>'+it[0]+'</h3>'+(it[1]?'<small>'+it[1]+'</small>':'')+'</div></div>'+prodControl(s,i)+'</div>';
   }).join("");
 }
-function route(){
+var botMsg="",botCur=null;
+function itemLabel(s){var n=s.items.length;return n+(s.kind==="service"?(n===1?" service":" services"):(n===1?" item":" items"))}
+function homeText(n){
+  var t=q.trim();
+  if(cat==="All"&&!t)return "Hi, I am Marky. You are on the Markezo home page. Here are "+SHOPS.length+" local shops. Tap a shop card to open its store.";
+  if(t)return 'You searched for "'+t+'". I found '+n+(n===1?" shop":" shops")+(n?". Tap a card to open it.":". Try another word.");
+  return "You are looking at "+cat+". There "+(n===1?"is 1 shop":"are "+n+" shops")+" here. Tap a card to open its store.";
+}
+function shopText(s){
+  return "You are in "+s.name+" ("+s.cat+"), at "+s.area+". "+s.blurb+" It has "+itemLabel(s)+". "+(s.facts&&s.facts[0]?s.facts[0][1]+" ":"")+(s.phone?"Tap Message on WhatsApp to chat with the shop.":"The phone number is coming soon.");
+}
+function botSay(msg){botMsg=msg;var t=$("#botText");if(t)t.textContent=msg;var a=$("#botActs");if(a)a.innerHTML="";botChips()}
+function botReveal(){
+  var b=$("#bot"),u=$("#botBubble");if(!b)return;
+  b.classList.remove("quiet");u.classList.remove("pop");void u.offsetWidth;u.classList.add("pop");
+  try{if(window.speechSynthesis)window.speechSynthesis.cancel()}catch(e){}
+}
+function botListen(){
+  try{if(!window.speechSynthesis)return;window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(botMsg);u.lang="en-US";u.rate=0.95;window.speechSynthesis.speak(u)}catch(e){}
+}
+function route(){botCur=null;
   var h=location.hash.replace("#","");
   window.scrollTo(0,0);
   if(h.indexOf("shop-")===0&&byId(h.slice(5)))shopView(byId(h.slice(5)));
   else homeView();
+  botReveal();
 }
 function copyText(text,btn){
   var o=btn.innerHTML;
@@ -290,4 +319,151 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")openCart(fal
 window.addEventListener("hashchange",route);
 $("#logoIc").innerHTML=I("shop");
 $("#closeCart").innerHTML=I("x");
+$("#botListen").innerHTML=I("speaker")+"Listen";
+$("#botHide").innerHTML=I("x")+"Hide";
+if(!window.speechSynthesis)$("#botListen").hidden=true;
+$("#botListen").addEventListener("click",botListen);
+$("#botHide").addEventListener("click",function(){$("#bot").classList.add("quiet")});
+/* Question box: answers come from the shop data on this page (no server needed) */
+var BOT_KEYS={"khan-food-point":["khan","food"],"khan-karyana-store":["khan","karyana","kariyana"],"smoke-bar":["smoke"],"warda-drink-corner":["warda"],"ali-tailors":["ali","tailor","tailors","tayler","tailer"],"shades-beauty-parlour":["shade","shades","parlour","parlor","beauty"],"kashmiri-tuition-center":["kashmiri","tuition","tution"],"al-nasir-homeo-clinic":["nasir","homeo","clinic"],"hashmi-electronics":["hashmi"],"mamas-bake":["mama","mamas","bake"],"al-khair-pharmacy":["khair","pharmacy"]};
+var BOT_STOP={};
+"a an the is are am i me my you we it its this that there here of in on at to for from with and or do does did can could will would should have has had any some want need get buy find looking look show tell please pls about what which who how much many where when why shop shops store stores near nearby local muzaffargarh markezo phone number contact call whatsapp address location map deliver delivery home price prices rate cost open close closed time timing hours sell sells menu list item items product products service services offer offers kya hai hain ka ki ke ko se mein mujhe chahiye available free good best cheap thanks thank hello hey salam".split(" ").forEach(function(w){BOT_STOP[w]=1});
+var BOT_SYN={medicine:"pharmacy",medicines:"pharmacy",dawai:"pharmacy",dawa:"pharmacy",tablet:"pharmacy",tablets:"pharmacy",doctor:"clinic",school:"tuition",admission:"tuition",study:"tuition",tv:"led",television:"led",makeup:"makeup",dress:"stitching",suit:"stitching",suits:"stitching",clothes:"stitching",cloth:"stitching",cold:"drinks",pepsi:"drinks",coke:"drinks",vape:"vapes",pod:"pods",grocery:"karyana",birthday:"cake",sweet:"cake",bakery:"cake"};
+function botVariants(t){var v=[t,t.replace(/ies$/,"ie"),t.replace(/es$/,""),t.replace(/s$/,"")];if(BOT_SYN[t])v=v.concat(BOT_SYN[t].split(" "));return v.filter(function(x,i){return x.length>=3&&v.indexOf(x)===i})}
+function botHay(s){return (s.name+" "+s.cat+" "+s.blurb+" "+s.items.map(function(i){return i[0]+" "+(i[1]||"")+" "+(i[2]||"")}).join(" ")).toLowerCase()}
+function botFind(toks){var best=0,list=[];SHOPS.forEach(function(s){var k=BOT_KEYS[s.id]||[],n=0;toks.forEach(function(t){if(k.indexOf(t)>-1)n++});if(n>best){best=n;list=[s]}else if(n&&n===best)list.push(s)});return list}
+function botSearch(toks){
+  var ts=toks.filter(function(t){return t.length>=3&&!BOT_STOP[t]});
+  if(!ts.length)return [];
+  var res=[];
+  SHOPS.forEach(function(s){
+    var h=botHay(s),n=0,hits=[];
+    ts.forEach(function(t){
+      var v=botVariants(t);
+      if(v.some(function(x){return h.indexOf(x)>-1})){
+        n++;
+        s.items.forEach(function(it){var nm=it[0].toLowerCase();if(hits.length<3&&hits.indexOf(it)<0&&v.some(function(x){return nm.indexOf(x)>-1}))hits.push(it)});
+      }
+    });
+    if(n)res.push({s:s,n:n,hits:hits});
+  });
+  res.sort(function(a,b){return b.n-a.n});
+  var top=res.length?res[0].n:0;
+  return res.filter(function(r){return r.n===top}).slice(0,4);
+}
+function botFacts(s,re){return (s.facts||[]).map(function(f){return f[1]}).filter(function(t){return re.test(t)})}
+function botHasDel(s){var t=(s.facts||[]).map(function(f){return f[1]}).join(" ")+" "+(s.tags||[]).join(" ");return /deliver/i.test(t)&&!/no delivery/i.test(t)}
+function botOpenAct(s){return {l:"Open "+s.name,h:"#shop-"+s.id}}
+function botShopAns(s,intent){
+  var a=[botOpenAct(s)],t="";
+  if(intent==="phone"){
+    if(s.phone){t=s.name+": "+s.disp+". Tap WhatsApp to message the shop.";a=[{l:"WhatsApp",h:waUrl(s,s.msg||("Hello "+s.name+", I found you on Markezo.")),x:1},a[0]]}
+    else t=s.name+": the phone number is coming soon.";
+  }else if(intent==="where"){
+    t=s.name+" is at "+s.address+".";a=[{l:"Open map",h:mapUrl(s),x:1},a[0]];
+  }else if(intent==="delivery"){
+    var d=botFacts(s,/deliver/i);t=s.name+": "+(d.length?d.join(" "):"delivery is not mentioned. Please ask the shop.");
+  }else if(intent==="open"){
+    var o=botFacts(s,/open|clos|appointment|admission/i);t=s.name+": "+(o.length?o.join(" ")+" ":"")+"I do not have exact timings, so please message the shop.";
+  }else if(intent==="price"){
+    var p=[];
+    if(s.rates)p.push("Flavours: "+s.rates.map(function(r){return r[0]+" "+r[1]}).join(", ")+".");
+    var pr=s.items.filter(function(i){return /\bRs/.test(i[1]||"")});
+    if(pr.length)p.push("Some prices: "+pr.slice(0,5).map(function(i){return i[0]+" "+i[1]}).join(", ")+(pr.length>5?" and more on the shop page.":"."));
+    var f=botFacts(s,/price|cost/i);if(f.length)p.push(f.join(" "));
+    t=s.name+": "+(p.length?p.join(" "):"please ask the shop for prices.");
+  }else if(intent==="items"){
+    var n=s.items.length;t=s.name+" has: "+s.items.slice(0,8).map(function(i){return i[0]}).join(", ")+(n>8?" and "+(n-8)+" more.":".");
+  }else t=shopText(s);
+  return {text:t,acts:a};
+}
+function botAnswer(raw){
+  var q=raw.toLowerCase().replace(/['’]/g,""),toks=q.replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(Boolean);
+  if(!toks.length)return {text:"Type a question, for example: Which shops deliver?",acts:[]};
+  if(/^(hi|hello|hey|salam|assalam)/.test(q)&&toks.length<4)return {text:"Hello! I am Marky. Ask me about any shop: phone number, address, delivery or prices.",acts:[]};
+  if(/\b(thanks|thank|shukriya|bye)\b/.test(q))return {text:"You are welcome! Ask me anything about the shops.",acts:[]};
+  var intent=/\b(phone|number|contact|call|whatsapp|nambar|raabta)\b/.test(q)?"phone":/\b(address|where|location|map|kahan|kidhar|pata|direction|directions)\b/.test(q)?"where":/deliver|dilivery|ghar/.test(q)?"delivery":/\b(open|opened|close|closed|timing|timings|time|hours|khula|band)\b/.test(q)?"open":/price|rate|cost|how much|kitna|kitne|qeemat|kimat|charges|\brs\b/.test(q)?"price":/\b(sell|sells|menu|list|item|items|product|products|service|services|offer|offers|kya)\b/.test(q)?"items":"";
+  var named=botFind(toks),target=null;
+  if(named.length>1)return {text:"Which shop do you mean? "+named.map(function(s){return s.name}).join(" or ")+"?",acts:named.map(botOpenAct)};
+  if(named.length===1)target=named[0];
+  if(!target){
+    if(/how many|all shops|shop list|list of shops|every shop/.test(q))return {text:"Markezo has "+SHOPS.length+" shops: "+SHOPS.map(function(s){return s.name}).join(", ")+".",acts:[]};
+    if(/how (does (it|this|markezo)|it works)|how to order|kaise order/.test(q))return {text:"Pick a shop, add items to your request list, then send the list to the shop on WhatsApp. The shop confirms the price.",acts:[]};
+    var found=botSearch(toks);
+    if(found.length===1&&(intent==="price"||intent==="phone"||intent==="open"||intent==="delivery"))return botShopAns(found[0].s,intent);
+    if(intent==="delivery"&&!found.length&&(!botCur||/\bshops\b/.test(q))){
+      var dl=SHOPS.filter(botHasDel);
+      return {text:"Shops with delivery: "+dl.map(function(s){return s.name}).join(", ")+". The rules are different for each shop, so open the shop to read them.",acts:dl.slice(0,4).map(botOpenAct)};
+    }
+    if(found.length){
+      var top=found[0],t=found.length===1?"Try "+top.s.name+" ("+top.s.area+").":"These shops match: "+found.map(function(r){return r.s.name}).join(", ")+".";
+      if(top.hits.length)t+=" "+(found.length===1?"It has ":top.s.name+" has ")+top.hits.map(function(i){return i[0]+(i[1]?" ("+i[1]+")":"")}).join(", ")+".";
+      return {text:t,acts:found.map(function(r){return botOpenAct(r.s)})};
+    }
+    if(botCur&&(intent||/\b(this|it|here)\b/.test(q)))target=botCur;
+  }
+  if(target)return botShopAns(target,intent);
+  if(intent)return {text:"Which shop? Tell me the shop name, for example: Smoke Bar phone number.",acts:[]};
+  return {text:"Sorry, I did not find that. Try a shop name or a thing, like cake, medicine or tailor.",acts:[]};
+}
+function botActs(list){
+  var c=$("#botActs");if(!c)return;c.innerHTML="";
+  (list||[]).forEach(function(x){var a=document.createElement("a");a.href=x.h;a.textContent=x.l;if(x.x){a.target="_blank";a.rel="noopener"}c.appendChild(a)});
+}
+function botChips(){
+  var c=$("#botChips");if(!c)return;c.innerHTML="";
+  var l=botCur?["Phone number","Where is it?","Delivery?","Prices?"]:["Which shops deliver?","Where can I buy a cake?","I need medicine","How does it work?"];
+  l.forEach(function(t){var b=document.createElement("button");b.type="button";b.textContent=t;b.addEventListener("click",function(){$("#botQ").value=t;botSubmit()});c.appendChild(b)});
+}
+function botSubmit(){
+  var i=$("#botQ"),q=i.value.trim();if(!q)return;
+  var a=botAnswer(q);botSay(a.text);botActs(a.acts);i.value="";$("#botBubble").scrollTop=0;
+}
+$("#botForm").addEventListener("submit",function(e){e.preventDefault();botSubmit()});
+var botMoved=false,botPos=null;
+function botPlace(x,y){
+  var b=$("#bot"),w=b.offsetWidth,h=b.offsetHeight;
+  x=Math.max(4,Math.min(innerWidth-w-4,x));y=Math.max(4,Math.min(innerHeight-h-4,y));
+  b.style.left=x+"px";b.style.top=y+"px";b.style.bottom="auto";
+  b.classList.toggle("right",x+w/2>innerWidth/2);
+  var bh=$("#botBubble").offsetHeight||120;
+  b.classList.toggle("low",y<bh-20);
+  botPos={x:x,y:y};
+}
+try{var sp=JSON.parse(localStorage.getItem("mzBot")||"null");if(sp&&typeof sp.x==="number")botPlace(sp.x,sp.y)}catch(e){}
+(function(){
+  var f=$("#botFace"),b=$("#bot"),sx,sy,ox,oy,down=false;
+  f.addEventListener("pointerdown",function(e){
+    down=true;botMoved=false;sx=e.clientX;sy=e.clientY;
+    var r=b.getBoundingClientRect();ox=r.left;oy=r.top;
+    try{f.setPointerCapture(e.pointerId)}catch(x){}
+  });
+  f.addEventListener("pointermove",function(e){
+    if(!down)return;
+    var dx=e.clientX-sx,dy=e.clientY-sy;
+    if(!botMoved&&Math.abs(dx)+Math.abs(dy)<6)return;
+    botMoved=true;b.classList.add("drag");
+    botPlace(ox+dx,oy+dy);
+  });
+  function end(){
+    if(!down)return;down=false;b.classList.remove("drag");
+    if(botMoved&&botPos){try{localStorage.setItem("mzBot",JSON.stringify(botPos))}catch(e){}}
+  }
+  f.addEventListener("pointerup",end);
+  f.addEventListener("pointercancel",end);
+  f.addEventListener("click",function(){
+    if(botMoved){botMoved=false;return}
+    if(b.classList.contains("quiet")){b.classList.remove("quiet");b.classList.add("ask")}
+    else b.classList.toggle("ask");
+    if(botPos)botPlace(botPos.x,botPos.y);
+    if(b.classList.contains("ask"))setTimeout(function(){var i=$("#botQ");if(i)i.focus({preventScroll:true})},60);
+  });
+  f.addEventListener("keydown",function(e){
+    var k={ArrowLeft:[-20,0],ArrowRight:[20,0],ArrowUp:[0,-20],ArrowDown:[0,20]}[e.key];
+    if(!k)return;e.preventDefault();
+    var r=b.getBoundingClientRect();botPlace(r.left+k[0],r.top+k[1]);
+    try{localStorage.setItem("mzBot",JSON.stringify(botPos))}catch(x){}
+  });
+  addEventListener("resize",function(){if(botPos)botPlace(botPos.x,botPos.y)});
+})();
 themeIcon();route();renderCart();
