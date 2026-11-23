@@ -54,6 +54,9 @@ var SHOPS=[
  {id:"shades-beauty-parlour",name:"Shade's Beauty Parlour",cat:"Tailor & Beauty",hue:326,ic:"sparkle",kind:"service",
   blurb:"Bridal, party and everyday makeup, plus skin and nail care.",address:"Muhalla Bukhari Wala",area:"Muhalla Bukhari Wala",
   items:[["Bridal makeup",""],["Party makeup",""],["Simple makeup",""],["Facial",""],["Pedicure",""],["Manicure",""]]},
+ {id:"kashmiri-tuition-center",name:"Kashmiri Tuition Center",cat:"Health & Learning",hue:150,ic:"book",kind:"service",
+  blurb:"Tuition classes for girls and boys.",address:"Near Kashmiri Chowk",area:"Kashmiri Chowk",
+  items:[["Girls classes","Prep Group (PG) to Matric"],["Boys classes","Prep Group (PG) to 5th"]]},
  {id:"al-nasir-homeo-clinic",name:"Al-Nasir Homeo Clinic",cat:"Health & Learning",hue:205,ic:"cross",kind:"product",
   blurb:"A 12-hour doctor and a full range of medicines.",address:"Tida, Karimabad",area:"Tida, Karimabad",
   items:[["All varieties of medicine",""],["Homeopathic medicine",""],["Doctor visit","Doctor available 12 hours"]]},
@@ -74,7 +77,7 @@ var SHOPS=[
 ];
 var DEL=[["truck","Delivery on orders of Rs. 500 or more. Delivery charges depend on distance."],["tag","For product prices, contact the shop."]];
 var INFO={
- "khan-food-point":{phone:"923006864202",disp:"0300-6864202",tags:["Delivery from Rs. 500"],facts:[DEL[0],["tag","Prices are given by the shop and can change. Please confirm when you order."]],
+ "khan-food-point":{tags:["Delivery from Rs. 500"],facts:[DEL[0],["tag","Prices are given by the shop and can change. Please confirm when you order."]],
   items:[["Honey","Rs. 5,000 per kg"],["Desi Ghee","Rs. 3,200 per kg"],["Milk","Rs. 200 per litre"],["Butter","Rs. 1,800 per kg"],["Yogurt","Rs. 240 per kg"],["Shon Halwa","Rs. 1,400 per kg"],["Paratha Chana",""]],close:"Please tell me the prices and the delivery charge.",msg:"Hello Khan Food Point, I found you on Markezo. I want to place an order. Please tell me the prices and the delivery charge."},
  "khan-karyana-store":{phone:"923012846162",disp:"0301-2846162",tags:["Delivery from Rs. 500"],facts:[DEL[0],["tag","Prices are given by the shop and can change. Please confirm when you order."]],
   items:G("Karyana products",[["Ata","Rs. 170 per kg"],["Maida","Rs. 170 per kg"],["Baisan","Rs. 210 per kg"],["Sugar","Rs. 130 per kg"],["Salt","Rs. 20 per kg"],["Cooking oil","Rs. 500 to 600 per litre"],["Ghee","Rs. 500 to 580 per kg"]])
@@ -89,8 +92,9 @@ var INFO={
  "warda-drink-corner":{maplink:"https://www.google.com/maps/search/?api=1&query=30.0681897,71.1946228",phone:"923083731216",disp:"0308-3731216",tags:["No delivery"],facts:[["alert","No delivery."],["clock","Contact the shop to know if it is open or closed."]],close:"Is the shop open now?",msg:"Hello Warda Drink Corner, I found you on Markezo. Is the shop open now?"},
  "ali-tailors":{phone:"923003908941",disp:"0300-3908941",tags:["Price on contact"],facts:[["tag","For stitching, contact the shop. The price is confirmed when you contact."]],close:"Please tell me the stitching price and when I can bring the cloth.",msg:"Hello Ali Tailor, I found you on Markezo. I want to get stitching done. Please tell me the price."},
  "shades-beauty-parlour":{phone:"923024264499",disp:"0302-4264499",tags:["Ladies only"],facts:[["alert","This parlour is only for ladies."]],close:"Please tell me the price and the appointment time.",msg:"Hello Shades Beauty Parlour, I found you on Markezo. I would like to book an appointment."},
+ "kashmiri-tuition-center":{tags:["Admission on contact"],facts:[["book","For admission, contact the center."]],close:"Please tell me about admission and fees.",msg:"Hello Kashmiri Tuition Center, I found you on Markezo. I want to ask about admission."},
  "al-nasir-homeo-clinic":{phone:"923094658416",disp:"0309-4658416",tags:["12-hour doctor"],facts:[["clock","A doctor is available for 12 hours."],["phone","For an appointment, contact the clinic."]],close:"Please tell me about the appointment time.",msg:"Hello Al-Nasir Homeo Clinic, I found you on Markezo. I want to book an appointment."},
- "hashmi-electronics":{tags:["Visit the shop for pricing"],facts:[["tag","Visit the shop for pricing and details."]],close:"Please tell me the price.",msg:"Hello Hashmi Electronics, I found you on Markezo. I want to ask about LED TVs and speakers."},
+ "hashmi-electronics":{close:"Please tell me the price.",msg:"Hello Hashmi Electronics, I found you on Markezo. I want to ask about LED TVs and speakers."},
  "mamas-bake":{phone:"923318811235",disp:"0331-8811235",tags:["Home delivery","Pay first"],
   facts:[["truck","Home delivery is available."],["alert","Payment is taken first, before delivery."],["tag","Prices are from the shop's WhatsApp catalogue. Please confirm with the shop."]],
   close:"Please tell me the total price, the delivery charge and how to pay.",msg:"Hello Mama's Bake, I found you on Markezo. I want to order. Please tell me about delivery and payment."},
@@ -321,10 +325,10 @@ if(!window.speechSynthesis)$("#botListen").hidden=true;
 $("#botListen").addEventListener("click",botListen);
 $("#botHide").addEventListener("click",function(){$("#bot").classList.add("quiet")});
 /* Question box: answers come from the shop data on this page (no server needed) */
-var BOT_KEYS={"khan-food-point":["khan","food"],"khan-karyana-store":["khan","karyana","kariyana"],"smoke-bar":["smoke"],"warda-drink-corner":["warda"],"ali-tailors":["ali","tailor","tailors","tayler","tailer"],"shades-beauty-parlour":["shade","shades","parlour","parlor","beauty"],"al-nasir-homeo-clinic":["nasir","homeo","clinic"],"hashmi-electronics":["hashmi"],"mamas-bake":["mama","mamas","bake"],"al-khair-pharmacy":["khair","pharmacy"]};
+var BOT_KEYS={"khan-food-point":["khan","food"],"khan-karyana-store":["khan","karyana","kariyana"],"smoke-bar":["smoke"],"warda-drink-corner":["warda"],"ali-tailors":["ali","tailor","tailors","tayler","tailer"],"shades-beauty-parlour":["shade","shades","parlour","parlor","beauty"],"kashmiri-tuition-center":["kashmiri","tuition","tution"],"al-nasir-homeo-clinic":["nasir","homeo","clinic"],"hashmi-electronics":["hashmi"],"mamas-bake":["mama","mamas","bake"],"al-khair-pharmacy":["khair","pharmacy"]};
 var BOT_STOP={};
 "a an the is are am i me my you we it its this that there here of in on at to for from with and or do does did can could will would should have has had any some want need get buy find looking look show tell please pls about what which who how much many where when why shop shops store stores near nearby local muzaffargarh markezo phone number contact call whatsapp address location map deliver delivery home price prices rate cost open close closed time timing hours sell sells menu list item items product products service services offer offers kya hai hain ka ki ke ko se mein mujhe chahiye available free good best cheap thanks thank hello hey salam".split(" ").forEach(function(w){BOT_STOP[w]=1});
-var BOT_SYN={medicine:"pharmacy",medicines:"pharmacy",dawai:"pharmacy",dawa:"pharmacy",tablet:"pharmacy",tablets:"pharmacy",doctor:"clinic",tv:"led",television:"led",makeup:"makeup",dress:"stitching",suit:"stitching",suits:"stitching",clothes:"stitching",cloth:"stitching",cold:"drinks",pepsi:"drinks",coke:"drinks",vape:"vapes",pod:"pods",grocery:"karyana",birthday:"cake",sweet:"cake",bakery:"cake"};
+var BOT_SYN={medicine:"pharmacy",medicines:"pharmacy",dawai:"pharmacy",dawa:"pharmacy",tablet:"pharmacy",tablets:"pharmacy",doctor:"clinic",school:"tuition",admission:"tuition",study:"tuition",tv:"led",television:"led",makeup:"makeup",dress:"stitching",suit:"stitching",suits:"stitching",clothes:"stitching",cloth:"stitching",cold:"drinks",pepsi:"drinks",coke:"drinks",vape:"vapes",pod:"pods",grocery:"karyana",birthday:"cake",sweet:"cake",bakery:"cake"};
 function botVariants(t){var v=[t,t.replace(/ies$/,"ie"),t.replace(/es$/,""),t.replace(/s$/,"")];if(BOT_SYN[t])v=v.concat(BOT_SYN[t].split(" "));return v.filter(function(x,i){return x.length>=3&&v.indexOf(x)===i})}
 function botHay(s){return (s.name+" "+s.cat+" "+s.blurb+" "+s.items.map(function(i){return i[0]+" "+(i[1]||"")+" "+(i[2]||"")}).join(" ")).toLowerCase()}
 function botFind(toks){var best=0,list=[];SHOPS.forEach(function(s){var k=BOT_KEYS[s.id]||[],n=0;toks.forEach(function(t){if(k.indexOf(t)>-1)n++});if(n>best){best=n;list=[s]}else if(n&&n===best)list.push(s)});return list}
