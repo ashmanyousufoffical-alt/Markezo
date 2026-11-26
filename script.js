@@ -189,7 +189,7 @@ var KAR_PHOTOS={"Ata": 61, "Maida": 62, "Baisan": 63, "Sugar": 64, "Salt": 65, "
   s.items.forEach(function(it){if(KAR_PHOTOS[it[0]]!==undefined)it[3]=KAR_PHOTOS[it[0]]});
   s.facts=(s.facts||[]).concat([["tag","Product pictures are illustrations. Brands, sizes and prices are confirmed by the shop."]]);
 })();
-function photoUrl(i){return "photos/"+i+".webp"}
+function photoUrl(i){return "Photos/"+i+".webp"}
 
 /* ===== Small components ===== */
 function tagsHtml(s,cls){return (s.tags&&s.tags.length)?'<div class="'+cls+'">'+s.tags.map(function(t){return '<span>'+esc(t)+'</span>'}).join("")+'</div>':''}
