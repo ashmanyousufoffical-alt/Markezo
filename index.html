@@ -3,10 +3,13 @@
 <head>
 <meta name="google-site-verification" content="n5h1SkMO4lCYIxkYDlouYj3IXpWvrF7Q885TDrIRiIs" />
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Markezo - Online Bazaar of Local Shops in Muzaffargarh</title>
 <meta name="description" content="Markezo brings 11 local shops of Muzaffargarh online. Browse food, grocery, bakery, pharmacy, tailor, beauty, electronics and more, see prices and message each shop on WhatsApp.">
 <link rel="canonical" href="https://ashmanyousufoffical-alt.github.io/Markezo/">
+<meta name="author" content="Shahzaib Arshad Khagga, Muhammad Ashman">
+<meta name="application-name" content="Markezo">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="keywords" content="Markezo, Muzaffargarh shops online, Muzaffargarh bazaar, online shopping Muzaffargarh, local shops Muzaffargarh">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Markezo">
@@ -18,28 +21,39 @@
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#0E1424">
+<meta name="theme-color" content="#F5F6FA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A0F1C" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap">
+<script>try{var t=localStorage.getItem("mzTheme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-<noscript><div style="padding:20px;font-family:sans-serif"><h1>Markezo - local shops of Muzaffargarh</h1><p>Please turn on JavaScript, or open a shop page:</p><ul><li><a href="shop-khan-food-point.html">Khan Food Point</a> - Food &amp; Grocery, Jhang Mor</li><li><a href="shop-khan-karyana-store.html">Khan Karyana Store</a> - Food &amp; Grocery, Purani Ghass Mandi Chowk</li><li><a href="shop-smoke-bar.html">Smoke Bar</a> - Drinks &amp; Smoke, Makkah Plaza</li><li><a href="shop-warda-drink-corner.html">Warda Drink Corner</a> - Drinks &amp; Smoke, Purani Ghass Mandi Chowk</li><li><a href="shop-ali-tailors.html">Ali Tailor&#x27;s</a> - Tailor &amp; Beauty, Water plant</li><li><a href="shop-shades-beauty-parlour.html">Shade&#x27;s Beauty Parlour</a> - Tailor &amp; Beauty, Muhalla Bukhari Wala</li><li><a href="shop-kashmiri-tuition-center.html">Kashmiri Tuition Center</a> - Health &amp; Learning, Kashmiri Chowk</li><li><a href="shop-al-nasir-homeo-clinic.html">Al-Nasir Homeo Clinic</a> - Health &amp; Learning, Tida, Karimabad</li><li><a href="shop-hashmi-electronics.html">Hashmi Electronics</a> - Electronics, Qinwan Chowk</li><li><a href="shop-mamas-bake.html">Mama&#x27;s Bake</a> - Food &amp; Grocery, Jhang Mor</li><li><a href="shop-al-khair-pharmacy.html">Al-Khair Pharmacy</a> - Health &amp; Learning, Committee Chowk</li></ul></div></noscript>
-<div class="bar"><div class="wrap">
+<a class="skip" href="#view" id="skip">Skip to content</a>
+<header class="bar"><div class="wrap">
   <a class="logo" href="#home" aria-label="Markezo home"><span class="mk" id="logoIc"></span>Markezo</a>
+  <nav class="nav" aria-label="Main"><a href="#stores">Stores</a><a href="#how">How it works</a><a href="#areas">Areas</a><a href="#faq">FAQ</a></nav>
   <div class="tools">
     <button class="ibtn" id="themeBtn" type="button" aria-label="Switch light or dark theme"></button>
-    <button class="cartbtn" id="cartBtn" type="button" aria-label="Open request list"><span class="t">Request list</span><b id="cartCount">0</b></button>
+    <button class="cartbtn" id="cartBtn" type="button" aria-haspopup="dialog" aria-label="Open request list"><span class="t">Request list</span><b id="cartCount">0</b></button>
   </div>
-</div></div>
+</div></header>
 
-<main id="view"></main>
+<main id="view" tabindex="-1"><noscript><div style="padding:20px;font-family:sans-serif"><h1>Markezo - local shops of Muzaffargarh</h1><p>Please turn on JavaScript, or open a shop page:</p><ul><li><a href="shop-khan-food-point.html">Khan Food Point</a> - Food &amp; Grocery, Jhang Mor</li><li><a href="shop-khan-karyana-store.html">Khan Karyana Store</a> - Food &amp; Grocery, Purani Ghass Mandi Chowk</li><li><a href="shop-smoke-bar.html">Smoke Bar</a> - Drinks &amp; Smoke, Makkah Plaza</li><li><a href="shop-warda-drink-corner.html">Warda Drink Corner</a> - Drinks &amp; Smoke, Purani Ghass Mandi Chowk</li><li><a href="shop-ali-tailors.html">Ali Tailor&#x27;s</a> - Tailor &amp; Beauty, Water plant</li><li><a href="shop-shades-beauty-parlour.html">Shade&#x27;s Beauty Parlour</a> - Tailor &amp; Beauty, Muhalla Bukhari Wala</li><li><a href="shop-kashmiri-tuition-center.html">Kashmiri Tuition Center</a> - Health &amp; Learning, Kashmiri Chowk</li><li><a href="shop-al-nasir-homeo-clinic.html">Al-Nasir Homeo Clinic</a> - Health &amp; Learning, Tida, Karimabad</li><li><a href="shop-hashmi-electronics.html">Hashmi Electronics</a> - Electronics, Qinwan Chowk</li><li><a href="shop-mamas-bake.html">Mama&#x27;s Bake</a> - Food &amp; Grocery, Jhang Mor</li><li><a href="shop-al-khair-pharmacy.html">Al-Khair Pharmacy</a> - Health &amp; Learning, Committee Chowk</li></ul></div></noscript></main>
 
-<footer><div class="wrap"><div><b>Markezo</b><p>Eleven local shops, one online bazaar. Each shop confirms its prices when you message it.</p></div></div></footer>
+<footer><div class="wrap">
+  <div><b>Markezo</b><p>Local shops, one online bazaar. Each shop confirms its prices when you message it.</p></div>
+  <nav aria-label="Footer"><a href="#home">Home</a><a href="#stores">Stores</a><a href="#how">How it works</a><a href="#areas">Areas</a><a href="#faq">FAQ</a></nav>
+  <p class="credit">Designed &amp; built by <b>Shahzaib Arshad Khagga</b> <span>&amp;</span> <b>Muhammad Ashman</b></p>
+  <small id="copy"></small>
+</div></footer>
 
 <button class="fab" id="fab" type="button" hidden>View request list <b id="fabCount">0</b></button>
-<div class="toast" id="toast" hidden></div>
+<button class="totop" id="toTop" type="button" hidden aria-label="Back to top"></button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="bot" id="bot" role="complementary" aria-label="Marky, the Markezo helper">
   <button class="botface" id="botFace" type="button" aria-label="Show or hide the helper">
     <svg viewBox="0 0 64 76" aria-hidden="true">
@@ -67,13 +81,23 @@
     <div class="botbtns"><button id="botListen" type="button" aria-label="Read this aloud"></button><button id="botHide" type="button" aria-label="Hide the helper"></button></div>
   </div>
 </div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Cake design photo" hidden>
+  <div class="lbbox">
+    <div class="lbimg"><img id="lbImg" alt="" width="480" height="640">
+      <button class="lbn prev" id="lbPrev" type="button" aria-label="Previous photo">&lsaquo;</button>
+      <button class="lbn next" id="lbNext" type="button" aria-label="Next photo">&rsaquo;</button>
+      <button class="ibtn lbx" id="lbClose" type="button" aria-label="Close photo"></button></div>
+    <div class="lbcap"><div><b id="lbCap"></b><small id="lbCount"></small></div><div class="btns" id="lbActs"></div></div>
+  </div>
+</div>
 <div id="veil" class="veil" hidden></div>
-<aside id="panel" class="panel" hidden aria-label="Request list">
-  <header><h2>Request list</h2><button class="ibtn" id="closeCart" type="button" aria-label="Close"></button></header>
+<aside id="panel" class="panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" hidden>
+  <header><h2 id="panelTitle">Request list</h2><button class="ibtn" id="closeCart" type="button" aria-label="Close request list"></button></header>
   <p class="hint">Tap Send on WhatsApp to open a chat with the shop. Your request is already typed in the message.</p>
   <div class="list2" id="cartBody"></div>
+  <button class="clear" id="clearCart" type="button" hidden>Clear all</button>
 </aside>
-
 <script src="script.js"></script>
 </body>
 </html>

@@ -1,3 +1,13 @@
+/* ===== Settings ===== */
+/* To show the "List your shop" button, put the owner's WhatsApp number here, digits only with country code, e.g. "923001234567". */
+var CONFIG={ownerPhone:""};
+
+/* ===== Logos (optimised WebP) ===== */
+
+var LOGO_DIM={"al-khair-pharmacy":[560,280],"al-nasir-homeo-clinic":[560,313],"ali-tailors":[560,373],"hashmi-electronics":[560,306],"kashmiri-tuition-center":[560,373],"khan-food-point":[560,448],"khan-karyana-store":[560,373],"mamas-bake":[560,548],"shades-beauty-parlour":[560,373],"smoke-bar":[560,373],"warda-drink-corner":[560,373]};
+var LOGO={};for(var k in LOGO_DIM)LOGO[k]="logos/"+k+".webp";
+
+/* ===== Shop data (unchanged from the original) ===== */
 var P={
  bowl:'<path d="M3 11h18a8 8 0 0 1-8 8h-2a8 8 0 0 1-8-8z"/><path d="M8 7c0-1.5 1-1.5 1-3M12 7c0-1.5 1-1.5 1-3M16 7c0-1.5 1-1.5 1-3"/>',
  basket:'<path d="M3 9h18l-2 10H5z"/><path d="M8 9l4-6 4 6"/>',
@@ -77,7 +87,7 @@ var SHOPS=[
 ];
 var DEL=[["truck","Delivery on orders of Rs. 500 or more. Delivery charges depend on distance."],["tag","For product prices, contact the shop."]];
 var INFO={
- "khan-food-point":{phone:"923006864202",disp:"0300-6864202",tags:["Delivery from Rs. 500"],facts:[DEL[0],["tag","Prices are given by the shop and can change. Please confirm when you order."]],
+ "khan-food-point":{tags:["Delivery from Rs. 500"],facts:[DEL[0],["tag","Prices are given by the shop and can change. Please confirm when you order."]],
   items:[["Honey","Rs. 5,000 per kg"],["Desi Ghee","Rs. 3,200 per kg"],["Milk","Rs. 200 per litre"],["Butter","Rs. 1,800 per kg"],["Yogurt","Rs. 240 per kg"],["Shon Halwa","Rs. 1,400 per kg"],["Paratha Chana",""]],close:"Please tell me the prices and the delivery charge.",msg:"Hello Khan Food Point, I found you on Markezo. I want to place an order. Please tell me the prices and the delivery charge."},
  "khan-karyana-store":{phone:"923012846162",disp:"0301-2846162",tags:["Delivery from Rs. 500"],facts:[DEL[0],["tag","Prices are given by the shop and can change. Please confirm when you order."]],
   items:G("Karyana products",[["Ata","Rs. 170 per kg"],["Maida","Rs. 170 per kg"],["Baisan","Rs. 210 per kg"],["Sugar","Rs. 130 per kg"],["Salt","Rs. 20 per kg"],["Cooking oil","Rs. 500 to 600 per litre"],["Ghee","Rs. 500 to 580 per kg"]])
@@ -103,97 +113,177 @@ var INFO={
 SHOPS.forEach(function(s){var x=INFO[s.id]||{};for(var k in x)s[k]=x[k]});
 var CATS=["All"].concat(SHOPS.map(function(s){return s.cat}).filter(function(c,i,a){return a.indexOf(c)===i}));
 var CATIC={"All":"grid","Food & Grocery":"basket","Drinks & Smoke":"cup","Tailor & Beauty":"scissors","Health & Learning":"book","Electronics":"tv"};
-var cart={}, cat="All", q="", toastT=null;
 
+P.share='<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/>';
+P.up='<path d="M12 19V5M6 11l6-6 6 6"/>';
+P.check='<path d="M5 12.5l4.5 4.5L19 7.5"/>';
+
+var cart={}, cat="All", q="", toastT=null, ps="", booted=false, lastFocus=null;
+
+/* ===== Helpers ===== */
 function $(s){return document.querySelector(s)}
+function esc(t){return String(t).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function byId(id){return SHOPS.filter(function(s){return s.id===id})[0]}
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function mapUrl(s){
   if(s.maplink)return s.maplink;
-  var q=s.name+", "+s.address;
-  if(!/muzaffargarh/i.test(q))q+=", Muzaffargarh";
-  return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q+", Pakistan");
+  var t=s.name+", "+s.address;if(!/muzaffargarh/i.test(t))t+=", Muzaffargarh";
+  return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(t+", Pakistan");
 }
 function total(){var n=0;for(var k in cart)n+=cart[k];return n}
-function st(s){return '--h:'+s.hue}
-
-function tagsHtml(s){return (s.tags&&s.tags.length)?'<div class="bd">'+s.tags.map(function(t){return '<span>'+t+'</span>'}).join("")+'</div>':''}
+var THEME={"khan-food-point": [30, "hsl(30 78% 36%)", "hsl(20 72% 15%)"], "khan-karyana-store": [140, "hsl(140 58% 29%)", "hsl(156 66% 13%)"], "smoke-bar": [268, "hsl(268 70% 42%)", "hsl(280 76% 20%)"], "warda-drink-corner": [42, "hsl(41 82% 31%)", "hsl(33 78% 13%)"], "ali-tailors": [42, "hsl(36 12% 27%)", "hsl(30 16% 9%)"], "shades-beauty-parlour": [336, "hsl(336 62% 41%)", "hsl(326 64% 20%)"], "kashmiri-tuition-center": [228, "hsl(228 62% 38%)", "hsl(234 70% 16%)"], "al-nasir-homeo-clinic": [84, "hsl(80 48% 29%)", "hsl(88 52% 13%)"], "hashmi-electronics": [24, "hsl(214 14% 34%)", "hsl(220 24% 12%)"], "mamas-bake": [16, "hsl(16 82% 42%)", "hsl(350 66% 26%)"], "al-khair-pharmacy": [192, "hsl(192 82% 31%)", "hsl(212 80% 17%)"]};
+SHOPS.forEach(function(s){var t=THEME[s.id];if(t){s.hue=t[0];s.c1=t[1];s.c2=t[2]}});
+function st(s){return '--h:'+s.hue+(s.c1?';--c1:'+s.c1+';--c2:'+s.c2:'')}
+function realCount(s){return s.items.filter(function(it){return it[2]!=="Design ideas"}).length}
+function itemLabel(s){var n=realCount(s);return n+(s.kind==="service"?(n===1?" service":" services"):(n===1?" item":" items"))}
+function areaList(){var a=[];SHOPS.forEach(function(s){if(a.indexOf(s.area)<0)a.push(s.area)});return a}
 function hasCart(id){for(var k in cart){if(k.split("|")[0]===id)return true}return false}
 function waUrl(s,text){return "https://wa.me/"+s.phone+"?text="+encodeURIComponent(text)}
 function waText(s){return hasCart(s.id)?requestText(s.id):(s.msg||("Hello "+s.name+", I found you on Markezo."))}
-function waBtn(s,cls){return s.phone?'<a class="'+cls+'" data-wa="'+s.id+'" target="_blank" rel="noopener" href="'+waUrl(s,waText(s))+'">'+I("chat")+'Message on WhatsApp</a>':''}
+function waBtn(s,cls){return s.phone?'<a class="'+cls+'" data-wa="'+s.id+'" target="_blank" rel="noopener noreferrer" href="'+waUrl(s,waText(s))+'">'+I("chat")+'Message on WhatsApp</a>':''}
+function syncWa(){var a=document.querySelectorAll("a[data-wa]");for(var i=0;i<a.length;i++){var s=byId(a[i].dataset.wa);a[i].href=waUrl(s,waText(s))}}
+function toast(msg){var t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove("show")},1600)}
+function setMeta(title,desc){
+  document.title=title;
+  var m=$('meta[name="description"]');if(m)m.setAttribute("content",desc);
+  var o=$('meta[property="og:title"]');if(o)o.setAttribute("content",title);
+  var d=$('meta[property="og:description"]');if(d)d.setAttribute("content",desc);
+}
+function ld(s){
+  var o={"@type":"LocalBusiness","name":s.name,"description":s.blurb,"address":{"@type":"PostalAddress","streetAddress":s.address,"addressLocality":"Muzaffargarh","addressCountry":"PK"}};
+  if(s.phone)o.telephone="+"+s.phone;return o;
+}
+function setLd(obj){
+  var el=$("#ld");if(!el){el=document.createElement("script");el.type="application/ld+json";el.id="ld";document.head.appendChild(el)}
+  obj["@context"]="https://schema.org";el.textContent=JSON.stringify(obj);
+}
+
+
+/* ===== Mama's Bake cake design photos ===== */
+
+var PHOTO_CAP=["Chocolate fault-line cake","Congrats marble cake with flowers","Ribbon bows and pearls cake","Buttercream roses cake","Chick face fondant cake","Chocolate drip cake with biscuits and wafers","Buttercream flower bouquet cake","Vintage piped cake with pearls","Giant decorated cupcake","Peony and basket-weave cake","Anniversary cake with black bows","Graduation cake with books and cap","Red hearts cake","Ocean blue ombre cake","Birthday cake with rose and name tag","Birthday cake with calendar plaque","Chocolate drip cake with coin biscuits","Chocolate cake with white flowers","Engagement ring cake with mehndi plate","Birthday chocolate cake with gold balls",
+"Pink and yellow buttercream roses cake","Brown ribbon cake with piped border","Bento box cartoon birthday cake","Pink sprinkle hearts cake","Two-tier pink cake with gold butterflies","Chocolate peanut butter donuts","Anniversary couple silhouette cake","Chocolate donuts with rainbow sprinkles","Chocolate chip muffins","Chocolate rosette cake","Fudgy brownies","Chocolate cupcakes with chocolate swirl","Chocolate chip brownies","Two-tier birthday cake with chocolate wafer","Chocolate drip cake with pretzels","Chocolate drip cake with walnuts","Chocolate cake with cookie pieces","Chocolate drip cake with wafer rolls and biscuits","Vanilla frosted chocolate cupcake","Chocolate chip sided cake","Umrah Mubarak cake with gold balls","Vanilla layer cake slice","Chocolate cupcakes with swirl frosting","Stacked sprinkle donuts","Vanilla cupcakes with buttercream swirl","Colourful buttercream cupcakes","Strawberry chocolate drip cake"];
+(function(){var s=byId("mamas-bake");if(!s)return;PHOTO_CAP.forEach(function(c,i){s.items.push(i<20?[c,"Custom design. Ask the shop for the price.","Cake designs",i]:[c,"Design idea. Ask the shop if it can make this.","Design ideas",i])})})();
+var KF_PHOTOS={"Milk":47,"Shon Halwa":48,"Desi Ghee":49,"Butter":50,"Honey":51,"Yogurt":52,"Paratha Chana":53};
+(function(){
+  var s=byId("khan-food-point");if(!s)return;
+  s.items.forEach(function(it){if(KF_PHOTOS[it[0]]!==undefined){it[2]="";it[3]=KF_PHOTOS[it[0]]}});
+  s.facts=(s.facts||[]).concat([["tag","Product photos are for illustration. The actual product may look a little different."]]);
+})();
+var WARDA_PHOTOS={"Cold drinks":54,"Snacks":55};
+(function(){
+  var s=byId("warda-drink-corner");if(!s)return;
+  s.items.forEach(function(it){if(WARDA_PHOTOS[it[0]]!==undefined){it[2]="";it[3]=WARDA_PHOTOS[it[0]]}});
+  s.facts=(s.facts||[]).concat([["tag","Product pictures are illustrations. Brands and prices are confirmed by the shop."]]);
+})();
+var ALI_PHOTOS={"Ladies suits":56,"Gents suits":57,"Waistcoat stitching":58,"Coat stitching":59,"Shirt stitching":60};
+(function(){
+  var s=byId("ali-tailors");if(!s)return;
+  s.items.forEach(function(it){if(ALI_PHOTOS[it[0]]!==undefined){it[2]="";it[3]=ALI_PHOTOS[it[0]]}});
+  s.facts=(s.facts||[]).concat([["tag","Photos show example styles. Your stitching is made to your own measurements."]]);
+})();
+var KAR_PHOTOS={"Ata": 61, "Maida": 62, "Baisan": 63, "Sugar": 64, "Salt": 65, "Cooking oil": 66, "Ghee": 67, "Mirch powder (red chilli powder)": 68, "Mirch danadar (whole red chilli)": 69, "Haldi (turmeric)": 70, "Zira (cumin)": 71, "Soap": 72, "Tooth paste": 73, "Surf (detergent) 1/2 kg": 74, "Surf (detergent) 1 kg": 75, "Confectionery": 76, "Stationery": 77};
+(function(){
+  var s=byId("khan-karyana-store");if(!s)return;
+  s.items.forEach(function(it){if(KAR_PHOTOS[it[0]]!==undefined)it[3]=KAR_PHOTOS[it[0]]});
+  s.facts=(s.facts||[]).concat([["tag","Product pictures are illustrations. Brands, sizes and prices are confirmed by the shop."]]);
+})();
+function photoUrl(i){return "photos/"+i+".webp"}
+
+/* ===== Small components ===== */
+function tagsHtml(s,cls){return (s.tags&&s.tags.length)?'<div class="'+cls+'">'+s.tags.map(function(t){return '<span>'+esc(t)+'</span>'}).join("")+'</div>':''}
 function factsHtml(s){
   var h='';
-  if(s.facts&&s.facts.length)h+='<div class="facts">'+s.facts.map(function(f){return '<div class="fact"><span class="fi">'+I(f[0])+'</span><p>'+f[1]+'</p></div>'}).join("")+'</div>';
-  if(s.rates)h+='<div class="rates"><h3>Flavour prices</h3>'+s.rates.map(function(r){return '<div class="rr"><span>'+r[0]+'</span><span>'+r[1]+'</span></div>'}).join("")+'</div>';
+  if(s.facts&&s.facts.length)h+='<div class="facts">'+s.facts.map(function(f){return '<div class="fact"><span class="fi">'+I(f[0])+'</span><p>'+esc(f[1])+'</p></div>'}).join("")+'</div>';
+  if(s.rates)h+='<div class="rates"><h3>Flavour prices</h3>'+s.rates.map(function(r){return '<div class="rr"><span>'+esc(r[0])+'</span><span>'+esc(r[1])+'</span></div>'}).join("")+'</div>';
   return h;
 }
+function telNum(s){return "+"+s.phone}
 function contactHtml(s){
   if(!s.phone)return '<div class="contact"><h2>Contact</h2><p class="addr">Phone number coming soon.</p></div>';
-  return '<div class="contact"><h2>Contact</h2><p class="num">'+s.disp+'</p><div class="btns">'+waBtn(s,"btn wa")+'<button class="btn" type="button" data-num="'+s.disp+'">'+I("copy")+'Copy number</button></div></div>';
+  return '<div class="contact"><h2>Contact</h2><p class="num">'+esc(s.disp)+'</p><div class="btns">'+waBtn(s,"btn wa")+
+    '<a class="btn" href="tel:'+telNum(s)+'">'+I("phone")+'Call</a>'+
+    '<button class="btn" type="button" data-num="'+esc(s.disp)+'">'+I("copy")+'Copy number</button></div></div>';
 }
-function syncWa(){var a=document.querySelectorAll("a[data-wa]");for(var i=0;i<a.length;i++){var s=byId(a[i].dataset.wa);a[i].href=waUrl(s,waText(s))}}
-function logoBox(s,cls){
-  var c=(s.id==="khan-food-point"||s.id==="mamas-bake"||s.id==="al-khair-pharmacy")?" contain":"";
-  return '<div class="'+cls+c+'"><span class="fb">'+I(s.ic)+'</span><img src="logos/'+s.id+'.webp" alt="'+s.name+' logo"></div>';
-}
-function storeCard(s){
-  var n=s.items.length, label=n+(s.kind==="service"?(n===1?" service":" services"):(n===1?" item":" items"));
-  var tags=(s.tags&&s.tags.length)?'<div class="ctags">'+s.tags.map(function(t){return '<span>'+t+'</span>'}).join("")+'</div>':'';
-  return '<a class="card sg" href="#shop-'+s.id+'" style="'+st(s)+'">'+
-    '<div class="lg2" style="--logo:url(logos/'+s.id+'.webp)"><img src="logos/'+s.id+'.webp" alt="'+s.name+' logo"><span class="cbadge">'+I(s.ic)+'</span></div>'+
-    '<div class="cbody"><div class="crow"><span class="ccat">'+s.cat+'</span><span class="cn">'+label+'</span></div>'+
-    '<h3>'+s.name+'</h3><p class="cdesc">'+s.blurb+'</p>'+tags+
-    '<div class="cloc">'+I("pin")+'<span>'+s.address+'</span></div>'+
-    '<span class="visit">Visit store<i class="va">'+I("arrow")+'</i></span></div></a>';
-}
-function shopCard(s,big){
-  var pv=big?'<div class="pv">'+s.items.slice(0,4).map(function(i){return '<span>'+i[0]+'</span>'}).join("")+'</div>':'';
-  return '<a class="card sg'+(big?' big':'')+'" href="#shop-'+s.id+'" style="'+st(s)+'">'+logoBox(s,"lg")+'<div class="cb">'+
-    '<span class="tag">'+s.cat+'</span><h3>'+s.name+'</h3>'+pv+tagsHtml(s)+
-    '<span class="where">'+I("pin")+s.address+'</span></div><span class="go">'+I("arrow")+'</span></a>';
+var CONTAIN={"khan-food-point":1,"mamas-bake":1,"al-khair-pharmacy":1,"al-nasir-homeo-clinic":1,"hashmi-electronics":1};
+function imgTag(s,eager){var d=LOGO_DIM[s.id]||[560,373];return '<img src="'+LOGO[s.id]+'" alt="'+esc(s.name)+' logo" width="'+d[0]+'" height="'+d[1]+'" decoding="async"'+(eager?'':' loading="lazy"')+'>'}
+function logoBox(s){return '<div class="big'+(CONTAIN[s.id]?' contain':'')+'">'+imgTag(s,true)+'</div>'}
+function storeCard(s,i){
+  return '<a class="card sg" href="#shop-'+s.id+'" style="'+st(s)+';--i:'+i+'" aria-label="'+esc(s.name)+', '+esc(s.cat)+'. Open store">'+
+    '<div class="lg2" style="--logo:url('+LOGO[s.id]+')">'+imgTag(s,i<3)+'<span class="cbadge">'+I(s.ic)+'</span></div>'+
+    '<div class="cbody"><div class="crow"><span class="ccat">'+esc(s.cat)+'</span><span class="cn">'+itemLabel(s)+'</span></div>'+
+    '<h3>'+esc(s.name)+'</h3><p class="cdesc">'+esc(s.blurb)+'</p>'+tagsHtml(s,"ctags")+
+    '<div class="cloc">'+I("pin")+'<span>'+esc(s.address)+'</span></div>'+
+    '<span class="visit">Visit store<i class="va" aria-hidden="true" style="font-style:normal">'+I("arrow")+'</i></span></div></a>';
 }
 function areaBlocks(){
-  var areas=[];SHOPS.forEach(function(s){if(areas.indexOf(s.area)<0)areas.push(s.area)});
-  return areas.map(function(a){
+  return areaList().map(function(a){
     var list=SHOPS.filter(function(s){return s.area===a});
-    return '<div class="area"><h3>'+I("pin")+a+'</h3>'+list.map(function(s){return '<a href="#shop-'+s.id+'">'+s.name+'<span>'+s.cat+'</span></a>'}).join("")+'</div>';
+    return '<div class="area"><h3>'+I("pin")+esc(a)+'</h3>'+list.map(function(s){return '<a href="#shop-'+s.id+'">'+esc(s.name)+'<span>'+esc(s.cat)+'</span></a>'}).join("")+'</div>';
   }).join("");
 }
+function faqHtml(){
+  var dl=SHOPS.filter(botHasDel).map(function(s){return s.name}).join(", ");
+  var qa=[
+    ["How do I order?","Open a shop, tap Add to list on what you need, then tap Send on WhatsApp. A chat with the shop opens with your request already typed. You can also open the shop's location in Maps and visit."],
+    ["Do I pay on Markezo?","No. Markezo does not take payments. Each shop confirms the final price, delivery charge and payment method when you message it. Some shops, such as Mama's Bake, take payment before delivery."],
+    ["Are the prices final?","Prices are given by the shops and can change. Please confirm the price with the shop when you order."],
+    ["Which shops deliver?","Delivery is offered by: "+dl+". Delivery rules and charges are different for each shop, so open the shop page to read them."],
+    ["Are there age limits?","Yes. Smoke Bar and the cigarettes at Warda Drink Corner are sold to adults 18 and over only."]
+  ];
+  if(CONFIG.ownerPhone)qa.push(["How can my shop be listed?","Tap List your shop and send us a WhatsApp message with your shop name, address and what you sell."]);
+  return qa.map(function(x){return '<details><summary>'+esc(x[0])+'</summary><p>'+esc(x[1])+'</p></details>'}).join("");
+}
 function pick3(){var a=SHOPS.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a.slice(0,3)}
+
+/* ===== Views ===== */
 function homeView(){
-  var stack=pick3().map(function(s,i){
-    return '<a class="mini sg" href="#shop-'+s.id+'" style="'+st(s)+';background:linear-gradient(145deg,var(--c1),var(--c2))"><span class="ic">'+I(s.ic)+'</span><span><b>'+s.name+'</b><span>'+s.address+'</span></span></a>';
+  var items=SHOPS.reduce(function(n,s){return n+realCount(s)},0), rounded=Math.floor(items/10)*10;
+  var stack=pick3().map(function(s){
+    return '<a class="mini sg" href="#shop-'+s.id+'" style="'+st(s)+';background:linear-gradient(145deg,var(--c1),var(--c2))"><span class="ic">'+I(s.ic)+'</span><span><b>'+esc(s.name)+'</b><span>'+esc(s.address)+'</span></span></a>';
   }).join("");
   $("#view").innerHTML=
-   '<div class="wrap"><section class="hero"><div><span class="eyebrow"><i></i>11 local shops, one bazaar</span>'+
-   '<h1>Your whole <em>bazaar</em>, in one place.</h1>'+
+   '<div class="wrap"><section class="hero" aria-labelledby="h1"><div><span class="eyebrow"><i></i>'+SHOPS.length+' local shops, one bazaar</span>'+
+   '<h1 id="h1">Your whole <em>bazaar</em>, in one place.</h1>'+
    '<p>Browse each shop\'s store, see what they sell, and find exactly where they are.</p>'+
-   '<label class="search">'+I("search")+'<input id="q" type="search" placeholder="Search a shop, product or area" aria-label="Search shops"></label>'+
-   '<div class="stats"><div><b>11</b><span>Shops</span></div><div><b>9</b><span>Areas</span></div><div><b>80+</b><span>Products and services</span></div></div></div>'+
-   '<div class="stack">'+stack+'</div></section>'+
-   '<div class="cats" id="cats"></div>'+
-   '<div class="head"><h2 id="gt">All stores</h2><span class="count" id="count"></span></div>'+
-   '<div class="grid" id="grid"></div>'+
-   '<section class="sec"><h2>How Markezo works</h2><p>Three steps from browsing to your order.</p><div class="steps">'+
+   '<form class="search" role="search" id="sform"><label class="sr" for="q">Search shops, products or areas</label>'+I("search")+'<input id="q" type="search" placeholder="Search a shop, product or area" autocomplete="off" enterkeyhint="search"><kbd aria-hidden="true">/</kbd><button class="clr" id="qclr" type="button" aria-label="Clear search" hidden>'+I("x")+'</button></form>'+
+   '<div class="stats"><div><b>'+SHOPS.length+'</b><span>Shops</span></div><div><b>'+areaList().length+'</b><span>Areas</span></div><div><b>'+rounded+'+</b><span>Products and services</span></div></div></div>'+
+   '<div class="stack" aria-hidden="true">'+stack+'</div></section>'+
+   '<div class="tstrip" aria-label="Why Markezo"><span>'+I("check")+'Free to browse, no sign-up</span><span>'+I("chat")+'Order on WhatsApp</span><span>'+I("tag")+'Prices confirmed by each shop</span><span>'+I("pin")+'Real local shops with addresses</span></div>'+
+   '<div id="stores" class="sec" style="padding-top:0;content-visibility:visible"><div class="cats" id="cats" role="group" aria-label="Filter by category"></div>'+
+   '<div class="head"><h2 id="gt">All stores</h2><span class="count" id="count" aria-live="polite"></span></div>'+
+   '<div class="grid" id="grid"></div></div>'+
+   '<section class="sec" id="how"><h2>How Markezo works</h2><p>Three steps from browsing to your order.</p><div class="steps">'+
    '<div class="stp"><span class="n">1</span><h3>Pick a shop</h3><p>Open any store to see its products or services and its address.</p></div>'+
    '<div class="stp"><span class="n">2</span><h3>Build your list</h3><p>Tap Add on what you need. Change quantities any time.</p></div>'+
    '<div class="stp"><span class="n">3</span><h3>Send or visit</h3><p>Tap Send on WhatsApp. A chat with the shop opens with your request already typed. Or open the location in Maps and visit.</p></div></div></section>'+
-   '<section class="sec"><h2>Shops by area</h2><p>Find stores that are close to each other.</p><div class="areas">'+areaBlocks()+'</div></section></div>';
-  $("#cats").innerHTML=CATS.map(function(c){return '<button class="chip" type="button" data-cat="'+c+'" aria-pressed="'+(c===cat)+'">'+I(CATIC[c])+c+'</button>'}).join("");
-  $("#q").value=q;
-  $("#q").addEventListener("input",function(e){q=e.target.value;filterGrid()});
+   '<section class="sec" id="areas"><h2>Shops by area</h2><p>Find stores that are close to each other.</p><div class="areas">'+areaBlocks()+'</div></section>'+
+   '<section class="sec" id="faq"><h2>Questions</h2><p>Quick answers before you order.</p><div class="faq">'+faqHtml()+'</div></section>'+
+   (CONFIG.ownerPhone?'<div class="cta"><div><h2>Own a shop in Muzaffargarh?</h2><p>Get your store on Markezo and let customers find you and message you on WhatsApp.</p></div><a href="https://wa.me/'+CONFIG.ownerPhone+'?text='+encodeURIComponent("Hello Markezo, I want to list my shop.")+'" target="_blank" rel="noopener noreferrer">'+I("chat")+'List your shop</a></div>':'')+
+   '</div>';
+  var cats=["All"].concat(SHOPS.map(function(s){return s.cat}).filter(function(c,i,a){return a.indexOf(c)===i}));
+  $("#cats").innerHTML=cats.map(function(c){
+    var n=c==="All"?SHOPS.length:SHOPS.filter(function(s){return s.cat===c}).length;
+    return '<button class="chip" type="button" data-cat="'+esc(c)+'" aria-pressed="'+(c===cat)+'">'+I(CATIC[c]||"grid")+esc(c)+'<small>'+n+'</small></button>';
+  }).join("");
+  var inp=$("#q");inp.value=q;$("#qclr").hidden=!q;
+  var tm;inp.addEventListener("input",function(e){q=e.target.value;$("#qclr").hidden=!q;clearTimeout(tm);tm=setTimeout(filterGrid,120)});
+  $("#sform").addEventListener("submit",function(e){e.preventDefault();filterGrid();inp.blur();var g=$("#stores");if(g&&q)g.scrollIntoView({behavior:"smooth"})});
+  $("#qclr").addEventListener("click",function(){q="";inp.value="";$("#qclr").hidden=true;filterGrid();inp.focus()});
   filterGrid();
+  setMeta("Markezo | Local shops of Muzaffargarh in one online bazaar","Markezo: "+SHOPS.length+" local shops in one online bazaar. Browse each store, see products, prices and location, and message the shop on WhatsApp.");
+  setLd({"@type":"ItemList","name":"Markezo shops","creator":[{"@type":"Person","name":"Shahzaib Arshad Khagga"},{"@type":"Person","name":"Muhammad Ashman"}],"itemListElement":SHOPS.map(function(s,i){return {"@type":"ListItem","position":i+1,"item":ld(s)}})});
 }
 function filterGrid(){
-  var t=q.trim().toLowerCase(), plain=(cat==="All"&&!t);
+  var t=q.trim().toLowerCase();
   var list=SHOPS.filter(function(s){
     if(cat!=="All"&&s.cat!==cat)return false;
     if(!t)return true;
     var hay=(s.name+" "+s.cat+" "+s.address+" "+s.blurb+" "+s.items.map(function(i){return i[0]+" "+i[1]}).join(" ")).toLowerCase();
     return hay.indexOf(t)>-1;
   });
-  var bigAt=plain?{0:1,3:1,7:1,10:1}:{};
-  $("#grid").innerHTML=list.length?list.map(function(s,i){return storeCard(s)}).join(""):'<p class="empty">No shop matches that search. Try another word.</p>';
+  $("#grid").innerHTML=list.length?list.map(storeCard).join(""):'<div class="empty"><p>No shop matches that search. Try another word.</p>'+((t||cat!=="All")?'<button type="button" data-reset="1">Show all stores</button>':'')+'</div>';
   $("#count").textContent=list.length+(list.length===1?" shop":" shops");
   $("#gt").textContent=cat==="All"?"All stores":cat;
   botSay(homeText(list.length));
@@ -201,35 +291,85 @@ function filterGrid(){
 function prodControl(s,i){
   var k=s.id+"|"+i,n=cart[k]||0;
   if(!n)return '<button class="add" type="button" data-add="'+k+'">'+I("plus")+(s.kind==="service"?"Request":"Add to list")+'</button>';
-  return '<div class="step"><button type="button" data-dec="'+k+'" aria-label="Less">−</button><span>'+n+'</span><button type="button" data-add="'+k+'" aria-label="More">+</button></div>';
+  return '<div class="step"><button type="button" data-dec="'+k+'" aria-label="Less">&minus;</button><span aria-live="polite">'+n+'</span><button type="button" data-add="'+k+'" aria-label="More">+</button></div>';
 }
+function ordered(s){var a=[];s.items.forEach(function(it,i){if(it[3]!==undefined)a.push(i)});s.items.forEach(function(it,i){if(it[3]===undefined)a.push(i)});return a}
+function groupsOf(s){var g=[];ordered(s).forEach(function(i){var x=s.items[i][2];if(x&&g.indexOf(x)<0)g.push(x)});return g}
 function shopView(s){
   var near=SHOPS.filter(function(o){return o.id!==s.id&&o.area===s.area});
+  var groups=groupsOf(s);
   var map='<svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g stroke="currentColor" stroke-width="10" fill="none" stroke-linecap="round"><path d="M-10 110 L120 80 L200 100 L340 40"/><path d="M90 -10 L120 80 L100 160"/><path d="M230 -10 L200 100 L250 160"/></g><g stroke="currentColor" stroke-width="3" fill="none" opacity=".7"><path d="M-10 40 L340 70"/><path d="M160 -10 L170 160"/><path d="M-10 140 L340 120"/></g></svg>';
+  ps="";
   $("#view").innerHTML=
    '<div class="wrap"><a class="crumb" href="#home">'+I("back")+'All shops</a>'+
-   '<div class="sh sg" style="'+st(s)+'">'+logoBox(s,"big")+'<div><span class="tag">'+s.cat+'</span><h1>'+s.name+'</h1><p>'+s.blurb+'</p>'+
-   '<div class="pills"><span>'+I("bag")+s.items.length+(s.kind==="service"?(s.items.length===1?' service':' services'):(s.items.length===1?' item':' items'))+'</span><span>'+I("pin")+s.area+'</span>'+(s.tags||[]).map(function(t){return '<span>'+t+'</span>'}).join("")+'</div>'+waBtn(s,"wabig")+'</div></div>'+
-   '<div class="layout sg" style="'+st(s)+'"><div>'+(s.note?'<div class="note">'+I("alert")+s.note+'</div>':'')+factsHtml(s)+
-   '<h2 class="sec2">'+(s.kind==="service"?"Services":"Products")+'</h2><div class="plist" id="plist"></div></div>'+
-   '<aside class="loc"><div class="map">'+map+'<span class="pin"><i></i></span></div><div class="in"><h2>Location</h2><p class="addr">'+s.address+'</p><div class="btns">'+
-   '<a class="btn pri" href="'+mapUrl(s)+'" target="_blank" rel="noopener">'+I("pin")+'Open in Maps</a>'+
-   '<button class="btn" type="button" id="copyAddr">'+I("copy")+'Copy address</button></div>'+
-   contactHtml(s)+(near.length?'<div class="near">Also in this area'+near.map(function(o){return '<a href="#shop-'+o.id+'">'+o.name+'</a>'}).join("")+'</div>':'')+
+   '<section class="sh sg'+(CONTAIN[s.id]?' lite':'')+'" style="'+st(s)+';--logo:url('+LOGO[s.id]+')">'+logoBox(s)+'<div><span class="tag">'+esc(s.cat)+'</span><h1>'+esc(s.name)+'</h1><p>'+esc(s.blurb)+'</p>'+
+   '<div class="pills"><span>'+I("bag")+itemLabel(s)+'</span><span>'+I("pin")+esc(s.area)+'</span>'+(s.tags||[]).map(function(t){return '<span>'+esc(t)+'</span>'}).join("")+'</div>'+waBtn(s,"wabig")+'</div></section>'+
+   '<div class="layout sg" style="'+st(s)+'"><div>'+(s.note?'<div class="note">'+I("alert")+esc(s.note)+'</div>':'')+factsHtml(s)+
+   '<div class="phead"><h2 class="sec2">'+(s.kind==="service"?"Services":"Products")+'</h2>'+
+   (s.items.length>8?'<label class="pfind">'+I("search")+'<span class="sr">Search in '+esc(s.name)+'</span><input id="ps" type="search" placeholder="Search this shop" autocomplete="off"></label>':'')+'</div>'+
+   (groups.length>1?'<div class="gchips" role="group" aria-label="Jump to section">'+groups.map(function(g,i){return '<button type="button" data-g="'+i+'">'+esc(g)+'</button>'}).join("")+'</div>':'')+
+   '<div class="plist" id="plist"></div></div>'+
+   '<aside class="loc" aria-label="Location and contact"><div class="map">'+map+'<span class="pin"><i></i></span></div><div class="in"><h2>Location</h2><p class="addr">'+esc(s.address)+'</p><div class="btns">'+
+   '<a class="btn pri" href="'+mapUrl(s)+'" target="_blank" rel="noopener noreferrer">'+I("pin")+'Open in Maps</a>'+
+   '<button class="btn" type="button" id="copyAddr">'+I("copy")+'Copy address</button>'+
+   '<button class="btn" type="button" id="shareBtn">'+I("share")+'Share</button></div>'+
+   contactHtml(s)+(near.length?'<div class="near">Also in this area'+near.map(function(o){return '<a href="#shop-'+o.id+'">'+esc(o.name)+'</a>'}).join("")+'</div>':'')+
    '</div></aside></div></div>';
   drawProducts(s);
+  var pi=$("#ps");if(pi){var tm;pi.addEventListener("input",function(e){ps=e.target.value;clearTimeout(tm);tm=setTimeout(function(){drawProducts(s)},100)})}
   $("#copyAddr").addEventListener("click",function(e){copyText(s.name+", "+s.address,e.currentTarget)});
+  $("#shareBtn").addEventListener("click",function(){shareShop(s)});
   botCur=s;botSay(shopText(s));
+  setMeta(s.name+" | Markezo",s.blurb+" "+s.address+". See products and message the shop on WhatsApp.");
+  setLd(ld(s));
 }
 function drawProducts(s){
-  syncWa();var el=$("#plist"); if(!el)return;var lastG="";
-  el.innerHTML=s.items.map(function(it,i){
-    var gh=(it[2]&&it[2]!==lastG)?'<h3 class="gh">'+(lastG=it[2])+'</h3>':'';
-    return gh+'<div class="prod"><div class="top"><span class="b">'+I(s.ic)+'</span><div><h3>'+it[0]+'</h3>'+(it[1]?'<small>'+it[1]+'</small>':'')+'</div></div>'+prodControl(s,i)+'</div>';
-  }).join("");
+  syncWa();var el=$("#plist");if(!el)return;
+  var t=ps.trim().toLowerCase(),lastG="",html="",n=0,gs=groupsOf(s);
+  ordered(s).forEach(function(i){
+    var it=s.items[i];
+    if(t&&(it[0]+" "+(it[1]||"")+" "+(it[2]||"")).toLowerCase().indexOf(t)<0)return;
+    n++;
+    if(it[2]&&it[2]!==lastG){lastG=it[2];html+='<h3 class="gh" id="g-'+gs.indexOf(lastG)+'">'+esc(lastG)+'</h3>';if(lastG==="Design ideas")html+='<p class="ghn">Reference photos that show styles you can ask for. These are not the shop\'s own work. Ask the shop if it can make something similar.</p>'}
+    var sub=it[1]||"",priceHtml="",small="";
+    if(/\bRs\./.test(sub))priceHtml='<span class="price">'+esc(sub)+'</span>';else if(sub)small='<small>'+esc(sub)+'</small>';
+    if(it[3]!==undefined){
+      html+='<div class="prod photo"><button class="pphoto" type="button" data-lb="'+i+'" aria-label="View photo: '+esc(it[0])+'"><img src="'+photoUrl(it[3])+'" alt="'+esc(it[0])+'" width="480" height="640" loading="lazy" decoding="async"><span>'+I("search")+'View</span></button><div class="pbody"><div><h3>'+esc(it[0])+'</h3>'+small+priceHtml+'</div>'+prodControl(s,i)+'</div></div>';
+    }else{
+      html+='<div class="prod"><div class="top"><span class="b">'+I(s.ic)+'</span><div><h3>'+esc(it[0])+'</h3>'+small+priceHtml+'</div></div>'+prodControl(s,i)+'</div>';
+    }
+  });
+  el.innerHTML=n?html:'<p class="empty">No products match "'+esc(ps)+'".</p>';
 }
+/* Lightbox for photo products */
+var lbShop=null,lbPos=0,lbList=[];
+function openLb(s,i){
+  lbShop=s;lbList=ordered(s).filter(function(x){return s.items[x][3]!==undefined});lbPos=lbList.indexOf(i);if(lbPos<0)return;
+  lastFocus=document.activeElement;$("#lb").hidden=false;document.body.style.overflow="hidden";renderLb();$("#lbClose").focus();
+}
+function closeLb(){
+  $("#lb").hidden=true;if($("#panel").hidden)document.body.style.overflow="";
+  if(lastFocus&&lastFocus.focus){try{lastFocus.focus()}catch(e){}}
+}
+function stepLb(d){if(!lbList.length)return;lbPos=(lbPos+d+lbList.length)%lbList.length;renderLb()}
+function renderLb(){
+  var s=lbShop,i=lbList[lbPos],it=s.items[i],k=s.id+"|"+i,n=cart[k]||0;
+  var im=$("#lbImg");im.src=photoUrl(it[3]);im.alt=it[0];
+  $("#lbCap").textContent=it[0];$("#lbCount").textContent="Photo "+(lbPos+1)+" of "+lbList.length+(it[1]?" · "+it[1]:"");
+  var idea=it[2]==="Design ideas";
+  var cake=s.id==="mamas-bake";
+  var msg="Hello "+s.name+", I found you on Markezo. "+(cake?(idea?"Can you make something like this design idea: ":"I like this cake design: ")+it[0]+". Please tell me the price, the delivery charge and how to pay.":"I want to order: "+it[0]+". "+(s.close||"Please tell me the price and the delivery charge."));
+  $("#lbActs").innerHTML=(s.phone?'<a class="btn wa" target="_blank" rel="noopener noreferrer" href="'+waUrl(s,msg)+'">'+I("chat")+'Ask on WhatsApp</a>':'')+
+    '<button class="btn pri" type="button" data-add="'+k+'">'+I("plus")+(n?"Added x"+n+" · add more":"Add to list")+'</button>';
+}
+function shareShop(s){
+  var data={title:s.name+" on Markezo",text:s.name+": "+s.blurb,url:location.href};
+  if(navigator.share){navigator.share(data).catch(function(){})}
+  else{var b=$("#shareBtn");copyText(location.href,b)}
+}
+
+/* ===== Helper bot (original logic) ===== */
 var botMsg="",botCur=null;
-function itemLabel(s){var n=s.items.length;return n+(s.kind==="service"?(n===1?" service":" services"):(n===1?" item":" items"))}
 function homeText(n){
   var t=q.trim();
   if(cat==="All"&&!t)return "Hi, I am Marky. You are on the Markezo home page. Here are "+SHOPS.length+" local shops. Tap a shop card to open its store.";
@@ -240,36 +380,57 @@ function shopText(s){
   return "You are in "+s.name+" ("+s.cat+"), at "+s.area+". "+s.blurb+" It has "+itemLabel(s)+". "+(s.facts&&s.facts[0]?s.facts[0][1]+" ":"")+(s.phone?"Tap Message on WhatsApp to chat with the shop.":"The phone number is coming soon.");
 }
 function botSay(msg){botMsg=msg;var t=$("#botText");if(t)t.textContent=msg;var a=$("#botActs");if(a)a.innerHTML="";botChips()}
-function botReveal(){
-  var b=$("#bot"),u=$("#botBubble");if(!b)return;
-  b.classList.remove("quiet");u.classList.remove("pop");void u.offsetWidth;u.classList.add("pop");
-  try{if(window.speechSynthesis)window.speechSynthesis.cancel()}catch(e){}
-}
 function botListen(){
   try{if(!window.speechSynthesis)return;window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(botMsg);u.lang="en-US";u.rate=0.95;window.speechSynthesis.speak(u)}catch(e){}
 }
-function route(){botCur=null;
+
+/* the bot code above has its own itemLabel; keep ours (real products only) */
+function itemLabel(s){var n=realCount(s);return n+(s.kind==="service"?(n===1?" service":" services"):(n===1?" item":" items"))}
+var botSeen=false;
+function botReveal(){
+  var b=$("#bot"),u=$("#botBubble");if(!b)return;
+  if(botSeen)return;botSeen=true;
+  b.classList.remove("quiet");u.classList.remove("pop");void u.offsetWidth;u.classList.add("pop");
+  setTimeout(function(){if(!b.classList.contains("ask"))b.classList.add("quiet")},8000);
+}
+
+/* ===== Router ===== */
+var SECTIONS={stores:1,how:1,areas:1,faq:1};
+function route(){
+  botCur=null;if(!$("#lb").hidden){$("#lb").hidden=true;document.body.style.overflow=""}
   var h=location.hash.replace("#","");
+  if(SECTIONS[h]){
+    if(!$("#grid"))homeView();
+    var el=document.getElementById(h);if(el)el.scrollIntoView();
+    return;
+  }
   window.scrollTo(0,0);
   if(h.indexOf("shop-")===0&&byId(h.slice(5)))shopView(byId(h.slice(5)));
   else homeView();
   botReveal();
 }
+
+/* ===== Clipboard ===== */
 function copyText(text,btn){
   var o=btn.innerHTML;
-  var done=function(){btn.textContent="Copied";setTimeout(function(){btn.innerHTML=o},1500)};
+  var done=function(){btn.textContent="Copied";toast("Copied");setTimeout(function(){btn.innerHTML=o},1500)};
   var fallback=function(){
-    var ta=btn.parentNode.querySelector("textarea")||document.createElement("textarea");
-    ta.readOnly=true;ta.value=text;
-    if(!ta.parentNode)btn.parentNode.appendChild(ta);
-    ta.select();
+    var ta=document.createElement("textarea");ta.value=text;ta.setAttribute("readonly","");ta.style.cssText="position:fixed;opacity:0";
+    document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done()}catch(e){}document.body.removeChild(ta);
   };
   try{navigator.clipboard.writeText(text).then(done,fallback)}catch(e){fallback()}
+}
+
+/* ===== Request list ===== */
+function saveCart(){lsSet("mzCart",JSON.stringify(cart))}
+function loadCart(){
+  try{var c=JSON.parse(lsGet("mzCart")||"{}");for(var k in c){var p=k.split("|"),s=byId(p[0]);if(s&&s.items[+p[1]]&&c[k]>0&&c[k]<100)cart[k]=Math.floor(c[k])}}catch(e){cart={}}
 }
 function renderCart(){
   var n=total();
   $("#cartCount").textContent=n;$("#fabCount").textContent=n;
   $("#fab").hidden=(n===0)||!$("#panel").hidden;
+  $("#clearCart").hidden=!n;
   var groups={};
   Object.keys(cart).forEach(function(k){var p=k.split("|");(groups[p[0]]=groups[p[0]]||[]).push([+p[1],cart[k]])});
   var ids=Object.keys(groups);
@@ -277,8 +438,8 @@ function renderCart(){
   $("#cartBody").innerHTML=ids.map(function(id){
     var s=byId(id);
     var rows=groups[id].map(function(r){var it=s.items[r[0]],k=id+"|"+r[0];
-      return '<div class="row"><span>'+it[0]+'</span><div class="step"><button type="button" data-dec="'+k+'" aria-label="Less">−</button><span>'+r[1]+'</span><button type="button" data-add="'+k+'" aria-label="More">+</button></div></div>'}).join("");
-    return '<div class="grp"><h3>'+s.name+'</h3>'+rows+'<div class="btns" style="margin-top:10px">'+(s.phone?'<a class="btn wa" target="_blank" rel="noopener" href="'+waUrl(s,requestText(id))+'">'+I("chat")+'Send on WhatsApp</a>':'')+'<button class="btn" type="button" data-copy="'+id+'">'+I("copy")+'Copy request</button></div>'+(s.phone?'':'<p class="hint" style="margin:8px 0 0">This shop has no number yet. Copy the request and send it later.</p>')+'</div>';
+      return '<div class="row"><span>'+esc(it[0])+'</span><div class="step"><button type="button" data-dec="'+k+'" aria-label="Less '+esc(it[0])+'">&minus;</button><span>'+r[1]+'</span><button type="button" data-add="'+k+'" aria-label="More '+esc(it[0])+'">+</button></div></div>'}).join("");
+    return '<div class="grp"><h3>'+esc(s.name)+'</h3>'+rows+'<div class="btns" style="margin-top:10px">'+(s.phone?'<a class="btn wa" target="_blank" rel="noopener noreferrer" href="'+waUrl(s,requestText(id))+'">'+I("chat")+'Send on WhatsApp</a>':'')+'<button class="btn" type="button" data-copy="'+id+'">'+I("copy")+'Copy request</button></div>'+(s.phone?'':'<p class="hint" style="margin:8px 0 0">This shop has no number yet. Copy the request and send it later.</p>')+'</div>';
   }).join("");
 }
 function requestText(id){
@@ -287,40 +448,73 @@ function requestText(id){
   lines.push(s.close||"Please tell me the price and when I can come.");
   return lines.join("\n");
 }
-function openCart(o){$("#panel").hidden=!o;$("#veil").hidden=!o;if(o)$("#closeCart").focus();renderCart()}
-function toast(msg){
-  var t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){t.hidden=true},1400);
+function openCart(o){
+  var panel=$("#panel");
+  if(o){lastFocus=document.activeElement}
+  panel.hidden=!o;$("#veil").hidden=!o;
+  document.body.style.overflow=o?"hidden":"";
+  renderCart();
+  if(o)$("#closeCart").focus();else if(lastFocus&&lastFocus.focus){try{lastFocus.focus()}catch(e){}}
 }
 function refresh(){
-  renderCart();
+  saveCart();renderCart();if(!$("#lb").hidden)renderLb();
   var h=location.hash.replace("#","");
   if(h.indexOf("shop-")===0&&byId(h.slice(5)))drawProducts(byId(h.slice(5)));
 }
+
+/* ===== Theme ===== */
 function isDark(){
   var a=document.documentElement.getAttribute("data-theme");
   if(a)return a==="dark";
-  return window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return !!(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);
 }
 function themeIcon(){$("#themeBtn").innerHTML=I(isDark()?"sun":"moon")}
+
+/* ===== Events ===== */
 document.addEventListener("click",function(e){
   var t=e.target.closest("button");if(!t)return;
-  if(t.dataset.add){cart[t.dataset.add]=(cart[t.dataset.add]||0)+1;refresh();if(cart[t.dataset.add]===1)toast("Added to your list")}
-  else if(t.dataset.dec){var k=t.dataset.dec;cart[k]=(cart[k]||0)-1;if(cart[k]<=0)delete cart[k];refresh()}
-  else if(t.dataset.copy){copyText(requestText(t.dataset.copy),t)}
-  else if(t.dataset.num){copyText(t.dataset.num,t)}
-  else if(t.dataset.cat){cat=t.dataset.cat;var c=document.querySelectorAll(".chip");for(var i=0;i<c.length;i++)c[i].setAttribute("aria-pressed",c[i].dataset.cat===cat);filterGrid()}
+  var d=t.dataset;
+  if(d.add){cart[d.add]=(cart[d.add]||0)+1;refresh();if(cart[d.add]===1)toast("Added to your list")}
+  else if(d.dec){var k=d.dec;cart[k]=(cart[k]||0)-1;if(cart[k]<=0)delete cart[k];refresh()}
+  else if(d.copy){copyText(requestText(d.copy),t)}
+  else if(d.num){copyText(d.num,t)}
+  else if(d.reset){cat="All";q="";var i=$("#q");if(i)i.value="";var c=$("#qclr");if(c)c.hidden=true;syncChips();filterGrid()}
+  else if(d.cat){cat=d.cat;syncChips();filterGrid()}
+  else if(d.lb!==undefined){var sh=byId(location.hash.replace("#shop-",""));if(sh)openLb(sh,+d.lb)}
+  else if(d.g!==undefined){var el=document.getElementById("g-"+d.g);if(el)el.scrollIntoView({behavior:"smooth"})}
 });
+function syncChips(){var c=document.querySelectorAll(".chip");for(var i=0;i<c.length;i++)c[i].setAttribute("aria-pressed",c[i].dataset.cat===cat)}
 $("#cartBtn").addEventListener("click",function(){openCart(true)});
 $("#fab").addEventListener("click",function(){openCart(true)});
 $("#closeCart").addEventListener("click",function(){openCart(false)});
 $("#veil").addEventListener("click",function(){openCart(false)});
-$("#themeBtn").addEventListener("click",function(){document.documentElement.setAttribute("data-theme",isDark()?"light":"dark");themeIcon()});
-document.addEventListener("keydown",function(e){if(e.key==="Escape")openCart(false)});
+$("#lbClose").addEventListener("click",closeLb);$("#lbPrev").addEventListener("click",function(){stepLb(-1)});$("#lbNext").addEventListener("click",function(){stepLb(1)});
+$("#lb").addEventListener("click",function(e){if(e.target.id==="lb")closeLb()});
+$("#clearCart").addEventListener("click",function(){cart={};refresh();toast("List cleared")});
+$("#themeBtn").addEventListener("click",function(){var v=isDark()?"light":"dark";document.documentElement.setAttribute("data-theme",v);lsSet("mzTheme",v);themeIcon()});
+$("#skip").addEventListener("click",function(e){e.preventDefault();$("#view").focus()});
+$("#toTop").addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});
+(function(){var tick=false;addEventListener("scroll",function(){if(tick)return;tick=true;requestAnimationFrame(function(){tick=false;$("#toTop").hidden=window.scrollY<900})},{passive:true})})();
+document.addEventListener("keydown",function(e){
+  if(!$("#lb").hidden){if(e.key==="Escape")closeLb();else if(e.key==="ArrowLeft")stepLb(-1);else if(e.key==="ArrowRight")stepLb(1);return}
+  if(e.key==="Escape"&&!$("#panel").hidden){openCart(false);return}
+  if(e.key==="Tab"&&!$("#panel").hidden){
+    var f=$("#panel").querySelectorAll("a[href],button:not([hidden]),textarea,input");if(!f.length)return;
+    var first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+  }
+  if(e.key==="/"&&!/^(INPUT|TEXTAREA)$/.test((document.activeElement||{}).tagName||"")){var i=$("#q");if(i){e.preventDefault();i.focus()}}
+});
 window.addEventListener("hashchange",route);
+
+/* ===== Init ===== */
 $("#logoIc").innerHTML=I("shop");
-$("#closeCart").innerHTML=I("x");
+$("#closeCart").innerHTML=I("x");$("#lbClose").innerHTML=I("x");
+$("#toTop").innerHTML=I("up");
 $("#botListen").innerHTML=I("speaker")+"Listen";
 $("#botHide").innerHTML=I("x")+"Hide";
+$("#copy").textContent="© "+new Date().getFullYear()+" Markezo. Shop details and prices are provided by each shop.";
 if(!window.speechSynthesis)$("#botListen").hidden=true;
 $("#botListen").addEventListener("click",botListen);
 $("#botHide").addEventListener("click",function(){$("#bot").classList.add("quiet")});
@@ -466,4 +660,5 @@ try{var sp=JSON.parse(localStorage.getItem("mzBot")||"null");if(sp&&typeof sp.x=
   });
   addEventListener("resize",function(){if(botPos)botPlace(botPos.x,botPos.y)});
 })();
-themeIcon();route();renderCart();
+
+loadCart();themeIcon();route();renderCart();
