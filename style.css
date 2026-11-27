@@ -1,3 +1,4 @@
+
 /* ===== Tokens ===== */
 :root{
   --bg:#F5F6FA;--surface:#FFFFFF;--fg:#0F1426;--muted:#5B6478;--line:#E2E5EE;
@@ -310,6 +311,76 @@ footer small{flex-basis:100%;font-size:.82rem}
 .lbcap small{opacity:.75}
 
 .ghn{grid-column:1/-1;margin:-6px 0 2px;color:var(--muted);font-size:.9rem}
+
+/* ===== Story (scroll-driven shop hero) ===== */
+.story{--serif:"Bodoni Moda","Didot","Playfair Display","Times New Roman",serif;position:relative;margin:22px 0 0;height:calc(var(--n)*70vh + 100vh)}
+.stick{position:sticky;top:72px;height:calc(100vh - 92px);min-height:520px;max-height:800px;border-radius:32px;overflow:hidden;background:var(--sbg,#fff);color:var(--sink,#111);transition:background-color .9s ease,color .9s ease;box-shadow:0 24px 60px rgba(0,0,0,.22)}
+.stage{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px;padding:clamp(24px,5vw,64px)}
+.txt{position:relative;display:grid;align-content:center;min-width:0}
+.tx{grid-area:1/1;align-self:center;opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .8s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.tx.on{opacity:1;transform:none;pointer-events:auto}
+.sk{margin:0 0 14px;font-size:.74rem;font-weight:700;letter-spacing:.22em;opacity:.7}
+.st{margin:0;font-family:var(--serif);font-weight:800;font-size:clamp(2.3rem,5.4vw,4.8rem);line-height:.95;letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance}
+.sp{margin:18px 0 0;max-width:34ch;font-size:1.02rem;line-height:1.55;opacity:.82}
+.sbtn{grid-row:2;grid-column:1;justify-self:start;margin-top:24px;border:0;border-radius:999px;padding:13px 24px;font-weight:700;background:var(--sink);color:var(--sbg);transition:background-color .9s,color .9s,transform .2s}
+.sbtn:hover{transform:translateY(-2px)}
+.art{position:relative;height:100%;min-height:0;display:grid;place-items:center}
+.art svg{width:100%;height:100%;max-height:100%;overflow:visible}
+.ann{position:absolute;top:4%;right:2%;padding:7px 16px;border-radius:999px;background:var(--sink);color:var(--sbg);font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:translateX(12px);transition:opacity .4s,transform .5s,background-color .9s,color .9s}
+.ann.show{opacity:1;transform:none}
+.ann::before{content:"";position:absolute;right:100%;top:50%;width:44px;height:1px;background:var(--sink);opacity:.5}
+.dots{position:absolute;right:18px;top:50%;translate:0 -50%;margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.dots li{width:6px;height:6px;border-radius:4px;background:currentColor;opacity:.3;transition:height .4s,opacity .4s}
+.dots li.on{opacity:1;height:24px}
+.ly{opacity:0;transform:translateY(-70px) scale(.97);transition:opacity .7s ease,transform .95s cubic-bezier(.2,.9,.25,1)}
+.ly.up{transform:translateY(60px) scale(.97)}
+.ly.on{opacity:1;transform:none}
+.story .draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s ease .3s}
+.story .ly.on .draw{stroke-dashoffset:0}
+.grow{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);transition:transform 1.6s cubic-bezier(.3,.8,.3,1) .2s}
+.ly.on .grow{transform:scaleY(1)}
+.fl{animation:sfloat 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes sfloat{50%{transform:translateY(-10px)}}
+.tw{animation:stw 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes stw{0%,100%{opacity:.3;transform:scale(.7)}50%{opacity:1;transform:scale(1.15)}}
+.fk{animation:sfk .9s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes sfk{to{transform:scale(1.1,1.25) rotate(4deg)}}
+.rise{animation:srise 4s ease-in infinite;transform-box:fill-box}
+@keyframes srise{0%{transform:translateY(0);opacity:0}15%{opacity:.8}100%{transform:translateY(-120px);opacity:0}}
+.drift{animation:sdrift 7s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+@keyframes sdrift{to{transform:translate(30px,-26px) scale(1.2);opacity:.3}}
+.drop{animation:sdrop 2s ease-in infinite;transform-box:fill-box}
+@keyframes sdrop{0%{transform:translateY(-6px);opacity:0}30%{opacity:1}100%{transform:translateY(70px);opacity:0}}
+#prodstart{scroll-margin-top:76px}
+
+/* Tour + themed bot */
+.tourbtn{margin-top:14px;display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.32);background:rgba(255,255,255,.1);color:#fff;border-radius:999px;padding:10px 18px;font-weight:700;backdrop-filter:blur(6px);transition:background .2s}
+.tourbtn:hover{background:rgba(255,255,255,.22)}
+.tbar{position:fixed;left:50%;translate:-50% 0;bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:42;display:flex;align-items:center;gap:8px;background:var(--fg);color:var(--bg);border-radius:999px;padding:8px 10px 8px 18px;box-shadow:0 14px 34px rgba(0,0,0,.35);max-width:calc(100vw - 20px)}
+.tbar span{font-weight:700;font-size:.88rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tbar button{border:0;border-radius:999px;padding:8px 14px;font-weight:700;background:var(--mark);color:var(--mark-fg);flex:none}
+.tbar button.ghost{background:transparent;color:inherit;border:1px solid currentColor;opacity:.85}
+.tbar button:disabled{opacity:.35;cursor:default}
+.botname{margin:0 0 4px;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+
+@media (max-width:760px){
+  .story{height:calc(var(--n)*62vh + 100vh)}
+  .stick{top:68px;height:calc(100vh - 84px);border-radius:26px}
+  .stage{grid-template-columns:1fr;grid-template-rows:44% 1fr;padding:16px 20px 20px;gap:6px}
+  .art{order:-1}
+  .txt{align-content:start}
+  .st{font-size:clamp(1.9rem,9vw,3rem)}
+  .sp{font-size:.95rem;max-width:none}
+  .dots{right:10px}
+  .ann{top:2%;font-size:.7rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .story{height:auto!important}
+  .stick{position:relative;top:0;height:min(720px,92vh)}
+  .ly,.tx,.draw,.grow,.ann{transition:none}
+  .fl,.tw,.fk,.rise,.drift,.drop{animation:none}
+}
+
 
 /* ===== Responsive ===== */
 @media (max-width:900px){

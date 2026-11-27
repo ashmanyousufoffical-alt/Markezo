@@ -1,10 +1,10 @@
+
 /* ===== Settings ===== */
 /* To show the "List your shop" button, put the owner's WhatsApp number here, digits only with country code, e.g. "923001234567". */
 var CONFIG={ownerPhone:""};
 
 /* ===== Logos (optimised WebP) ===== */
-
-var LOGO_DIM={"al-khair-pharmacy":[560,280],"al-nasir-homeo-clinic":[560,313],"ali-tailors":[560,373],"hashmi-electronics":[560,306],"kashmiri-tuition-center":[560,373],"khan-food-point":[560,448],"khan-karyana-store":[560,373],"mamas-bake":[560,548],"shades-beauty-parlour":[560,373],"smoke-bar":[560,373],"warda-drink-corner":[560,373]};
+var LOGO_DIM={"alizay-baking":[560,560],"al-khair-pharmacy":[560,280],"al-nasir-homeo-clinic":[560,313],"ali-tailors":[560,373],"hashmi-electronics":[560,306],"kashmiri-tuition-center":[560,373],"khan-food-point":[560,448],"khan-karyana-store":[560,373],"mamas-bake":[560,548],"shades-beauty-parlour":[560,373],"smoke-bar":[560,373],"warda-drink-corner":[560,373]};
 var LOGO={};for(var k in LOGO_DIM)LOGO[k]="logos/"+k+".webp";
 
 /* ===== Shop data (unchanged from the original) ===== */
@@ -81,6 +81,9 @@ var SHOPS=[
    .concat(G("Cupcakes",[["Chocolate fudge + filling cupcake","Rs. 200"],["Chocolate fudge simple","Rs. 150"],["Chocolate filling cupcakes","Rs. 120"],["Chocolate cream cupcake","Rs. 100"],["Vanilla cupcakes with caramel filling","Rs. 120"],["Vanilla cream + filling","Rs. 100"],["Vanilla simple","Rs. 80"]]))
    .concat(G("Donuts",[["Baked donut sprinkle","Rs. 80"],["Drizzling baked donut","Rs. 100"]]))
    .concat(G("Gluten-free items",[["Gluten free muffins","Rs. 120"],["Gluten free homemade buttercream cupcakes","Rs. 150"],["Gluten free homemade buttercream cake","Rs. 1,500"],["Gluten free tea cake","Rs. 1,000"]]))},
+ {id:"alizay-baking",name:"Alizay Baking",cat:"Food & Grocery",hue:310,ic:"cake",kind:"product",
+  blurb:"Home bakery with custom cakes, cupcakes, muffins, brownies and donuts.",address:"Muzaffargarh",area:"Muzaffargarh",
+  items:[["Bon voyage cake with cupcakes","Custom design. Ask the shop for the price.","Cakes",78],["Oreo chocolate drip cake","Custom design. Ask the shop for the price.","Cakes",79],["Pink cartoon theme cake","Custom design. Ask the shop for the price.","Cakes",80],["Boss baby theme cake","Custom design. Ask the shop for the price.","Cakes",81],["Space theme cake with astronaut and rocket","Custom design. Ask the shop for the price.","Cakes",82],["Frozen theme cake","Custom design. Ask the shop for the price.","Cakes",83],["Teddy bear baby boy cake","Custom design. Ask the shop for the price.","Cakes",84],["Doctor theme cake with stethoscope","Custom design. Ask the shop for the price.","Cakes",85],["Doctor theme cake with pills","Custom design. Ask the shop for the price.","Cakes",86],["Doctor to be cake","Custom design. Ask the shop for the price.","Cakes",87],["Bride to be dress cake","Custom design. Ask the shop for the price.","Cakes",88],["Photo print cake with gold balls","Custom design. Ask the shop for the price.","Cakes",89],["Chocolate chip muffins","Ask the shop for the price.","Cupcakes and muffins",90],["Vanilla cupcakes with cream roses","Ask the shop for the price.","Cupcakes and muffins",91],["Oreo cupcakes","Ask the shop for the price.","Cupcakes and muffins",92],["Fudgy chocolate brownies","Ask the shop for the price.","Brownies and donuts",93],["Chocolate donuts with white drizzle","Ask the shop for the price.","Brownies and donuts",94],["Glazed donuts","Ask the shop for the price.","Brownies and donuts",95]]},
  {id:"al-khair-pharmacy",name:"Al-Khair Pharmacy",cat:"Health & Learning",hue:105,ic:"cross",kind:"product",
   blurb:"Pharmacy with delivery.",address:"Committee Chowk, Muzaffargarh",area:"Committee Chowk",
   items:[["Medicines","Ask the shop for price and stock"]]}
@@ -108,6 +111,10 @@ var INFO={
  "mamas-bake":{phone:"923318811235",disp:"0331-8811235",tags:["Home delivery","Pay first"],
   facts:[["truck","Home delivery is available."],["alert","Payment is taken first, before delivery."],["tag","Prices are from the shop's WhatsApp catalogue. Please confirm with the shop."]],
   close:"Please tell me the total price, the delivery charge and how to pay.",msg:"Hello Mama's Bake, I found you on Markezo. I want to order. Please tell me about delivery and payment."},
+ "alizay-baking":{phone:"923061919029",disp:"0306-1919029",tags:["Home bakery","Custom cakes"],
+  facts:[["tag","Prices are not listed here. Please ask the shop for the price of your design."],["chat","See more cake designs and updates on the shop's WhatsApp catalogue and channel."]],
+  links:[["WhatsApp catalogue","https://wa.me/c/923061919029"],["WhatsApp channel","https://whatsapp.com/channel/0029VavXITxJP21AbPL9xo2z"]],
+  close:"Please tell me the price, the delivery details and how to pay.",msg:"Hello Alizay Baking, I found you on Markezo. I want to order a cake. Please tell me about the designs, price and delivery."},
  "al-khair-pharmacy":{phone:"923028551000",disp:"0302-8551000",tags:["Delivery"],facts:[["truck","Delivery is available."],["tag","Please ask the shop for medicine prices and stock."]],close:"Please tell me the price and the delivery details.",msg:"Hello Al-Khair Pharmacy, I found you on Markezo. I want to ask about a medicine and delivery."}
 };
 SHOPS.forEach(function(s){var x=INFO[s.id]||{};for(var k in x)s[k]=x[k]});
@@ -132,7 +139,7 @@ function mapUrl(s){
   return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(t+", Pakistan");
 }
 function total(){var n=0;for(var k in cart)n+=cart[k];return n}
-var THEME={"khan-food-point": [30, "hsl(30 78% 36%)", "hsl(20 72% 15%)"], "khan-karyana-store": [140, "hsl(140 58% 29%)", "hsl(156 66% 13%)"], "smoke-bar": [268, "hsl(268 70% 42%)", "hsl(280 76% 20%)"], "warda-drink-corner": [42, "hsl(41 82% 31%)", "hsl(33 78% 13%)"], "ali-tailors": [42, "hsl(36 12% 27%)", "hsl(30 16% 9%)"], "shades-beauty-parlour": [336, "hsl(336 62% 41%)", "hsl(326 64% 20%)"], "kashmiri-tuition-center": [228, "hsl(228 62% 38%)", "hsl(234 70% 16%)"], "al-nasir-homeo-clinic": [84, "hsl(80 48% 29%)", "hsl(88 52% 13%)"], "hashmi-electronics": [24, "hsl(214 14% 34%)", "hsl(220 24% 12%)"], "mamas-bake": [16, "hsl(16 82% 42%)", "hsl(350 66% 26%)"], "al-khair-pharmacy": [192, "hsl(192 82% 31%)", "hsl(212 80% 17%)"]};
+var THEME={"khan-food-point": [30, "hsl(30 78% 36%)", "hsl(20 72% 15%)"], "khan-karyana-store": [140, "hsl(140 58% 29%)", "hsl(156 66% 13%)"], "smoke-bar": [268, "hsl(268 70% 42%)", "hsl(280 76% 20%)"], "warda-drink-corner": [42, "hsl(41 82% 31%)", "hsl(33 78% 13%)"], "ali-tailors": [42, "hsl(36 12% 27%)", "hsl(30 16% 9%)"], "shades-beauty-parlour": [336, "hsl(336 62% 41%)", "hsl(326 64% 20%)"], "kashmiri-tuition-center": [228, "hsl(228 62% 38%)", "hsl(234 70% 16%)"], "al-nasir-homeo-clinic": [84, "hsl(80 48% 29%)", "hsl(88 52% 13%)"], "hashmi-electronics": [24, "hsl(214 14% 34%)", "hsl(220 24% 12%)"], "mamas-bake": [16, "hsl(16 82% 42%)", "hsl(350 66% 26%)"], "alizay-baking": [310, "hsl(310 52% 40%)", "hsl(290 56% 20%)"], "al-khair-pharmacy": [192, "hsl(192 82% 31%)", "hsl(212 80% 17%)"]};
 SHOPS.forEach(function(s){var t=THEME[s.id];if(t){s.hue=t[0];s.c1=t[1];s.c2=t[2]}});
 function st(s){return '--h:'+s.hue+(s.c1?';--c1:'+s.c1+';--c2:'+s.c2:'')}
 function realCount(s){return s.items.filter(function(it){return it[2]!=="Design ideas"}).length}
@@ -161,7 +168,6 @@ function setLd(obj){
 
 
 /* ===== Mama's Bake cake design photos ===== */
-
 var PHOTO_CAP=["Chocolate fault-line cake","Congrats marble cake with flowers","Ribbon bows and pearls cake","Buttercream roses cake","Chick face fondant cake","Chocolate drip cake with biscuits and wafers","Buttercream flower bouquet cake","Vintage piped cake with pearls","Giant decorated cupcake","Peony and basket-weave cake","Anniversary cake with black bows","Graduation cake with books and cap","Red hearts cake","Ocean blue ombre cake","Birthday cake with rose and name tag","Birthday cake with calendar plaque","Chocolate drip cake with coin biscuits","Chocolate cake with white flowers","Engagement ring cake with mehndi plate","Birthday chocolate cake with gold balls",
 "Pink and yellow buttercream roses cake","Brown ribbon cake with piped border","Bento box cartoon birthday cake","Pink sprinkle hearts cake","Two-tier pink cake with gold butterflies","Chocolate peanut butter donuts","Anniversary couple silhouette cake","Chocolate donuts with rainbow sprinkles","Chocolate chip muffins","Chocolate rosette cake","Fudgy brownies","Chocolate cupcakes with chocolate swirl","Chocolate chip brownies","Two-tier birthday cake with chocolate wafer","Chocolate drip cake with pretzels","Chocolate drip cake with walnuts","Chocolate cake with cookie pieces","Chocolate drip cake with wafer rolls and biscuits","Vanilla frosted chocolate cupcake","Chocolate chip sided cake","Umrah Mubarak cake with gold balls","Vanilla layer cake slice","Chocolate cupcakes with swirl frosting","Stacked sprinkle donuts","Vanilla cupcakes with buttercream swirl","Colourful buttercream cupcakes","Strawberry chocolate drip cake"];
 (function(){var s=byId("mamas-bake");if(!s)return;PHOTO_CAP.forEach(function(c,i){s.items.push(i<20?[c,"Custom design. Ask the shop for the price.","Cake designs",i]:[c,"Design idea. Ask the shop if it can make this.","Design ideas",i])})})();
@@ -189,7 +195,7 @@ var KAR_PHOTOS={"Ata": 61, "Maida": 62, "Baisan": 63, "Sugar": 64, "Salt": 65, "
   s.items.forEach(function(it){if(KAR_PHOTOS[it[0]]!==undefined)it[3]=KAR_PHOTOS[it[0]]});
   s.facts=(s.facts||[]).concat([["tag","Product pictures are illustrations. Brands, sizes and prices are confirmed by the shop."]]);
 })();
-function photoUrl(i){return "Photos/"+i+".webp"}
+function photoUrl(i){return "photos/"+i+".webp"}
 
 /* ===== Small components ===== */
 function tagsHtml(s,cls){return (s.tags&&s.tags.length)?'<div class="'+cls+'">'+s.tags.map(function(t){return '<span>'+esc(t)+'</span>'}).join("")+'</div>':''}
@@ -204,9 +210,10 @@ function contactHtml(s){
   if(!s.phone)return '<div class="contact"><h2>Contact</h2><p class="addr">Phone number coming soon.</p></div>';
   return '<div class="contact"><h2>Contact</h2><p class="num">'+esc(s.disp)+'</p><div class="btns">'+waBtn(s,"btn wa")+
     '<a class="btn" href="tel:'+telNum(s)+'">'+I("phone")+'Call</a>'+
-    '<button class="btn" type="button" data-num="'+esc(s.disp)+'">'+I("copy")+'Copy number</button></div></div>';
+    '<button class="btn" type="button" data-num="'+esc(s.disp)+'">'+I("copy")+'Copy number</button></div>'+
+    (s.links?'<div class="btns">'+s.links.map(function(l){return '<a class="btn" href="'+esc(l[1])+'" target="_blank" rel="noopener noreferrer">'+I("bag")+esc(l[0])+'</a>'}).join("")+'</div>':'')+'</div>';
 }
-var CONTAIN={"khan-food-point":1,"mamas-bake":1,"al-khair-pharmacy":1,"al-nasir-homeo-clinic":1,"hashmi-electronics":1};
+var CONTAIN={"alizay-baking":1,"khan-food-point":1,"mamas-bake":1,"al-khair-pharmacy":1,"al-nasir-homeo-clinic":1,"hashmi-electronics":1};
 function imgTag(s,eager){var d=LOGO_DIM[s.id]||[560,373];return '<img src="'+LOGO[s.id]+'" alt="'+esc(s.name)+' logo" width="'+d[0]+'" height="'+d[1]+'" decoding="async"'+(eager?'':' loading="lazy"')+'>'}
 function logoBox(s){return '<div class="big'+(CONTAIN[s.id]?' contain':'')+'">'+imgTag(s,true)+'</div>'}
 function storeCard(s,i){
@@ -248,6 +255,7 @@ function homeView(){
    '<h1 id="h1">Your whole <em>bazaar</em>, in one place.</h1>'+
    '<p>Browse each shop\'s store, see what they sell, and find exactly where they are.</p>'+
    '<form class="search" role="search" id="sform"><label class="sr" for="q">Search shops, products or areas</label>'+I("search")+'<input id="q" type="search" placeholder="Search a shop, product or area" autocomplete="off" enterkeyhint="search"><kbd aria-hidden="true">/</kbd><button class="clr" id="qclr" type="button" aria-label="Clear search" hidden>'+I("x")+'</button></form>'+
+   '<button class="tourbtn" type="button" data-tour="start">'+I("pin")+'Take a shop tour with Marky</button>'+
    '<div class="stats"><div><b>'+SHOPS.length+'</b><span>Shops</span></div><div><b>'+areaList().length+'</b><span>Areas</span></div><div><b>'+rounded+'+</b><span>Products and services</span></div></div></div>'+
    '<div class="stack" aria-hidden="true">'+stack+'</div></section>'+
    '<div class="tstrip" aria-label="Why Markezo"><span>'+I("check")+'Free to browse, no sign-up</span><span>'+I("chat")+'Order on WhatsApp</span><span>'+I("tag")+'Prices confirmed by each shop</span><span>'+I("pin")+'Real local shops with addresses</span></div>'+
@@ -304,7 +312,7 @@ function shopView(s){
    '<div class="wrap"><a class="crumb" href="#home">'+I("back")+'All shops</a>'+
    '<section class="sh sg'+(CONTAIN[s.id]?' lite':'')+'" style="'+st(s)+';--logo:url('+LOGO[s.id]+')">'+logoBox(s)+'<div><span class="tag">'+esc(s.cat)+'</span><h1>'+esc(s.name)+'</h1><p>'+esc(s.blurb)+'</p>'+
    '<div class="pills"><span>'+I("bag")+itemLabel(s)+'</span><span>'+I("pin")+esc(s.area)+'</span>'+(s.tags||[]).map(function(t){return '<span>'+esc(t)+'</span>'}).join("")+'</div>'+waBtn(s,"wabig")+'</div></section>'+
-   '<div class="layout sg" style="'+st(s)+'"><div>'+(s.note?'<div class="note">'+I("alert")+esc(s.note)+'</div>':'')+factsHtml(s)+
+   storyHtml(s)+'<div class="layout sg" id="prodstart" style="'+st(s)+'"><div>'+(s.note?'<div class="note">'+I("alert")+esc(s.note)+'</div>':'')+factsHtml(s)+
    '<div class="phead"><h2 class="sec2">'+(s.kind==="service"?"Services":"Products")+'</h2>'+
    (s.items.length>8?'<label class="pfind">'+I("search")+'<span class="sr">Search in '+esc(s.name)+'</span><input id="ps" type="search" placeholder="Search this shop" autocomplete="off"></label>':'')+'</div>'+
    (groups.length>1?'<div class="gchips" role="group" aria-label="Jump to section">'+groups.map(function(g,i){return '<button type="button" data-g="'+i+'">'+esc(g)+'</button>'}).join("")+'</div>':'')+
@@ -319,7 +327,8 @@ function shopView(s){
   var pi=$("#ps");if(pi){var tm;pi.addEventListener("input",function(e){ps=e.target.value;clearTimeout(tm);tm=setTimeout(function(){drawProducts(s)},100)})}
   $("#copyAddr").addEventListener("click",function(e){copyText(s.name+", "+s.address,e.currentTarget)});
   $("#shareBtn").addEventListener("click",function(){shareShop(s)});
-  botCur=s;botSay(shopText(s));
+  storyMount(s);
+  botCur=s;botSay(themedHello(s));
   setMeta(s.name+" | Markezo",s.blurb+" "+s.address+". See products and message the shop on WhatsApp.");
   setLd(ld(s));
 }
@@ -357,7 +366,7 @@ function renderLb(){
   var im=$("#lbImg");im.src=photoUrl(it[3]);im.alt=it[0];
   $("#lbCap").textContent=it[0];$("#lbCount").textContent="Photo "+(lbPos+1)+" of "+lbList.length+(it[1]?" · "+it[1]:"");
   var idea=it[2]==="Design ideas";
-  var cake=s.id==="mamas-bake";
+  var cake=s.id==="mamas-bake"||s.id==="alizay-baking";
   var msg="Hello "+s.name+", I found you on Markezo. "+(cake?(idea?"Can you make something like this design idea: ":"I like this cake design: ")+it[0]+". Please tell me the price, the delivery charge and how to pay.":"I want to order: "+it[0]+". "+(s.close||"Please tell me the price and the delivery charge."));
   $("#lbActs").innerHTML=(s.phone?'<a class="btn wa" target="_blank" rel="noopener noreferrer" href="'+waUrl(s,msg)+'">'+I("chat")+'Ask on WhatsApp</a>':'')+
     '<button class="btn pri" type="button" data-add="'+k+'">'+I("plus")+(n?"Added x"+n+" · add more":"Add to list")+'</button>';
@@ -372,7 +381,7 @@ function shareShop(s){
 var botMsg="",botCur=null;
 function homeText(n){
   var t=q.trim();
-  if(cat==="All"&&!t)return "Hi, I am Marky. You are on the Markezo home page. Here are "+SHOPS.length+" local shops. Tap a shop card to open its store.";
+  if(cat==="All"&&!t)return "Hi, I am Marky. You are on the Markezo home page. Here are "+SHOPS.length+" local shops. Tap a shop card to open its store, or choose Shop tour and I will walk you through every store.";
   if(t)return 'You searched for "'+t+'". I found '+n+(n===1?" shop":" shops")+(n?". Tap a card to open it.":". Try another word.");
   return "You are looking at "+cat+". There "+(n===1?"is 1 shop":"are "+n+" shops")+" here. Tap a card to open its store.";
 }
@@ -394,10 +403,341 @@ function botReveal(){
   setTimeout(function(){if(!b.classList.contains("ask"))b.classList.add("quiet")},8000);
 }
 
+/* ===== Per-shop animated stories (scroll driven, like a product-building hero) ===== */
+function srnd(seed){return function(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646}}
+function ly(s,inner,cls){return '<g class="ly '+(cls||'')+'" data-s="'+s+'">'+inner+'</g>'}
+function cyl(x,y,w,h,ry,side,top){var rx=w/2;return '<path d="M'+x+' '+y+'v'+h+'A'+rx+' '+ry+' 0 0 0 '+(x+w)+' '+(y+h)+'V'+y+'Z" fill="'+side+'"/><ellipse cx="'+(x+rx)+'" cy="'+y+'" rx="'+rx+'" ry="'+ry+'" fill="'+top+'"/>'}
+function SVG(inner,vb){return '<svg viewBox="'+(vb||'0 0 600 600')+'" role="img" focusable="false"><defs><linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".3" stop-color="#fff" stop-opacity=".35"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></linearGradient><filter id="blur8" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter><filter id="blur20" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="20"/></filter></defs>'+inner+'</svg>'}
+function star(x,y,r,c,cls){return '<path class="'+(cls||'tw')+'" d="M'+x+' '+(y-r)+' L'+(x+r*.28)+' '+(y-r*.28)+' L'+(x+r)+' '+y+' L'+(x+r*.28)+' '+(y+r*.28)+' L'+x+' '+(y+r)+' L'+(x-r*.28)+' '+(y+r*.28)+' L'+(x-r)+' '+y+' L'+(x-r*.28)+' '+(y-r*.28)+'Z" fill="'+c+'"/>'}
+function steam(x,y,c,d){return '<path class="rise" style="animation-delay:'+(d||0)+'s" d="M'+x+' '+y+' q-12 -20 0 -40 q12 -20 0 -40" fill="none" stroke="'+c+'" stroke-width="6" stroke-linecap="round" opacity=".6"/>'}
+function shadowE(cx,cy,rx){return '<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+rx+'" ry="'+(rx*.1)+'" fill="#000" opacity=".18" filter="url(#blur8)"/>'}
+
+/* ---------- Mama's Bake: a cake is baked layer by layer ---------- */
+function sceneBake(){
+  var r=srnd(7),o='',i,a,x,y,cols=['#ff4d6d','#ffd166','#06d6a0','#4cc9f0','#b388eb','#ff9f1c'];
+  o+=ly(0,shadowE(300,512,250)+'<ellipse cx="300" cy="498" rx="232" ry="34" fill="#fff"/><ellipse cx="300" cy="494" rx="206" ry="26" fill="#f2e7da"/>'+cyl(150,404,300,68,26,'#d99a3e','#f0c878')+'<path d="M150 404v68" stroke="#fff" stroke-opacity=".18" stroke-width="14"/>'+'<circle cx="190" cy="440" r="3" fill="#a96a1d" opacity=".6"/><circle cx="260" cy="452" r="3" fill="#a96a1d" opacity=".6"/><circle cx="360" cy="436" r="3" fill="#a96a1d" opacity=".6"/><circle cx="420" cy="456" r="3" fill="#a96a1d" opacity=".6"/>');
+  o+=ly(1,cyl(150,390,300,14,26,'#fff7ea','#fffdf6')+cyl(150,344,300,46,26,'#d99a3e','#f0c878')+'<path d="M150 344v46" stroke="#fff" stroke-opacity=".18" stroke-width="14"/>'+'<ellipse cx="300" cy="388" rx="150" ry="26" fill="none" stroke="#d63a5a" stroke-width="6" opacity=".85"/>');
+  var fr=cyl(138,334,324,138,28,'#ffcfdc','#ffe8ef')+'<path d="M138 334v138" stroke="#fff" stroke-opacity=".5" stroke-width="16"/>';
+  for(i=0;i<20;i++){a=i/20*Math.PI*2;x=300+156*Math.cos(a);y=334+25*Math.sin(a);fr+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="10" fill="#fff"/><circle cx="'+(x-3).toFixed(1)+'" cy="'+(y-3).toFixed(1)+'" r="3" fill="#ffd1df"/>'}
+  for(i=0;i<=14;i++){a=i/14*Math.PI;x=300+150*Math.cos(a);y=472+27*Math.sin(a);fr+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="8" fill="#fff"/><circle cx="'+(x-2).toFixed(1)+'" cy="'+(y-2).toFixed(1)+'" r="2.4" fill="#ffd1df"/>'}
+  o+=ly(2,fr);
+  var t='';
+  for(i=0;i<34;i++){a=r()*Math.PI*2;var rr=Math.sqrt(r());x=300+rr*118*Math.cos(a);y=334+rr*20*Math.sin(a);t+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="9" height="3.6" rx="1.8" fill="'+cols[i%6]+'" transform="rotate('+Math.round(r()*180)+' '+x.toFixed(1)+' '+y.toFixed(1)+')"/>'}
+  [[250,318],[300,308],[350,318]].forEach(function(p,k){t+='<path d="M'+p[0]+' '+(p[1]-12)+' q8 -14 18 -14" stroke="#2d6a2e" stroke-width="3" fill="none"/><circle cx="'+p[0]+'" cy="'+p[1]+'" r="15" fill="#d90429"/><circle cx="'+(p[0]-5)+'" cy="'+(p[1]-5)+'" r="4" fill="#fff" opacity=".7"/>'});
+  t+='<rect x="293" y="250" width="14" height="60" rx="3" fill="#7bdff2"/><rect x="293" y="262" width="14" height="6" fill="#fff"/><rect x="293" y="278" width="14" height="6" fill="#fff"/><rect x="293" y="294" width="14" height="6" fill="#fff"/><ellipse class="fk" cx="300" cy="238" rx="8" ry="15" fill="#ffb703"/><ellipse class="fk" cx="300" cy="242" rx="4" ry="8" fill="#fff3b0"/>';
+  t+=star(170,270,14,'#ffd166')+star(440,246,12,'#fff')+star(480,340,16,'#ffd166')+star(124,380,10,'#fff');
+  o+=ly(3,t);
+  return SVG(o,'40 190 520 400');
+}
+
+/* ---------- Khan Food Point: desi breakfast and dairy ---------- */
+function sceneFood(){
+  var r=srnd(3),o='',i,c='';
+  for(i=0;i<46;i++){var a=r()*6.28,rr=Math.sqrt(r());c+='<circle cx="'+(430+rr*62*Math.cos(a)).toFixed(1)+'" cy="'+(404+rr*20*Math.sin(a)).toFixed(1)+'" r="'+(5+r()*3).toFixed(1)+'" fill="'+(r()>.4?'#e3b26a':'#d29a4f')+'"/>'}
+  o+=ly(0,shadowE(300,508,250)+'<ellipse cx="300" cy="448" rx="250" ry="72" fill="#fff"/><ellipse cx="300" cy="444" rx="222" ry="58" fill="#f3ece0"/><ellipse cx="256" cy="420" rx="118" ry="38" fill="#c98a2e"/><ellipse cx="256" cy="414" rx="112" ry="34" fill="#e5a84a"/><ellipse cx="270" cy="392" rx="104" ry="32" fill="#c98a2e"/><ellipse cx="270" cy="386" rx="98" ry="29" fill="#f0bd62"/><path d="M200 386 q30 -12 60 0 M250 390 q30 -12 60 0 M300 380 q20 -8 40 0" stroke="#a5681c" stroke-width="4" fill="none" stroke-linecap="round" opacity=".7"/>'+
+    '<path d="M340 392 Q430 372 520 392 Q510 456 430 462 Q350 456 340 392Z" fill="#b87333"/><ellipse cx="430" cy="392" rx="90" ry="22" fill="#cf8844"/><ellipse cx="430" cy="396" rx="76" ry="16" fill="#9c3f1b"/>'+c+'<path d="M404 392 q8 -10 18 -2 M446 386 q10 -8 16 2" stroke="#3a8a3a" stroke-width="4" fill="none" stroke-linecap="round"/>'+steam(400,372,'#fff',0)+steam(450,372,'#fff',1.2));
+  o+=ly(1,'<path d="M82 292 H156 L148 410 Q147 420 138 420 H100 Q91 420 90 410 Z" fill="#e9f1f6" opacity=".9"/><path d="M88 320 H152 L148 410 Q147 420 138 420 H100 Q91 420 90 410 Z" fill="#fff"/><path d="M82 292 H156 L154 304 H84Z" fill="#fff" opacity=".6"/>'+
+    '<path d="M250 300 Q300 282 350 300 Q346 346 300 350 Q254 346 250 300Z" fill="#a85a2a"/><ellipse cx="300" cy="300" rx="50" ry="13" fill="#c97a42"/><ellipse cx="300" cy="302" rx="42" ry="9" fill="#fffaf0"/>');
+  o+=ly(2,'<path d="M300 216 q-10 40 -26 62" stroke="#ffd23f" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M284 190 q40 -8 52 34 q-30 22 -64 4 q-6 -24 12 -38Z" fill="#c9ccd1" stroke="#8d9199"/><path d="M270 256 q10 30 2 56" pathLength="1" class="draw" stroke="#ffcf33" stroke-width="7" fill="none" stroke-linecap="round"/><rect x="462" y="426" width="70" height="38" rx="6" fill="#fff0a8"/><rect x="462" y="426" width="70" height="12" rx="6" fill="#fff8cf"/>');
+  o+=ly(3,'<g class="fl"><rect x="470" y="236" width="62" height="78" rx="14" fill="#f4a300"/><rect x="470" y="236" width="62" height="78" rx="14" fill="url(#shine)"/><rect x="474" y="222" width="54" height="18" rx="6" fill="#6b3a12"/><text x="501" y="282" text-anchor="middle" font-size="12" font-weight="900" fill="#fff">HONEY</text><rect x="498" y="170" width="6" height="64" rx="3" fill="#8a5a2b"/><ellipse cx="501" cy="168" rx="12" ry="8" fill="#b9770e"/></g>'+star(120,230,12,'#ffd23f')+star(330,170,10,'#ffd23f'));
+  return SVG(o,'30 150 540 400');
+}
+
+/* ---------- Khan Karyana Store: a grocery basket fills up ---------- */
+function sceneKaryana(){
+  var o='',i,w='';
+  o+=ly(0,shadowE(300,530,250)+'<path d="M110 330 L150 500 Q300 540 450 500 L490 330Z" fill="#8a5a28"/><ellipse cx="300" cy="330" rx="190" ry="38" fill="#6b431c"/><ellipse cx="300" cy="332" rx="176" ry="30" fill="#3d2610"/><path d="M130 330 Q300 80 470 330" fill="none" stroke="#a8702f" stroke-width="16" stroke-linecap="round"/>');
+  o+=ly(1,'<path d="M210 250 C196 270 170 280 168 320 C168 350 172 372 180 380 H280 C288 372 292 350 292 320 C290 280 264 270 250 250Z" fill="#d9b072"/><rect x="198" y="246" width="64" height="10" rx="4" fill="#8b5a2b"/><rect x="190" y="296" width="80" height="46" rx="8" fill="#fff"/><text x="230" y="326" text-anchor="middle" font-size="22" font-weight="900" fill="#1b4d2a">ATA</text>'+'<path d="M330 270 C318 286 304 292 304 324 C304 350 308 366 314 374 H390 C396 366 400 350 400 324 C400 292 386 286 374 270Z" fill="#f4f6f8"/><rect x="324" y="296" width="66" height="40" rx="8" fill="#fff"/><text x="357" y="322" text-anchor="middle" font-size="16" font-weight="900" fill="#1b4d2a">SUGAR</text>');
+  o+=ly(2,'<rect x="406" y="214" width="26" height="30" rx="5" fill="#1b7f3b"/><path d="M400 244 h38 v14 c10 14 18 22 18 46 v70 q0 12 -12 12 h-50 q-12 0 -12 -12 v-70 c0 -24 8 -32 18 -46Z" fill="#f5c518"/><rect x="394" y="302" width="50" height="44" fill="#1b7f3b"/><circle cx="419" cy="324" r="11" fill="#ffd23f"/>'+'<rect x="124" y="296" width="70" height="84" rx="8" fill="#e8742a"/><ellipse cx="159" cy="296" rx="35" ry="8" fill="#f09a5c"/><rect x="124" y="320" width="70" height="30" fill="#fff6dc"/><text x="159" y="342" text-anchor="middle" font-size="18" font-weight="900" fill="#b4531a">GHEE</text>');
+  o+=ly(3,'<g class="fl"><rect x="262" y="196" width="46" height="70" rx="10" fill="#d00000"/><rect x="262" y="196" width="46" height="18" rx="6" fill="#fff"/><text x="285" y="244" text-anchor="middle" font-size="11" font-weight="900" fill="#fff">MIRCH</text></g><rect x="314" y="226" width="42" height="64" rx="10" fill="#ffb703"/><rect x="314" y="226" width="42" height="16" rx="6" fill="#fff"/><text x="335" y="272" text-anchor="middle" font-size="10" font-weight="900" fill="#7a4a00">HALDI</text>'+'<rect x="228" y="236" width="40" height="30" rx="8" fill="#4fc3f7" transform="rotate(-10 248 250)"/><text x="248" y="256" text-anchor="middle" font-size="9" font-weight="900" fill="#fff" transform="rotate(-10 248 250)">SOAP</text>'+star(150,210,12,'#ffd166')+star(470,210,14,'#fff'));
+  for(i=0;i<11;i++){w+='<path d="M'+(118+i*3)+' '+(350+i*14)+' Q300 '+(380+i*14)+' '+(482-i*3)+' '+(350+i*14)+'" stroke="#6b431c" stroke-width="3" fill="none" opacity=".55"/>'}
+  o+='<path d="M118 362 L150 500 Q300 540 450 500 L482 362 Q300 394 118 362Z" fill="#a8702f"/><path d="M118 362 L150 500 Q300 540 450 500 L482 362 Q300 394 118 362Z" fill="url(#shine)" opacity=".5"/>'+w+'<path d="M118 362 Q300 394 482 362" stroke="#d7a15a" stroke-width="8" fill="none"/>';
+  return SVG(o);
+}
+
+/* ---------- Smoke Bar: flavour bottles and drifting clouds (adults only) ---------- */
+function sceneSmoke(){
+  var o='',bot=function(x,c1,c2,name){return '<g><rect x="'+(x-8)+'" y="298" width="16" height="22" rx="4" fill="#222"/><rect x="'+(x-35)+'" y="318" width="70" height="150" rx="16" fill="'+c1+'"/><rect x="'+(x-35)+'" y="318" width="70" height="150" rx="16" fill="url(#shine)"/><rect x="'+(x-35)+'" y="372" width="70" height="46" fill="'+c2+'"/><text x="'+x+'" y="402" text-anchor="middle" font-size="15" font-weight="900" fill="#fff" letter-spacing="1">'+name+'</text></g>'};
+  o+=ly(0,'<circle cx="300" cy="300" r="210" fill="none" stroke="#b388ff" stroke-width="3" opacity=".5"/><circle cx="300" cy="300" r="210" fill="none" stroke="#b388ff" stroke-width="14" opacity=".25" filter="url(#blur8)"/><ellipse cx="300" cy="486" rx="240" ry="26" fill="#2a1456"/><ellipse cx="300" cy="480" rx="240" ry="24" fill="#3b1d78"/>');
+  o+=ly(1,bot(180,'#7b2ff7','#5b1fc4','TOKYO'));
+  o+=ly(2,bot(300,'#17a2b8','#0e7f92','OXWA')+bot(420,'#f77f00','#c25f00','CRUSH'));
+  var cl='';[[170,200,60,0],[300,150,80,1],[430,210,64,2],[240,110,50,3],[360,90,46,4],[110,130,40,5],[480,120,44,6]].forEach(function(p){cl+='<circle class="drift" style="animation-delay:-'+p[3]+'s" cx="'+p[0]+'" cy="'+p[1]+'" r="'+p[2]+'" fill="#d9c8ff" opacity=".45" filter="url(#blur20)"/>'});
+  o+=ly(3,cl+'<circle cx="480" cy="480" r="46" fill="#e63946"/><text x="480" y="492" text-anchor="middle" font-size="34" font-weight="900" fill="#fff">18+</text>');
+  return SVG(o);
+}
+
+/* ---------- Warda Drink Corner: a cold drink is poured ---------- */
+function sceneDrink(){
+  var o='',g='M190 190 H410 L388 490 Q386 504 372 504 H228 Q214 504 212 490 Z',i,b='';
+  o+=ly(0,shadowE(300,512,220)+'<rect x="362" y="96" width="14" height="260" rx="7" fill="#e11d2e" transform="rotate(14 369 226)"/><path d="'+g+'" fill="#fff" fill-opacity=".1" stroke="#fff" stroke-opacity=".7" stroke-width="5"/>');
+  o+=ly(1,'<clipPath id="gc"><path d="'+g+'"/></clipPath><g clip-path="url(#gc)"><rect class="grow" x="180" y="250" width="240" height="260" fill="#5a2a0e"/><rect class="grow" x="180" y="250" width="240" height="14" fill="#8a4a1a"/></g>','');
+  for(i=0;i<14;i++){b+='<circle class="rise" style="animation-delay:'+(i*.37).toFixed(2)+'s" cx="'+(236+((i*47)%130))+'" cy="'+(470-(i*13)%40)+'" r="'+(3+i%3)+'" fill="#fff" opacity=".7"/>'}
+  o+=ly(2,'<g class="fl"><rect x="232" y="236" width="46" height="46" rx="9" fill="#cfeaff" fill-opacity=".55" stroke="#fff" stroke-width="2" transform="rotate(-12 255 259)"/><rect x="298" y="228" width="50" height="50" rx="9" fill="#cfeaff" fill-opacity=".55" stroke="#fff" stroke-width="2" transform="rotate(10 323 253)"/><rect x="276" y="270" width="44" height="44" rx="9" fill="#cfeaff" fill-opacity=".5" stroke="#fff" stroke-width="2" transform="rotate(4 298 292)"/></g>'+b);
+  var ch='';for(i=0;i<26;i++){ch+='<path d="M'+(60+(i*37)%130)+' '+(520+(i*11)%30)+' l14 -22 l14 22Z" fill="#f2b441" transform="rotate('+((i*53)%90)+' 100 540)"/>'}
+  o+=ly(3,'<circle cx="408" cy="196" r="34" fill="#ffe66d"/><circle cx="408" cy="196" r="26" fill="#fff3a6"/><path d="M408 196 L408 170 M408 196 L430 183 M408 196 L430 209 M408 196 L408 222 M408 196 L386 209 M408 196 L386 183" stroke="#ffe66d" stroke-width="3"/>'+'<path d="M56 540 Q130 500 204 540 Q130 560 56 540Z" fill="#f5efe0"/>'+ch+star(480,320,14,'#ffd36a')+star(130,250,12,'#fff')+star(520,430,10,'#ffd36a'));
+  return SVG(o);
+}
+
+/* ---------- Ali Tailor's: a waistcoat is measured, cut and stitched ---------- */
+function sceneTailor(){
+  var o='',wc='M196 232 Q250 206 282 222 L300 304 L318 222 Q350 206 404 232 L398 440 Q300 472 202 440Z';
+  o+=ly(0,shadowE(300,560,170)+'<rect x="293" y="462" width="14" height="86" fill="#7b6b55"/><ellipse cx="300" cy="552" rx="80" ry="12" fill="#5d503f"/><circle cx="300" cy="126" r="22" fill="#8a5a2b"/><rect x="280" y="148" width="40" height="44" rx="10" fill="#d9c7a3"/><path d="M176 220 Q300 184 424 220 L410 346 Q404 424 382 472 H218 Q196 424 190 346Z" fill="#e8d9b8"/><path d="M176 220 Q300 184 424 220 L410 346 Q404 424 382 472 H218 Q196 424 190 346Z" fill="url(#shine)" opacity=".6"/>'+'<path d="M186 322 Q300 356 414 322" stroke="#ffd23f" stroke-width="18" fill="none"/><path d="M186 322 Q300 356 414 322" stroke="#111" stroke-width="18" fill="none" stroke-dasharray="2 12" opacity=".45"/><path d="M414 322 q40 20 22 70" stroke="#ffd23f" stroke-width="14" fill="none" stroke-linecap="round"/>');
+  o+=ly(1,'<path d="'+wc+'" pathLength="1" class="draw" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="1" />'+'<g class="fl"><path d="M470 160 l60 60 M530 160 l-60 60" stroke="#c9ccd1" stroke-width="8" stroke-linecap="round"/><circle cx="470" cy="226" r="14" fill="none" stroke="#d6336c" stroke-width="6"/><circle cx="530" cy="226" r="14" fill="none" stroke="#d6336c" stroke-width="6"/></g>');
+  o+=ly(2,'<path d="'+wc+'" fill="#37332f"/><path d="'+wc+'" fill="url(#shine)" opacity=".5"/><path d="'+wc+'" pathLength="1" class="draw" fill="none" stroke="#f3c969" stroke-width="3" stroke-dasharray="1"/><g class="fl"><path d="M470 330 l40 -48" stroke="#e5e7eb" stroke-width="4" stroke-linecap="round"/><ellipse cx="512" cy="280" rx="3" ry="9" fill="none" stroke="#e5e7eb" stroke-width="2" transform="rotate(40 512 280)"/><path d="M512 276 Q540 250 520 214" pathLength="1" class="draw" stroke="#f3c969" stroke-width="3" fill="none"/></g>');
+  o+=ly(3,[330,360,390,420].map(function(y,i){return '<circle cx="'+(300+(i%2?2:-2))+'" cy="'+y+'" r="9" fill="#f3c969"/><circle cx="'+(300+(i%2?2:-2))+'" cy="'+y+'" r="4" fill="#b8892a"/>'}).join('')+'<path d="M392 250 Q430 240 452 280" stroke="#f3c969" stroke-width="2" fill="none"/><g class="fl"><rect x="428" y="276" width="124" height="40" rx="6" fill="#f3c969"/><circle cx="438" cy="286" r="4" fill="#37332f"/><text x="490" y="302" text-anchor="middle" font-size="12" font-weight="900" fill="#37332f">GENTS · LADIES</text></g>'+star(150,200,12,'#f3c969')+star(470,150,10,'#fff'));
+  return SVG(o);
+}
+
+/* ---------- Shade's Beauty Parlour: mirror, makeup, lipstick, nails ---------- */
+function sceneBeauty(){
+  var o='',i,bulbs='',petal='';
+  for(i=0;i<16;i++){var a=i/16*Math.PI*2;bulbs+='<circle class="tw" style="animation-delay:'+(i*.15).toFixed(2)+'s" cx="'+(300+170*Math.cos(a)).toFixed(1)+'" cy="'+(270+170*Math.sin(a)).toFixed(1)+'" r="9" fill="#fff3b0"/>'}
+  o+=ly(0,shadowE(300,530,220)+'<circle cx="300" cy="270" r="170" fill="none" stroke="#e8b04a" stroke-width="16"/><circle cx="300" cy="270" r="160" fill="#fdebf3"/><circle cx="300" cy="270" r="160" fill="url(#shine)" opacity=".7"/>'+bulbs+star(250,220,26,'#fff')+star(350,310,16,'#fff')+'<rect x="280" y="436" width="40" height="80" fill="#b8860b"/>');
+  o+=ly(1,'<rect x="70" y="400" width="200" height="116" rx="20" fill="#3b1e2b"/><circle cx="118" cy="436" r="20" fill="#f4a6c0"/><circle cx="170" cy="436" r="20" fill="#e86a92"/><circle cx="222" cy="436" r="20" fill="#d4a373"/><circle cx="118" cy="486" r="20" fill="#a0522d"/><circle cx="170" cy="486" r="20" fill="#c9184a"/><circle cx="222" cy="486" r="20" fill="#7b2cbf"/>'+'<g transform="rotate(-28 300 420)"><rect x="296" y="330" width="12" height="110" rx="6" fill="#d4a017"/><path d="M290 330 q16 -40 32 0Z" fill="#f4a6c0"/></g>');
+  o+=ly(2,'<rect x="402" y="420" width="64" height="100" rx="8" fill="#d4a017"/><rect x="402" y="490" width="64" height="30" rx="8" fill="#111"/><rect x="410" y="360" width="48" height="66" rx="6" fill="#e11d48"/><path d="M410 360 l48 0 l-14 -24 q-10 -6 -20 0Z" fill="#be123c"/>','up');
+  var pl='';for(i=0;i<8;i++){pl+='<ellipse cx="0" cy="-30" rx="14" ry="30" fill="#fff" stroke="#f9a8d4" transform="rotate('+(i*45)+')"/>'}
+  o+=ly(3,'<g transform="translate(130 140)">'+pl+'<circle r="12" fill="#ffd23f"/></g><rect x="486" y="392" width="46" height="70" rx="10" fill="#ff5fa2"/><rect x="498" y="364" width="22" height="32" rx="4" fill="#111"/><path d="M60 560 L250 560 L236 590 L60 590 L74 575Z" fill="#c9184a"/><text x="150" y="580" text-anchor="middle" font-size="16" font-weight="900" fill="#fff" letter-spacing="2">BRIDAL · PARTY</text>'+star(500,190,16,'#ffd166')+star(110,330,12,'#fff'));
+  return SVG(o);
+}
+
+/* ---------- Kashmiri Tuition Center: books, writing, graduation cap ---------- */
+function sceneSchool(){
+  var o='';
+  o+=ly(0,'<path d="M0 520 L110 300 L180 380 L270 240 L370 400 L450 300 L600 520Z" fill="#8fa8d8" opacity=".5"/><path d="M270 240 L246 282 L270 270 L292 284Z M110 300 L92 334 L112 326 L130 338Z M450 300 L430 336 L452 328 L470 338Z" fill="#fff" opacity=".9"/>'+shadowE(300,520,220)+'<rect x="110" y="456" width="380" height="50" rx="6" fill="#1d3a8a"/><rect x="120" y="494" width="360" height="8" fill="#fff" opacity=".85"/><rect x="140" y="410" width="330" height="46" rx="6" fill="#c1121f"/><rect x="150" y="446" width="310" height="8" fill="#fff" opacity=".85"/><rect x="120" y="364" width="350" height="46" rx="6" fill="#2a9d8f"/><rect x="130" y="400" width="330" height="8" fill="#fff" opacity=".85"/>');
+  var ln='';for(var i=0;i<5;i++){ln+='<path d="M'+(190+i*4)+' '+(300+i*12)+' h'+(i%2?150:178)+'" pathLength="1" class="draw" style="transition-delay:'+(i*.25)+'s" stroke="#1d3a8a" stroke-width="3" fill="none" stroke-dasharray="1"/>'}
+  o+=ly(1,'<path d="M300 366 L130 346 L130 280 L300 300Z" fill="#fff" stroke="#cbd5e1"/><path d="M300 366 L470 346 L470 280 L300 300Z" fill="#f4f6fb" stroke="#cbd5e1"/>'+ln+'<g class="fl"><rect x="420" y="190" width="14" height="110" rx="4" fill="#ffd166" transform="rotate(28 427 245)"/><path d="M394 296 l10 -22 l18 10Z" fill="#f2d1a5" transform="rotate(28 427 245)"/></g>');
+  o+=ly(2,'<path d="M300 150 L470 214 L300 278 L130 214Z" fill="#111"/><path d="M214 244 v46 q86 40 172 0 v-46 L300 278Z" fill="#222"/><path d="M450 222 v70" stroke="#f5c542" stroke-width="5"/><circle cx="450" cy="298" r="9" fill="#f5c542"/><path d="M300 150 L470 214 L300 278 L130 214Z" fill="url(#shine)" opacity=".4"/>');
+  o+=ly(3,star(110,160,18,'#f5c542')+star(500,130,14,'#fff')+star(540,300,12,'#f5c542')+star(70,420,12,'#fff')+'<path d="M150 560 L450 560 L430 590 L170 590Z" fill="#1d3a8a"/><text x="300" y="581" text-anchor="middle" font-size="16" font-weight="900" fill="#fff" letter-spacing="3">PG TO MATRIC · PG TO 5TH</text>');
+  return SVG(o);
+}
+
+/* ---------- Al-Nasir Homeo Clinic: leaf, dropper, 12-hour doctor, heartbeat ---------- */
+function sceneClinic(){
+  var o='';
+  o+=ly(0,'<circle cx="300" cy="300" r="230" fill="#f4f8e6"/><circle cx="300" cy="300" r="230" fill="none" stroke="#c7d89a" stroke-width="3"/>'+'<path d="M300 520 Q290 400 300 300" stroke="#4d7c0f" stroke-width="8" fill="none"/>'+[[300,300,-30],[296,360,50],[302,420,-52],[300,250,18]].map(function(p){return '<ellipse cx="'+(p[0]+(p[2]>0?44:-44))+'" cy="'+p[1]+'" rx="46" ry="20" fill="#5e9c1a" transform="rotate('+(p[2]>0?-24:24)+' '+(p[0]+(p[2]>0?44:-44))+' '+p[1]+')"/>'}).join('')+'<ellipse cx="300" cy="226" rx="20" ry="42" fill="#6ab023"/>','up');
+  o+=ly(1,'<rect x="418" y="360" width="100" height="140" rx="18" fill="#b36a14"/><rect x="418" y="360" width="100" height="140" rx="18" fill="url(#shine)"/><rect x="418" y="420" width="100" height="52" fill="#fff"/><text x="468" y="452" text-anchor="middle" font-size="18" font-weight="900" fill="#3f6212">HOMEO</text><rect x="448" y="330" width="40" height="36" rx="6" fill="#444"/><path d="M468 330 q-30 -16 -26 -60 q8 -30 26 -20 q18 -10 26 20 q4 44 -26 60Z" fill="#111" transform="translate(0 -4)"/><path class="drop" d="M468 300 q10 18 0 30 q-10 -12 0 -30Z" fill="#7dd3fc"/>');
+  o+=ly(2,'<circle cx="150" cy="430" r="78" fill="#fff" stroke="#d7e3b0" stroke-width="3"/><circle cx="150" cy="430" r="62" pathLength="1" class="draw" fill="none" stroke="#5e9c1a" stroke-width="10" stroke-dasharray="1" stroke-linecap="round" transform="rotate(-90 150 430)"/><text x="150" y="440" text-anchor="middle" font-size="34" font-weight="900" fill="#3f6212">12H</text>');
+  o+=ly(3,'<path d="M40 250 H190 l20 -40 l30 100 l24 -140 l26 120 l16 -40 H560" pathLength="1" class="draw" fill="none" stroke="#e63946" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1"/><g class="fl"><rect x="276" y="100" width="48" height="140" rx="8" fill="#22c55e" opacity="0"/></g>'+'<rect x="476" y="150" width="30" height="86" rx="6" fill="#22c55e"/><rect x="448" y="178" width="86" height="30" rx="6" fill="#22c55e"/>'+star(120,170,14,'#7dd3fc')+star(300,130,12,'#fff'));
+  return SVG(o);
+}
+
+/* ---------- Hashmi Electronics: a TV powers on, speakers play ---------- */
+function sceneTV(){
+  var o='',i,q='',cols=['#ff4d6d','#ffd166','#06d6a0','#4cc9f0','#b388eb'];
+  o+=ly(0,shadowE(280,540,210)+'<rect x="240" y="400" width="80" height="44" fill="#1b2330"/><ellipse cx="280" cy="448" rx="110" ry="12" fill="#1b2330"/><rect x="70" y="150" width="420" height="260" rx="16" fill="#0f141c"/><rect x="82" y="162" width="396" height="236" rx="8" fill="#070a0f"/><path d="M82 162 H300 L220 398 H82Z" fill="#fff" opacity=".05"/>');
+  o+=ly(1,'<rect x="60" y="140" width="440" height="280" rx="30" fill="#4cc9f0" opacity=".35" filter="url(#blur20)"/><rect x="82" y="162" width="396" height="236" rx="8" fill="#ff4d6d"/><rect x="82" y="162" width="396" height="236" rx="8" fill="url(#shine)" opacity=".4"/><path d="M82 330 Q180 250 280 320 T478 280 V398 H82Z" fill="#4cc9f0"/><path d="M82 360 Q200 310 300 360 T478 340 V398 H82Z" fill="#06d6a0"/><circle cx="400" cy="224" r="30" fill="#ffd166"/>');
+  for(i=0;i<22;i++){q+='<circle class="tw" style="animation-delay:'+(i*.2).toFixed(1)+'s" cx="'+(100+(i*73)%360)+'" cy="'+(176+(i*41)%210)+'" r="4" fill="'+cols[i%5]+'"/>'}
+  o+=ly(2,'<rect x="506" y="220" width="78" height="230" rx="14" fill="#1b2330"/><circle cx="545" cy="290" r="22" fill="#0b0f15" stroke="#4cc9f0" stroke-width="3"/><circle cx="545" cy="372" r="30" fill="#0b0f15" stroke="#4cc9f0" stroke-width="3"/><circle cx="545" cy="290" r="8" fill="#4cc9f0"/><circle cx="545" cy="372" r="12" fill="#4cc9f0"/>'+[0,1,2].map(function(k){return '<path class="tw" style="animation-delay:'+(k*.4)+'s" d="M'+(496-k*16)+' '+(330-24-k*12)+' q-14 '+(24+k*12)+' 0 '+(48+k*24)+'" fill="none" stroke="#4cc9f0" stroke-width="4" stroke-linecap="round"/>'}).join(''));
+  o+=ly(3,q+'<text x="280" y="468" text-anchor="middle" font-size="26" font-weight="900" fill="#e2e8f0" letter-spacing="8">Q-LED</text>'+star(60,110,12,'#fff')+star(520,150,14,'#4cc9f0'));
+  return SVG(o);
+}
+
+/* ---------- Al-Khair Pharmacy: cross sign, medicine, pills, delivery ---------- */
+function scenePharma(){
+  var o='',i,pills='',cols=[['#ef4444','#fff'],['#2563eb','#fff'],['#f59e0b','#fff'],['#16a34a','#fff']];
+  o+=ly(0,'<circle cx="300" cy="290" r="200" fill="#0aa3c2"/><circle cx="300" cy="290" r="200" fill="url(#shine)" opacity=".5"/><rect x="262" y="170" width="76" height="240" rx="14" fill="#fff"/><rect x="180" y="252" width="240" height="76" rx="14" fill="#fff"/>'+shadowE(300,520,220));
+  o+=ly(1,'<rect x="76" y="320" width="130" height="190" rx="20" fill="#d97706"/><rect x="76" y="320" width="130" height="190" rx="20" fill="url(#shine)"/><rect x="86" y="284" width="110" height="44" rx="10" fill="#fff"/><rect x="76" y="380" width="130" height="80" fill="#fff"/><rect x="128" y="392" width="26" height="56" fill="#16a34a"/><rect x="113" y="407" width="56" height="26" fill="#16a34a"/>');
+  for(i=0;i<8;i++){var c=cols[i%4];pills+='<g transform="translate('+(250+(i*53)%250)+' '+(430+(i*19)%80)+') rotate('+((i*37)%120-40)+')"><rect width="52" height="22" rx="11" fill="'+c[0]+'"/><path d="M26 0 h15 a11 11 0 0 1 0 22 h-15Z" fill="'+c[1]+'"/></g>'}
+  o+=ly(2,pills+'<rect x="368" y="330" width="130" height="86" rx="10" fill="#e5e7eb"/>'+[0,1,2,3,4,5].map(function(k){return '<circle cx="'+(392+(k%3)*40)+'" cy="'+(356+Math.floor(k/3)*34)+'" r="12" fill="#fff" stroke="#9ca3af"/>'}).join(''));
+  o+=ly(3,'<g class="fl"><path d="M330 470 h120 l-14 70 h-92Z" fill="#fff"/><path d="M360 470 q30 -44 60 0" stroke="#fff" stroke-width="6" fill="none"/><rect x="378" y="488" width="14" height="36" fill="#16a34a"/><rect x="367" y="499" width="36" height="14" fill="#16a34a"/></g><path class="drift" d="M300 500 h-80 M310 520 h-110 M300 540 h-60" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".7"/>'+star(110,170,14,'#fff')+star(500,160,12,'#fff'));
+  return SVG(o);
+}
+
+var STORY={
+ "mamas-bake":{art:sceneBake,cta:"Browse cake designs",steps:[
+  {k:"FROM MAMA'S OVEN",t:"BAKED\nFRESH",p:"Fresh and tasty cakes, cupcakes, brownies, donuts and gluten-free bakes.",a:"Soft sponge",bg:"#FFF1E4",ink:"#3B1A0F"},
+  {k:"STEP TWO",t:"LAYER BY\nLAYER",p:"Cream and filling between every layer, so each slice is soft and rich.",a:"Cream and filling",bg:"#F8D7C4",ink:"#3B1A0F"},
+  {k:"STEP THREE",t:"FROSTED\nBY HAND",p:"Smooth buttercream and piped borders, finished the way you like.",a:"Piped by hand",bg:"#F2B8C6",ink:"#3A0F1D"},
+  {k:"MADE FOR YOU",t:"YOUR DESIGN,\nYOUR DAY",p:"Birthdays, anniversaries, Umrah Mubarak and more. Pick a design below or ask for your own. Home delivery is available; payment is taken first.",a:"Home delivery",bg:"#3B1220",ink:"#FFEFE6"}]},
+ "khan-food-point":{art:sceneFood,cta:"See the products",steps:[
+  {k:"DESI BREAKFAST",t:"PARATHA\nFIRST",p:"Hot paratha with chana, the classic desi breakfast.",a:"Paratha chana",bg:"#FBEBD0",ink:"#3A1D08"},
+  {k:"ON THE SIDE",t:"FRESH\nDAIRY",p:"Fresh milk and dahi to go with it.",a:"Milk and dahi",bg:"#F1D9A8",ink:"#3A1D08"},
+  {k:"PURE AND GOLDEN",t:"DESI GHEE,\nMAKHAN",p:"Desi ghee and butter by the kilo, with honey and shon halwa.",a:"Ghee and butter",bg:"#D9923B",ink:"#2B1403"},
+  {k:"ORDER",t:"FROM\nJHANG MOR",p:"Delivery on orders of Rs. 500 or more. Charges depend on distance.",a:"Delivery from Rs. 500",bg:"#4A2410",ink:"#FFF1DC"}]},
+ "khan-karyana-store":{art:sceneKaryana,cta:"See the products",steps:[
+  {k:"EVERYDAY KARYANA",t:"FILL YOUR\nBASKET",p:"Flour, sugar, oil and more from one store.",a:"Your basket",bg:"#E8F3E1",ink:"#12361B"},
+  {k:"THE BASICS",t:"ATA, SUGAR,\nSALT",p:"Staples with the shop's prices listed below.",a:"Staples",bg:"#CFE7C4",ink:"#12361B"},
+  {k:"COOKING",t:"OIL, GHEE,\nSPICES",p:"Cooking oil, ghee, mirch, haldi and zira.",a:"Cooking",bg:"#F7D9A0",ink:"#3A2406"},
+  {k:"HOME CARE",t:"SOAP TO\nSTATIONERY",p:"Soap, tooth paste, detergent, sweets, copies and pens. Delivery from Rs. 500.",a:"Delivery from Rs. 500",bg:"#123D22",ink:"#EAF7E3"}]},
+ "smoke-bar":{art:sceneSmoke,cta:"See the flavours",steps:[
+  {k:"ADULTS ONLY · 18+",t:"FLAVOUR\nFIRST",p:"Pods, vapes and flavours. Sold to adults 18 and over only.",a:"18+ only",bg:"#1B1030",ink:"#EFE6FF"},
+  {k:"THE FLAVOURS",t:"TOKYO",p:"Flavours are priced per 1 ml. Ask the shop for pods and vapes prices.",a:"Per 1 ml",bg:"#2A1456",ink:"#EFE6FF"},
+  {k:"MORE FLAVOURS",t:"OXWA,\nCRUSH",p:"Oxwa and Crush at Rs. 100 per 1 ml.",a:"Oxwa · Crush",bg:"#123238",ink:"#E4FBFF"},
+  {k:"VISIT US",t:"MAKKAH\nPLAZA",p:"Opposite Suhail Petroleum Pump. No delivery. Contact the shop to know if it is open.",a:"No delivery",bg:"#3A1766",ink:"#F4ECFF"}]},
+ "warda-drink-corner":{art:sceneDrink,cta:"See the products",steps:[
+  {k:"COLD DRINKS",t:"ICE COLD,\nALWAYS",p:"Cold drinks and snacks at Purani Ghass Mandi Chowk.",a:"Thandi bottle",bg:"#FFF1CF",ink:"#2A1A05"},
+  {k:"POURED FRESH",t:"CHILLED\nTO THE BRIM",p:"Cold bottles, ready when you are.",a:"Chilled",bg:"#F5D98A",ink:"#2A1A05"},
+  {k:"ICE ON TOP",t:"EXTRA\nCOOL",p:"Ice, bubbles and a drink that hits the spot.",a:"On ice",bg:"#C98A1B",ink:"#1F1203"},
+  {k:"SNACK TIME",t:"CHIPS\nON THE SIDE",p:"Snacks to go with it. No delivery; contact the shop to know if it is open.",a:"Snacks",bg:"#2A1A06",ink:"#FFE9B0"}]},
+ "ali-tailors":{art:sceneTailor,cta:"See the services",steps:[
+  {k:"THE FIRST MEASURE",t:"MADE TO\nMEASURE",p:"Stitching for men and women, measured to fit.",a:"Measure",bg:"#EFE7DA",ink:"#1C1812"},
+  {k:"THE PATTERN",t:"CUT WITH\nCARE",p:"Gents suits, ladies suits, waistcoats, coats and shirts.",a:"Pattern",bg:"#DCD0BC",ink:"#1C1812"},
+  {k:"STITCHED",t:"STITCHED\nTO FIT",p:"Each piece is stitched to your own measurements.",a:"Stitching",bg:"#2C2A28",ink:"#F6E7C1"},
+  {k:"READY TO WEAR",t:"FINISHED\nIN STYLE",p:"Contact the shop for the stitching price and when to bring the cloth.",a:"Price on contact",bg:"#14120F",ink:"#F3D98B"}]},
+ "shades-beauty-parlour":{art:sceneBeauty,cta:"See the services",steps:[
+  {k:"LADIES ONLY",t:"GLOW\nUP",p:"Bridal, party and everyday makeup, plus skin and nail care.",a:"Ladies only",bg:"#FCE7EF",ink:"#3B0F27"},
+  {k:"COLOUR AND CARE",t:"MAKEUP\nYOUR WAY",p:"Bridal makeup, party makeup and simple makeup.",a:"Makeup",bg:"#F6C6D8",ink:"#3B0F27"},
+  {k:"LIPS AND LOOKS",t:"FINISHED\nWITH FLAIR",p:"Facial, pedicure and manicure for the full look.",a:"Facial · Nails",bg:"#C23A78",ink:"#FFFFFF"},
+  {k:"BOOK YOUR SLOT",t:"MESSAGE\nUS",p:"Message the parlour on WhatsApp for the price and appointment time.",a:"Appointment",bg:"#3A0F27",ink:"#FFE3EE"}]},
+ "kashmiri-tuition-center":{art:sceneSchool,cta:"See the classes",steps:[
+  {k:"TUITION CLASSES",t:"START\nSTRONG",p:"Classes for girls and boys near Kashmiri Chowk.",a:"Girls and boys",bg:"#EAF0FB",ink:"#0C1D46"},
+  {k:"GIRLS",t:"PG TO\nMATRIC",p:"Prep Group (PG) to Matric for girls.",a:"PG to Matric",bg:"#CFDCF7",ink:"#0C1D46"},
+  {k:"BOYS",t:"PG TO\n5TH",p:"Prep Group (PG) to 5th for boys.",a:"PG to 5th",bg:"#1D3A8A",ink:"#FFFFFF"},
+  {k:"ADMISSION",t:"LEARN.\nPRACTICE.\nEXCEL.",p:"Contact the center for admission and fees.",a:"Admission",bg:"#0B1636",ink:"#F6E3A8"}]},
+ "al-nasir-homeo-clinic":{art:sceneClinic,cta:"See the services",steps:[
+  {k:"HOMEO CLINIC",t:"GENTLE\nCARE",p:"A 12-hour doctor and a full range of medicines.",a:"12-hour doctor",bg:"#EEF3DD",ink:"#1E2B0B"},
+  {k:"MEDICINES",t:"HOMEOPATHIC\nAND MORE",p:"Homeopathic medicine and all varieties of medicine.",a:"All medicines",bg:"#DCE6BC",ink:"#1E2B0B"},
+  {k:"DOCTOR HOURS",t:"12 HOURS\nA DAY",p:"A doctor is available for 12 hours.",a:"12 hours",bg:"#5B7A22",ink:"#FFFFFF"},
+  {k:"APPOINTMENT",t:"BOOK A\nVISIT",p:"Contact the clinic for the appointment time. Tida, Karimabad.",a:"Tida, Karimabad",bg:"#1F2D0B",ink:"#EAF2CC"}]},
+ "hashmi-electronics":{art:sceneTV,cta:"See the products",steps:[
+  {k:"ELECTRONICS",t:"WATCH\nIT BIG",p:"LED TVs, Q-LED TVs and Audionic speakers.",a:"LED TV",bg:"#E9EDF2",ink:"#0F1722"},
+  {k:"LED TV",t:"COLOUR\nON",p:"All varieties of LED TVs.",a:"All varieties",bg:"#CBD5E1",ink:"#0F1722"},
+  {k:"AUDIONIC",t:"SOUND TO\nMATCH",p:"Audionic speakers, all varieties.",a:"Audionic speakers",bg:"#2B3646",ink:"#FFFFFF"},
+  {k:"Q-LED",t:"VISIT\nQINWAN CHOWK",p:"All varieties of Q-LED TVs. Message the shop for prices.",a:"Q-LED",bg:"#0F1722",ink:"#E2E8F0"}]},
+  "alizay-baking":{art:sceneBake,cta:"Browse cake designs",steps:[
+  {k:"HOME BAKERY",t:"BAKED\nWITH LOVE",p:"Custom cakes, cupcakes, muffins, brownies and donuts from Alizay Baking.",a:"Home bakery",bg:"#FDEBF3",ink:"#3A1030"},
+  {k:"STEP TWO",t:"LAYER BY\nLAYER",p:"Soft sponge with cream and filling in every layer.",a:"Cream and filling",bg:"#F7D3E6",ink:"#3A1030"},
+  {k:"STEP THREE",t:"DECORATED\nBY HAND",p:"Fondant toppers, buttercream and piped details, made for your theme.",a:"Made by hand",bg:"#E9B6D8",ink:"#34102C"},
+  {k:"MADE FOR YOU",t:"YOUR THEME,\nYOUR DAY",p:"Birthdays, bride to be, doctor cakes and more. Pick a design below or ask for your own. Ask the shop for the price.",a:"Custom designs",bg:"#3A1034",ink:"#FFEAF6"}]},
+ "al-khair-pharmacy":{art:scenePharma,cta:"Ask about a medicine",steps:[
+  {k:"PHARMACY",t:"CARE,\nDELIVERED",p:"Pharmacy with delivery at Committee Chowk.",a:"Delivery",bg:"#E3F3F7",ink:"#08303D"},
+  {k:"MEDICINES",t:"THE RIGHT\nMEDICINE",p:"Ask the shop for the price and stock of any medicine.",a:"Ask for stock",bg:"#C4E5EE",ink:"#08303D"},
+  {k:"ON WHATSAPP",t:"TELL US\nWHAT YOU NEED",p:"Message the pharmacy on WhatsApp with your request.",a:"WhatsApp",bg:"#1B8AA6",ink:"#FFFFFF"},
+  {k:"DELIVERY",t:"AT YOUR\nDOOR",p:"Delivery is available. Please ask the shop for the price and delivery details.",a:"Delivery",bg:"#06303D",ink:"#DDF3F9"}]}
+};
+
+/* ===== Story engine: sticky stage, step by step as you scroll ===== */
+var REDUCE=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);
+var storyEl=null,storyData=null,storyStep=-1,storySeen=false,storyTick=false;
+function storyHtml(s){
+  var S=STORY[s.id];if(!S)return "";
+  var n=S.steps.length;
+  var tx=S.steps.map(function(st,i){return '<div class="tx" data-i="'+i+'"><p class="sk">'+esc(st.k)+'</p><h2 class="st">'+esc(st.t).replace(/\n/g,"<br>")+'</h2><p class="sp">'+esc(st.p)+'</p></div>'}).join("");
+  var dots=S.steps.map(function(st,i){return '<li data-i="'+i+'"></li>'}).join("");
+  return '<section class="story sg" id="story" style="'+st(s)+';--n:'+n+'" aria-label="The story of '+esc(s.name)+'">'+
+    '<div class="stick"><div class="stage"><div class="txt">'+tx+'<button class="sbtn" type="button" data-skip="1">'+esc(S.cta)+' <span aria-hidden="true">&darr;</span></button></div>'+
+    '<div class="art" aria-hidden="true">'+S.art()+'<div class="ann" id="storyAnn"></div></div></div><ol class="dots" aria-hidden="true">'+dots+'</ol></div></section>';
+}
+function storyMount(s){
+  storyEl=$("#story");storyData=STORY[s.id];storyStep=-1;storySeen=false;
+  if(!storyEl)return;
+  var f=storyData.steps[0],stick=storyEl.firstElementChild;
+  stick.style.setProperty("--sbg",f.bg);stick.style.setProperty("--sink",f.ink);
+  storyUpdate();
+}
+function storyUpdate(){
+  if(!storyEl)return;
+  var n=storyData.steps.length,stick=storyEl.firstElementChild,r=storyEl.getBoundingClientRect();
+  if(!storySeen&&(REDUCE||r.top<innerHeight*.82))storySeen=true;
+  if(!storySeen)return;
+  var step=n-1;
+  if(!REDUCE){
+    var total=Math.max(1,storyEl.offsetHeight-stick.offsetHeight),p=(70-r.top)/total;
+    step=Math.min(n-1,Math.floor(Math.max(0,Math.min(.9999,p))*n));
+  }
+  if(step===storyStep)return;
+  storyStep=step;
+  var cur=storyData.steps[step],i,els;
+  els=storyEl.querySelectorAll(".ly");for(i=0;i<els.length;i++)els[i].classList.toggle("on",+els[i].getAttribute("data-s")<=step);
+  els=storyEl.querySelectorAll(".tx");for(i=0;i<els.length;i++)els[i].classList.toggle("on",i===step);
+  els=storyEl.querySelectorAll(".dots li");for(i=0;i<els.length;i++)els[i].classList.toggle("on",i===step);
+  stick.style.setProperty("--sbg",cur.bg);stick.style.setProperty("--sink",cur.ink);
+  var an=$("#storyAnn");if(an){an.classList.remove("show");setTimeout(function(){an.textContent=cur.a;an.classList.add("show")},160)}
+}
+(function(){
+  function kick(){if(!storyEl||storyTick)return;storyTick=true;requestAnimationFrame(function(){storyTick=false;storyUpdate()})}
+  addEventListener("scroll",kick,{passive:true});addEventListener("resize",kick);
+})();
+
+/* ===== Shop themed bot: each shop gets its own Marky ===== */
+var ACC={
+ baker:'<path d="M14 18 q-8 -10 2 -14 q4 -7 12 -3 q8 -4 12 3 q10 4 2 14Z" fill="#fff" stroke="#e2d6c8"/><rect x="16" y="14" width="32" height="6" rx="2" fill="#fff" stroke="#e2d6c8"/>',
+ dairy:'<path d="M12 22 q20 -18 40 0Z" fill="#d9822b"/><rect x="10" y="20" width="44" height="4" rx="2" fill="#a85a12"/><path d="M24 41 q8 -6 16 0 q-8 3 -16 0Z" fill="#6b3a12"/>',
+ grocer:'<path d="M12 22 q20 -18 40 0Z" fill="#2f8f46"/><rect x="10" y="20" width="44" height="4" rx="2" fill="#1d6b31"/><path d="M19 58 H45 V72 Q32 77 19 72Z" fill="#2f8f46"/><rect x="27" y="63" width="10" height="6" rx="1" fill="#1d6b31"/>',
+ smoke:'<rect x="16" y="26" width="14" height="10" rx="3" fill="#111"/><rect x="34" y="26" width="14" height="10" rx="3" fill="#111"/><rect x="29" y="29" width="6" height="2" fill="#111"/><circle class="tw" cx="56" cy="10" r="5" fill="#c9b6ff" opacity=".8"/><circle class="tw" cx="60" cy="20" r="3.5" fill="#c9b6ff" opacity=".6"/>',
+ drink:'<path d="M10 20 q22 -14 44 0" stroke="#4cc9f0" stroke-width="3.4" fill="none"/><path d="M49 44 h13 l-2 24 h-9Z" fill="#fff" stroke="#bbb"/><path d="M51 51 h9 l-1 15 h-7Z" fill="#6b2d0c"/><rect x="57" y="32" width="2.4" height="16" fill="#e11d2e" transform="rotate(12 58 40)"/>',
+ tailor:'<path d="M15 54 q17 9 34 0" stroke="#ffd23f" stroke-width="5.5" fill="none"/><path d="M17 54 q15 7 30 0" stroke="#000" stroke-width="5.5" stroke-dasharray="1 4" opacity=".45" fill="none"/><path d="M49 55 q6 6 3 14" stroke="#ffd23f" stroke-width="4" fill="none" stroke-linecap="round"/>',
+ beauty:'<path d="M32 12 l-13 -7 v14Z M32 12 l13 -7 v14Z" fill="#ec4899"/><circle cx="32" cy="12" r="4" fill="#be185d"/><path d="M26 43c3 2.4 9 2.4 12 0" stroke="#e11d48" stroke-width="3.4" fill="none" stroke-linecap="round"/>',
+ teacher:'<path d="M32 3 L55 12 L32 21 L9 12Z" fill="#111"/><path d="M20 16 v9 q12 6 24 0 v-9" fill="#222"/><path d="M52 13 v13" stroke="#f5c542" stroke-width="2"/><circle cx="52" cy="28" r="2.6" fill="#f5c542"/>',
+ clinic:'<path d="M10 20 q22 -14 44 0" stroke="#ddd" stroke-width="3" fill="none"/><circle cx="32" cy="15" r="7" fill="#e5e7eb" stroke="#9ca3af"/><circle cx="32" cy="15" r="3" fill="#fff"/><rect x="29" y="59" width="6" height="11" fill="#22c55e"/><rect x="26.5" y="61.5" width="11" height="6" fill="#22c55e"/>',
+ tech:'<path d="M9 34 q0 -22 23 -22 q23 0 23 22" stroke="#222" stroke-width="4" fill="none"/><rect x="3" y="30" width="9" height="17" rx="4" fill="#ef4444"/><rect x="52" y="30" width="9" height="17" rx="4" fill="#ef4444"/>',
+ pharma:'<path d="M13 20 q19 -15 38 0Z" fill="#fff" stroke="#cbd5e1"/><rect x="30" y="8" width="4" height="9" fill="#16a34a"/><rect x="27.5" y="10.5" width="9" height="4" fill="#16a34a"/><rect x="29" y="59" width="6" height="11" fill="#16a34a"/><rect x="26.5" y="61.5" width="11" height="6" fill="#16a34a"/>'
+};
+var BOT_THEME={
+ "mamas-bake":{role:"Baker bot",acc:ACC.baker,chips:["See cake designs","Do you deliver?","Phone number","Where is it?"],hello:"I'm Marky the baker. Welcome to Mama's Bake! Scroll to watch a cake come together, then pick a design. Home delivery is available and payment is taken first."},
+ "khan-food-point":{role:"Dairy bot",acc:ACC.dairy,chips:["See the products","Milk price","Delivery?","Where is it?"],hello:"I'm Marky from the dairy counter. Khan Food Point has fresh milk, dahi, ghee, butter, honey and paratha chana. Delivery starts from Rs. 500."},
+ "khan-karyana-store":{role:"Grocer bot",acc:ACC.grocer,chips:["See the products","Delivery?","Phone number","Where is it?"],hello:"I'm Marky the grocer. Grab a basket: Khan Karyana Store has ata, sugar, oil, spices, soap and more. Delivery from Rs. 500."},
+ "smoke-bar":{role:"Flavour bot · 18+",acc:ACC.smoke,chips:["See the flavours","Prices?","Phone number","Where is it?"],hello:"Marky here. Smoke Bar is for adults 18 and over only. Flavours are priced per 1 ml. There is no delivery."},
+ "warda-drink-corner":{role:"Cold drink bot",acc:ACC.drink,chips:["See the products","Is it open now?","Phone number","Where is it?"],hello:"I'm Marky, your cold drink buddy. Warda Drink Corner serves cold drinks and snacks. There is no delivery."},
+ "ali-tailors":{role:"Tailor bot",acc:ACC.tailor,chips:["See the services","Stitching price?","Phone number","Where is it?"],hello:"I'm Marky the tailor, tape measure ready. Ali Tailor's stitches suits, waistcoats, coats and shirts for men and women. Contact the shop for the price."},
+ "shades-beauty-parlour":{role:"Beauty bot",acc:ACC.beauty,chips:["See the services","Book an appointment","Phone number","Where is it?"],hello:"I'm Marky, your glam guide. Shade's Beauty Parlour offers bridal, party and simple makeup, facial, pedicure and manicure. Ladies only."},
+ "kashmiri-tuition-center":{role:"Teacher bot",acc:ACC.teacher,chips:["See the classes","Admission?","Phone number","Where is it?"],hello:"I'm Marky the teacher. Kashmiri Tuition Center has classes for girls (PG to Matric) and boys (PG to 5th). Contact the center for admission."},
+ "al-nasir-homeo-clinic":{role:"Clinic bot",acc:ACC.clinic,chips:["See the services","Doctor timing","Phone number","Where is it?"],hello:"I'm Marky, the clinic assistant. Al-Nasir Homeo Clinic has a doctor for 12 hours and a full range of medicines. Contact the clinic for an appointment."},
+ "hashmi-electronics":{role:"Tech bot",acc:ACC.tech,chips:["See the products","Prices?","Phone number","Where is it?"],hello:"I'm Marky, the tech helper. Hashmi Electronics sells LED TVs, Q-LED TVs and Audionic speakers. Message the shop for prices."},
+  "alizay-baking":{role:"Baker bot",acc:ACC.baker,chips:["See cake designs","Phone number","Where is it?","Prices?"],hello:"I'm Marky the baker. Welcome to Alizay Baking! Scroll to watch a cake come together, then pick a design. Ask the shop for the price of your design."},
+ "al-khair-pharmacy":{role:"Pharmacy bot",acc:ACC.pharma,chips:["Ask about a medicine","Delivery?","Phone number","Where is it?"],hello:"I'm Marky, the pharmacy helper. Al-Khair Pharmacy delivers. Ask the shop about the price and stock of any medicine."}
+};
+function themedHello(s){var th=BOT_THEME[s.id];return th?th.hello:shopText(s)}
+function botThemeApply(){
+  var th=botCur&&BOT_THEME[botCur.id];
+  var g=$("#botAcc");if(g)g.innerHTML=th?th.acc:"";
+  var nm=$("#botName");if(nm)nm.textContent=th?th.role:"Marky · Markezo helper";
+}
+var botT=null;
+function botShow(ms){
+  var b=$("#bot"),u=$("#botBubble");if(!b)return;
+  b.classList.remove("quiet");u.classList.remove("pop");void u.offsetWidth;u.classList.add("pop");
+  clearTimeout(botT);botT=setTimeout(function(){if(!b.classList.contains("ask"))b.classList.add("quiet")},ms||8000);
+}
+function botChips(){
+  var c=$("#botChips");if(!c)return;c.innerHTML="";
+  var th=botCur&&BOT_THEME[botCur.id];
+  var l=botCur?(th?th.chips:["Phone number","Where is it?","Delivery?","Prices?"]):["Take a shop tour","Which shops deliver?","Where can I buy a cake?","How does it work?"];
+  l.forEach(function(t){
+    var b=document.createElement("button");b.type="button";b.textContent=t;
+    b.addEventListener("click",function(){
+      if(t==="Take a shop tour"){tourStart();return}
+      if(/^(See|Ask about)\b/.test(t)){var e=$("#prodstart");if(e)e.scrollIntoView({behavior:"smooth"});return}
+      $("#botQ").value=t;botSubmit();
+    });
+    c.appendChild(b);
+  });
+}
+
+/* ===== Shop tour: Marky walks you through every store ===== */
+var tour={on:false,i:0};
+function tourStart(){tour.on=true;tour.i=0;var h="shop-"+SHOPS[0].id;if(location.hash==="#"+h)route();else location.hash=h}
+function tourGo(d){
+  var n=SHOPS.length;tour.i+=d;
+  if(tour.i>=n){tourEnd(true);return}
+  if(tour.i<0)tour.i=0;
+  location.hash="shop-"+SHOPS[tour.i].id;
+}
+function tourEnd(done){
+  tour.on=false;$("#tbar").hidden=true;
+  if(done){toast("Tour finished. Happy shopping!");if(location.hash!=="#home")location.hash="home"}
+}
+function tourSync(h){
+  var bar=$("#tbar");
+  if(!tour.on){bar.hidden=true;return}
+  if(h.indexOf("shop-")!==0){tourEnd(false);return}
+  var n=SHOPS.length,i,s;
+  for(i=0;i<n;i++)if(SHOPS[i].id===h.slice(5))break;
+  if(i>=n){tourEnd(false);return}
+  tour.i=i;s=SHOPS[i];
+  $("#tourTxt").textContent="Tour "+(i+1)+" of "+n+" · "+s.name;
+  $("#tourNext").textContent=i===n-1?"Finish":"Next shop";
+  $("#tourPrev").disabled=i===0;
+  bar.hidden=false;
+  botSay("Stop "+(i+1)+" of "+n+". "+themedHello(s));
+  botShow(14000);
+}
+
+
 /* ===== Router ===== */
 var SECTIONS={stores:1,how:1,areas:1,faq:1};
 function route(){
-  botCur=null;if(!$("#lb").hidden){$("#lb").hidden=true;document.body.style.overflow=""}
+  storyEl=null;botCur=null;if(!$("#lb").hidden){$("#lb").hidden=true;document.body.style.overflow=""}
   var h=location.hash.replace("#","");
   if(SECTIONS[h]){
     if(!$("#grid"))homeView();
@@ -407,7 +747,8 @@ function route(){
   window.scrollTo(0,0);
   if(h.indexOf("shop-")===0&&byId(h.slice(5)))shopView(byId(h.slice(5)));
   else homeView();
-  botReveal();
+  botThemeApply();
+  if(tour.on)tourSync(h);else{$("#tbar").hidden=true;botReveal()}
 }
 
 /* ===== Clipboard ===== */
@@ -481,6 +822,8 @@ document.addEventListener("click",function(e){
   else if(d.reset){cat="All";q="";var i=$("#q");if(i)i.value="";var c=$("#qclr");if(c)c.hidden=true;syncChips();filterGrid()}
   else if(d.cat){cat=d.cat;syncChips();filterGrid()}
   else if(d.lb!==undefined){var sh=byId(location.hash.replace("#shop-",""));if(sh)openLb(sh,+d.lb)}
+  else if(d.tour==="start"){tourStart()}
+  else if(d.skip){var ps_=$("#prodstart");if(ps_)ps_.scrollIntoView({behavior:"smooth"})}
   else if(d.g!==undefined){var el=document.getElementById("g-"+d.g);if(el)el.scrollIntoView({behavior:"smooth"})}
 });
 function syncChips(){var c=document.querySelectorAll(".chip");for(var i=0;i<c.length;i++)c[i].setAttribute("aria-pressed",c[i].dataset.cat===cat)}
@@ -519,7 +862,7 @@ if(!window.speechSynthesis)$("#botListen").hidden=true;
 $("#botListen").addEventListener("click",botListen);
 $("#botHide").addEventListener("click",function(){$("#bot").classList.add("quiet")});
 /* Question box: answers come from the shop data on this page (no server needed) */
-var BOT_KEYS={"khan-food-point":["khan","food"],"khan-karyana-store":["khan","karyana","kariyana"],"smoke-bar":["smoke"],"warda-drink-corner":["warda"],"ali-tailors":["ali","tailor","tailors","tayler","tailer"],"shades-beauty-parlour":["shade","shades","parlour","parlor","beauty"],"kashmiri-tuition-center":["kashmiri","tuition","tution"],"al-nasir-homeo-clinic":["nasir","homeo","clinic"],"hashmi-electronics":["hashmi"],"mamas-bake":["mama","mamas","bake"],"al-khair-pharmacy":["khair","pharmacy"]};
+var BOT_KEYS={"khan-food-point":["khan","food"],"khan-karyana-store":["khan","karyana","kariyana"],"smoke-bar":["smoke"],"warda-drink-corner":["warda"],"ali-tailors":["ali","tailor","tailors","tayler","tailer"],"shades-beauty-parlour":["shade","shades","parlour","parlor","beauty"],"kashmiri-tuition-center":["kashmiri","tuition","tution"],"al-nasir-homeo-clinic":["nasir","homeo","clinic"],"hashmi-electronics":["hashmi"],"mamas-bake":["mama","mamas","bake"],"al-khair-pharmacy":["khair","pharmacy"],"alizay-baking":["alizay","alizzay","alizai","baking"]};
 var BOT_STOP={};
 "a an the is are am i me my you we it its this that there here of in on at to for from with and or do does did can could will would should have has had any some want need get buy find looking look show tell please pls about what which who how much many where when why shop shops store stores near nearby local muzaffargarh markezo phone number contact call whatsapp address location map deliver delivery home price prices rate cost open close closed time timing hours sell sells menu list item items product products service services offer offers kya hai hain ka ki ke ko se mein mujhe chahiye available free good best cheap thanks thank hello hey salam".split(" ").forEach(function(w){BOT_STOP[w]=1});
 var BOT_SYN={medicine:"pharmacy",medicines:"pharmacy",dawai:"pharmacy",dawa:"pharmacy",tablet:"pharmacy",tablets:"pharmacy",doctor:"clinic",school:"tuition",admission:"tuition",study:"tuition",tv:"led",television:"led",makeup:"makeup",dress:"stitching",suit:"stitching",suits:"stitching",clothes:"stitching",cloth:"stitching",cold:"drinks",pepsi:"drinks",coke:"drinks",vape:"vapes",pod:"pods",grocery:"karyana",birthday:"cake",sweet:"cake",bakery:"cake"};
@@ -604,11 +947,6 @@ function botActs(list){
   var c=$("#botActs");if(!c)return;c.innerHTML="";
   (list||[]).forEach(function(x){var a=document.createElement("a");a.href=x.h;a.textContent=x.l;if(x.x){a.target="_blank";a.rel="noopener"}c.appendChild(a)});
 }
-function botChips(){
-  var c=$("#botChips");if(!c)return;c.innerHTML="";
-  var l=botCur?["Phone number","Where is it?","Delivery?","Prices?"]:["Which shops deliver?","Where can I buy a cake?","I need medicine","How does it work?"];
-  l.forEach(function(t){var b=document.createElement("button");b.type="button";b.textContent=t;b.addEventListener("click",function(){$("#botQ").value=t;botSubmit()});c.appendChild(b)});
-}
 function botSubmit(){
   var i=$("#botQ"),q=i.value.trim();if(!q)return;
   var a=botAnswer(q);botSay(a.text);botActs(a.acts);i.value="";$("#botBubble").scrollTop=0;
@@ -661,4 +999,11 @@ try{var sp=JSON.parse(localStorage.getItem("mzBot")||"null");if(sp&&typeof sp.x=
   addEventListener("resize",function(){if(botPos)botPlace(botPos.x,botPos.y)});
 })();
 
+(function(){
+  var nm=document.createElement("div");nm.className="botname";nm.id="botName";nm.textContent="Marky · Markezo helper";
+  var bt=$("#botBubble");bt.insertBefore(nm,$("#botText"));
+  $("#tourNext").addEventListener("click",function(){tourGo(1)});
+  $("#tourPrev").addEventListener("click",function(){tourGo(-1)});
+  $("#tourEnd").addEventListener("click",function(){tourEnd(false)});
+})();
 loadCart();themeIcon();route();renderCart();
