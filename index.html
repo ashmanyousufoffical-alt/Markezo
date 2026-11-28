@@ -3,12 +3,12 @@
 <head>
 <meta name="google-site-verification" content="n5h1SkMO4lCYIxkYDlouYj3IXpWvrF7Q885TDrIRiIs" />
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://images.pexels.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Markezo - Online Bazaar of Local Shops in Muzaffargarh</title>
 <meta name="description" content="Markezo brings 12 local shops of Muzaffargarh online. Browse food, grocery, bakery, pharmacy, tailor, beauty, electronics and more, see prices and message each shop on WhatsApp.">
 <link rel="canonical" href="https://ashmanyousufoffical-alt.github.io/Markezo/">
-<meta name="author" content="Shahzaib Arshad Khagga, Muhammad Ashman">
+<meta name="author" content="Shahzaib Arshad Khagga">
 <meta name="application-name" content="Markezo">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="keywords" content="Markezo, Muzaffargarh shops online, Muzaffargarh bazaar, online shopping Muzaffargarh, local shops Muzaffargarh">
@@ -27,16 +27,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=Bodoni+Moda:wght@700;800&display=swap">
-<script>try{var t=localStorage.getItem("mzTheme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>document.documentElement.classList.add("js");try{if(sessionStorage.getItem("mzS"))document.documentElement.classList.add("nosplash")}catch(e){}try{var t=localStorage.getItem("mzTheme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <link rel="stylesheet" href="style.css">
 
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="splash" aria-hidden="true"><div class="sp-in"><span class="sp-mk" id="spMk"></span><b class="sp-w"><i style="--k:0">M</i><i style="--k:1">a</i><i style="--k:2">r</i><i style="--k:3">k</i><i style="--k:4">e</i><i style="--k:5">z</i><i style="--k:6">o</i></b><p class="sp-t">Your whole bazaar, in one place</p></div></div>
+<div id="sprog" aria-hidden="true"></div>
 <a class="skip" href="#view" id="skip">Skip to content</a>
 <header class="bar"><div class="wrap">
   <a class="logo" href="#home" aria-label="Markezo home"><span class="mk" id="logoIc"></span>Markezo</a>
-  <nav class="nav" aria-label="Main"><a href="#stores">Stores</a><a href="#how">How it works</a><a href="#areas">Areas</a><a href="#faq">FAQ</a></nav>
+  <nav class="nav" aria-label="Main"><a href="#stores">Stores</a><a href="#explore">Explore</a><a href="#how">How it works</a><a href="#areas">Areas</a><a href="#faq">FAQ</a></nav>
   <div class="tools">
     <button class="ibtn" id="themeBtn" type="button" aria-label="Switch light or dark theme"></button>
     <button class="cartbtn" id="cartBtn" type="button" aria-haspopup="dialog" aria-label="Open request list"><span class="t">Request list</span><b id="cartCount">0</b></button>
@@ -47,8 +49,8 @@
 
 <footer><div class="wrap">
   <div><b>Markezo</b><p>Local shops, one online bazaar. Each shop confirms its prices when you message it.</p></div>
-  <nav aria-label="Footer"><a href="#home">Home</a><a href="#stores">Stores</a><a href="#how">How it works</a><a href="#areas">Areas</a><a href="#faq">FAQ</a></nav>
-  <p class="credit">Designed &amp; built by <b>Shahzaib Arshad Khagga</b> <span>&amp;</span> <b>Muhammad Ashman</b></p>
+  <nav aria-label="Footer"><a href="#home">Home</a><a href="#stores">Stores</a><a href="#explore">Explore</a><a href="#how">How it works</a><a href="#areas">Areas</a><a href="#faq">FAQ</a></nav>
+  <p class="credit">Designed &amp; built by <b>Shahzaib Arshad Khagga</b></p>
   <small id="copy"></small>
 </div></footer>
 
@@ -101,6 +103,7 @@
   <button class="clear" id="clearCart" type="button" hidden>Clear all</button>
 </aside>
 
+<script type="application/json" id="cutData">{"maida":{"w":232,"h":300},"chilli":{"w":220,"h":300},"oil":{"w":156,"h":320},"ghee":{"w":158,"h":260},"soap":{"w":243,"h":200},"paste":{"w":192,"h":48},"surf":{"w":206,"h":320},"ata":{"w":200,"h":200},"sugar":{"w":200,"h":200},"salt":{"w":200,"h":200},"haldi":{"w":200,"h":200},"zira":{"w":200,"h":200},"conf":{"w":200,"h":200},"stat":{"w":200,"h":200}}</script>
 <script src="script.js"></script>
 </body>
 </html>

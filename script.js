@@ -83,7 +83,7 @@ var SHOPS=[
    .concat(G("Gluten-free items",[["Gluten free muffins","Rs. 120"],["Gluten free homemade buttercream cupcakes","Rs. 150"],["Gluten free homemade buttercream cake","Rs. 1,500"],["Gluten free tea cake","Rs. 1,000"]]))},
  {id:"alizay-baking",name:"Alizay Baking",cat:"Food & Grocery",hue:310,ic:"cake",kind:"product",
   blurb:"Home bakery with custom cakes, cupcakes, muffins, brownies and donuts.",address:"Muzaffargarh",area:"Muzaffargarh",
-  items:[["Bon voyage cake with cupcakes","Custom design. Ask the shop for the price.","Cakes",78],["Oreo chocolate drip cake","Custom design. Ask the shop for the price.","Cakes",79],["Pink cartoon theme cake","Custom design. Ask the shop for the price.","Cakes",80],["Boss baby theme cake","Custom design. Ask the shop for the price.","Cakes",81],["Space theme cake with astronaut and rocket","Custom design. Ask the shop for the price.","Cakes",82],["Frozen theme cake","Custom design. Ask the shop for the price.","Cakes",83],["Teddy bear baby boy cake","Custom design. Ask the shop for the price.","Cakes",84],["Doctor theme cake with stethoscope","Custom design. Ask the shop for the price.","Cakes",85],["Doctor theme cake with pills","Custom design. Ask the shop for the price.","Cakes",86],["Doctor to be cake","Custom design. Ask the shop for the price.","Cakes",87],["Bride to be dress cake","Custom design. Ask the shop for the price.","Cakes",88],["Photo print cake with gold balls","Custom design. Ask the shop for the price.","Cakes",89],["Chocolate chip muffins","Ask the shop for the price.","Cupcakes and muffins",90],["Vanilla cupcakes with cream roses","Ask the shop for the price.","Cupcakes and muffins",91],["Oreo cupcakes","Ask the shop for the price.","Cupcakes and muffins",92],["Fudgy chocolate brownies","Ask the shop for the price.","Brownies and donuts",93],["Chocolate donuts with white drizzle","Ask the shop for the price.","Brownies and donuts",94],["Glazed donuts","Ask the shop for the price.","Brownies and donuts",95]]},
+  items:[["Bon voyage cake with cupcakes","Custom design. Ask the shop for the price.","Cakes",79],["Oreo chocolate drip cake","Custom design. Ask the shop for the price.","Cakes",80],["Pink cartoon theme cake","Custom design. Ask the shop for the price.","Cakes",81],["Boss baby theme cake","Custom design. Ask the shop for the price.","Cakes",82],["Space theme cake with astronaut and rocket","Custom design. Ask the shop for the price.","Cakes",83],["Frozen theme cake","Custom design. Ask the shop for the price.","Cakes",84],["Teddy bear baby boy cake","Custom design. Ask the shop for the price.","Cakes",85],["Doctor theme cake with stethoscope","Custom design. Ask the shop for the price.","Cakes",86],["Doctor theme cake with pills","Custom design. Ask the shop for the price.","Cakes",87],["Doctor to be cake","Custom design. Ask the shop for the price.","Cakes",88],["Bride to be dress cake","Custom design. Ask the shop for the price.","Cakes",89],["Photo print cake with gold balls","Custom design. Ask the shop for the price.","Cakes",90],["Chocolate chip muffins","Ask the shop for the price.","Cupcakes and muffins",91],["Vanilla cupcakes with cream roses","Ask the shop for the price.","Cupcakes and muffins",92],["Oreo cupcakes","Ask the shop for the price.","Cupcakes and muffins",93],["Fudgy chocolate brownies","Ask the shop for the price.","Brownies and donuts",94],["Chocolate donuts with white drizzle","Ask the shop for the price.","Brownies and donuts",95],["Glazed donuts","Ask the shop for the price.","Brownies and donuts",96]]},
  {id:"al-khair-pharmacy",name:"Al-Khair Pharmacy",cat:"Health & Learning",hue:105,ic:"cross",kind:"product",
   blurb:"Pharmacy with delivery.",address:"Committee Chowk, Muzaffargarh",area:"Committee Chowk",
   items:[["Medicines","Ask the shop for price and stock"]]}
@@ -168,6 +168,7 @@ function setLd(obj){
 
 
 /* ===== Mama's Bake cake design photos ===== */
+
 var PHOTO_CAP=["Chocolate fault-line cake","Congrats marble cake with flowers","Ribbon bows and pearls cake","Buttercream roses cake","Chick face fondant cake","Chocolate drip cake with biscuits and wafers","Buttercream flower bouquet cake","Vintage piped cake with pearls","Giant decorated cupcake","Peony and basket-weave cake","Anniversary cake with black bows","Graduation cake with books and cap","Red hearts cake","Ocean blue ombre cake","Birthday cake with rose and name tag","Birthday cake with calendar plaque","Chocolate drip cake with coin biscuits","Chocolate cake with white flowers","Engagement ring cake with mehndi plate","Birthday chocolate cake with gold balls",
 "Pink and yellow buttercream roses cake","Brown ribbon cake with piped border","Bento box cartoon birthday cake","Pink sprinkle hearts cake","Two-tier pink cake with gold butterflies","Chocolate peanut butter donuts","Anniversary couple silhouette cake","Chocolate donuts with rainbow sprinkles","Chocolate chip muffins","Chocolate rosette cake","Fudgy brownies","Chocolate cupcakes with chocolate swirl","Chocolate chip brownies","Two-tier birthday cake with chocolate wafer","Chocolate drip cake with pretzels","Chocolate drip cake with walnuts","Chocolate cake with cookie pieces","Chocolate drip cake with wafer rolls and biscuits","Vanilla frosted chocolate cupcake","Chocolate chip sided cake","Umrah Mubarak cake with gold balls","Vanilla layer cake slice","Chocolate cupcakes with swirl frosting","Stacked sprinkle donuts","Vanilla cupcakes with buttercream swirl","Colourful buttercream cupcakes","Strawberry chocolate drip cake"];
 (function(){var s=byId("mamas-bake");if(!s)return;PHOTO_CAP.forEach(function(c,i){s.items.push(i<20?[c,"Custom design. Ask the shop for the price.","Cake designs",i]:[c,"Design idea. Ask the shop if it can make this.","Design ideas",i])})})();
@@ -177,11 +178,11 @@ var KF_PHOTOS={"Milk":47,"Shon Halwa":48,"Desi Ghee":49,"Butter":50,"Honey":51,"
   s.items.forEach(function(it){if(KF_PHOTOS[it[0]]!==undefined){it[2]="";it[3]=KF_PHOTOS[it[0]]}});
   s.facts=(s.facts||[]).concat([["tag","Product photos are for illustration. The actual product may look a little different."]]);
 })();
-var WARDA_PHOTOS={"Cold drinks":54,"Snacks":55};
+var WARDA_PHOTOS={"Cold drinks":54,"Snacks":55,"Cigarettes":78};
 (function(){
   var s=byId("warda-drink-corner");if(!s)return;
   s.items.forEach(function(it){if(WARDA_PHOTOS[it[0]]!==undefined){it[2]="";it[3]=WARDA_PHOTOS[it[0]]}});
-  s.facts=(s.facts||[]).concat([["tag","Product pictures are illustrations. Brands and prices are confirmed by the shop."]]);
+  s.facts=(s.facts||[]).concat([["tag","Product pictures are for illustration. Brands and prices are confirmed by the shop."]]);
 })();
 var ALI_PHOTOS={"Ladies suits":56,"Gents suits":57,"Waistcoat stitching":58,"Coat stitching":59,"Shirt stitching":60};
 (function(){
@@ -193,9 +194,33 @@ var KAR_PHOTOS={"Ata": 61, "Maida": 62, "Baisan": 63, "Sugar": 64, "Salt": 65, "
 (function(){
   var s=byId("khan-karyana-store");if(!s)return;
   s.items.forEach(function(it){if(KAR_PHOTOS[it[0]]!==undefined)it[3]=KAR_PHOTOS[it[0]]});
-  s.facts=(s.facts||[]).concat([["tag","Product pictures are illustrations. Brands, sizes and prices are confirmed by the shop."]]);
+  s.facts=(s.facts||[]).concat([["tag","Product pictures are for illustration. Brands, sizes and prices are confirmed by the shop."]]);
 })();
-function photoUrl(i){return "photos/"+i+".webp"}
+var STOCK_ITEMS={
+ "shades-beauty-parlour":{"Bridal makeup":"https://images.pexels.com/photos/29368877/pexels-photo-29368877.jpeg?auto=compress&cs=tinysrgb&w=520","Party makeup":"https://images.pexels.com/photos/7290123/pexels-photo-7290123.jpeg?auto=compress&cs=tinysrgb&w=520","Simple makeup":"https://images.pexels.com/photos/13469411/pexels-photo-13469411.jpeg?auto=compress&cs=tinysrgb&w=520","Facial":"https://images.pexels.com/photos/3865548/pexels-photo-3865548.jpeg?auto=compress&cs=tinysrgb&w=520","Pedicure":"https://images.pexels.com/photos/34930123/pexels-photo-34930123.jpeg?auto=compress&cs=tinysrgb&w=520","Manicure":"https://images.pexels.com/photos/2281695/pexels-photo-2281695.jpeg?auto=compress&cs=tinysrgb&w=520"},
+ "kashmiri-tuition-center":{"Girls classes":"https://images.pexels.com/photos/8423011/pexels-photo-8423011.jpeg?auto=compress&cs=tinysrgb&w=520","Boys classes":"https://images.pexels.com/photos/29659894/pexels-photo-29659894.jpeg?auto=compress&cs=tinysrgb&w=520"},
+ "al-nasir-homeo-clinic":{"All varieties of medicine":"https://images.pexels.com/photos/3873150/pexels-photo-3873150.jpeg?auto=compress&cs=tinysrgb&w=520","Homeopathic medicine":"https://images.pexels.com/photos/40557468/pexels-photo-40557468.jpeg?auto=compress&cs=tinysrgb&w=520","Doctor visit":"https://images.pexels.com/photos/7578798/pexels-photo-7578798.jpeg?auto=compress&cs=tinysrgb&w=520"},
+ "hashmi-electronics":{"LED TV":"https://images.pexels.com/photos/5202925/pexels-photo-5202925.jpeg?auto=compress&cs=tinysrgb&w=520","Q-LED TV":"https://images.pexels.com/photos/38975400/pexels-photo-38975400.jpeg?auto=compress&cs=tinysrgb&w=520","Audionic speakers":"https://images.pexels.com/photos/191877/pexels-photo-191877.jpeg?auto=compress&cs=tinysrgb&w=520"},
+ "al-khair-pharmacy":{"Medicines":"https://images.pexels.com/photos/31406906/pexels-photo-31406906.jpeg?auto=compress&cs=tinysrgb&w=520"}
+};
+var STOCK_NOTE={
+ "shades-beauty-parlour":"Photos show example looks. The price and appointment time are confirmed by the parlour.",
+ "kashmiri-tuition-center":"Photos are for illustration. Admission and fees are confirmed by the center.",
+ "al-nasir-homeo-clinic":"Photos are for illustration. Please contact the clinic for the appointment time.",
+ "hashmi-electronics":"Photos are for illustration. Models, sizes and prices are confirmed by the shop.",
+ "al-khair-pharmacy":"The photo is for illustration. Please ask the shop for the price and stock."
+};
+(function(){
+  Object.keys(STOCK_ITEMS).forEach(function(id){
+    var s=byId(id);if(!s)return;var m=STOCK_ITEMS[id];
+    s.items.forEach(function(it){if(m[it[0]]){it[2]="";it[3]=m[it[0]]}});
+    s.facts=(s.facts||[]).concat([["tag",STOCK_NOTE[id]]]);
+  });
+})();
+var CUTD=null;
+function CUTS(){if(!CUTD){try{CUTD=JSON.parse($("#cutData").textContent)}catch(e){CUTD={}}}return CUTD}
+function cutUrl(k){return CUTS()[k]?"cuts/"+k+".webp":""}
+function photoUrl(i){if(typeof i==="string")return i;return "photos/"+i+".webp"}
 
 /* ===== Small components ===== */
 function tagsHtml(s,cls){return (s.tags&&s.tags.length)?'<div class="'+cls+'">'+s.tags.map(function(t){return '<span>'+esc(t)+'</span>'}).join("")+'</div>':''}
@@ -251,17 +276,18 @@ function homeView(){
     return '<a class="mini sg" href="#shop-'+s.id+'" style="'+st(s)+';background:linear-gradient(145deg,var(--c1),var(--c2))"><span class="ic">'+I(s.ic)+'</span><span><b>'+esc(s.name)+'</b><span>'+esc(s.address)+'</span></span></a>';
   }).join("");
   $("#view").innerHTML=
-   '<div class="wrap"><section class="hero" aria-labelledby="h1"><div><span class="eyebrow"><i></i>'+SHOPS.length+' local shops, one bazaar</span>'+
-   '<h1 id="h1">Your whole <em>bazaar</em>, in one place.</h1>'+
+   '<div class="wrap"><section class="hero" aria-labelledby="h1"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><div><span class="eyebrow"><i></i>'+SHOPS.length+' local shops, one bazaar</span>'+
+   '<h1 id="h1"><span class="w" style="--i:0">Your</span> <span class="w" style="--i:1">whole</span> <span class="w" style="--i:2"><em>bazaar</em>,</span> <span class="w" style="--i:3">in</span> <span class="w" style="--i:4">one</span> <span class="w" style="--i:5">place.</span></h1>'+
    '<p>Browse each shop\'s store, see what they sell, and find exactly where they are.</p>'+
    '<form class="search" role="search" id="sform"><label class="sr" for="q">Search shops, products or areas</label>'+I("search")+'<input id="q" type="search" placeholder="Search a shop, product or area" autocomplete="off" enterkeyhint="search"><kbd aria-hidden="true">/</kbd><button class="clr" id="qclr" type="button" aria-label="Clear search" hidden>'+I("x")+'</button></form>'+
    '<button class="tourbtn" type="button" data-tour="start">'+I("pin")+'Take a shop tour with Marky</button>'+
-   '<div class="stats"><div><b>'+SHOPS.length+'</b><span>Shops</span></div><div><b>'+areaList().length+'</b><span>Areas</span></div><div><b>'+rounded+'+</b><span>Products and services</span></div></div></div>'+
+   '<div class="stats"><div><b data-count="'+SHOPS.length+'">0</b><span>Shops</span></div><div><b data-count="'+areaList().length+'">0</b><span>Areas</span></div><div><b data-count="'+rounded+'" data-suf="+">0</b><span>Products and services</span></div></div></div>'+
    '<div class="stack" aria-hidden="true">'+stack+'</div></section>'+
-   '<div class="tstrip" aria-label="Why Markezo"><span>'+I("check")+'Free to browse, no sign-up</span><span>'+I("chat")+'Order on WhatsApp</span><span>'+I("tag")+'Prices confirmed by each shop</span><span>'+I("pin")+'Real local shops with addresses</span></div>'+
+   '<div class="tstrip" aria-label="Why Markezo"><span>'+I("check")+'Free to browse, no sign-up</span><span>'+I("chat")+'Order on WhatsApp</span><span>'+I("tag")+'Prices confirmed by each shop</span><span>'+I("pin")+'Real local shops with addresses</span></div>'+mqHtml()+
    '<div id="stores" class="sec" style="padding-top:0;content-visibility:visible"><div class="cats" id="cats" role="group" aria-label="Filter by category"></div>'+
    '<div class="head"><h2 id="gt">All stores</h2><span class="count" id="count" aria-live="polite"></span></div>'+
    '<div class="grid" id="grid"></div></div>'+
+   stripHtml()+
    '<section class="sec" id="how"><h2>How Markezo works</h2><p>Three steps from browsing to your order.</p><div class="steps">'+
    '<div class="stp"><span class="n">1</span><h3>Pick a shop</h3><p>Open any store to see its products or services and its address.</p></div>'+
    '<div class="stp"><span class="n">2</span><h3>Build your list</h3><p>Tap Add on what you need. Change quantities any time.</p></div>'+
@@ -281,7 +307,7 @@ function homeView(){
   $("#qclr").addEventListener("click",function(){q="";inp.value="";$("#qclr").hidden=true;filterGrid();inp.focus()});
   filterGrid();
   setMeta("Markezo | Local shops of Muzaffargarh in one online bazaar","Markezo: "+SHOPS.length+" local shops in one online bazaar. Browse each store, see products, prices and location, and message the shop on WhatsApp.");
-  setLd({"@type":"ItemList","name":"Markezo shops","creator":[{"@type":"Person","name":"Shahzaib Arshad Khagga"},{"@type":"Person","name":"Muhammad Ashman"}],"itemListElement":SHOPS.map(function(s,i){return {"@type":"ListItem","position":i+1,"item":ld(s)}})});
+  setLd({"@type":"ItemList","name":"Markezo shops","creator":{"@type":"Person","name":"Shahzaib Arshad Khagga"},"itemListElement":SHOPS.map(function(s,i){return {"@type":"ListItem","position":i+1,"item":ld(s)}})});
 }
 function filterGrid(){
   var t=q.trim().toLowerCase();
@@ -294,6 +320,7 @@ function filterGrid(){
   $("#grid").innerHTML=list.length?list.map(storeCard).join(""):'<div class="empty"><p>No shop matches that search. Try another word.</p>'+((t||cat!=="All")?'<button type="button" data-reset="1">Show all stores</button>':'')+'</div>';
   $("#count").textContent=list.length+(list.length===1?" shop":" shops");
   $("#gt").textContent=cat==="All"?"All stores":cat;
+  revealIn($("#grid"),".card");
   botSay(homeText(list.length));
 }
 function prodControl(s,i){
@@ -343,12 +370,13 @@ function drawProducts(s){
     var sub=it[1]||"",priceHtml="",small="";
     if(/\bRs\./.test(sub))priceHtml='<span class="price">'+esc(sub)+'</span>';else if(sub)small='<small>'+esc(sub)+'</small>';
     if(it[3]!==undefined){
-      html+='<div class="prod photo"><button class="pphoto" type="button" data-lb="'+i+'" aria-label="View photo: '+esc(it[0])+'"><img src="'+photoUrl(it[3])+'" alt="'+esc(it[0])+'" width="480" height="640" loading="lazy" decoding="async"><span>'+I("search")+'View</span></button><div class="pbody"><div><h3>'+esc(it[0])+'</h3>'+small+priceHtml+'</div>'+prodControl(s,i)+'</div></div>';
+      html+='<div class="prod photo"><button class="pphoto" type="button" data-lb="'+i+'" aria-label="View photo: '+esc(it[0])+'"><img src="'+photoUrl(it[3])+'" alt="'+esc(it[0])+'" width="480" height="640" loading="lazy" decoding="async" onerror="this.style.opacity=0"><span>'+I("search")+'View</span></button><div class="pbody"><div><h3>'+esc(it[0])+'</h3>'+small+priceHtml+'</div>'+prodControl(s,i)+'</div></div>';
     }else{
       html+='<div class="prod"><div class="top"><span class="b">'+I(s.ic)+'</span><div><h3>'+esc(it[0])+'</h3>'+small+priceHtml+'</div></div>'+prodControl(s,i)+'</div>';
     }
   });
   el.innerHTML=n?html:'<p class="empty">No products match "'+esc(ps)+'".</p>';
+  revealIn(el,".prod");
 }
 /* Lightbox for photo products */
 var lbShop=null,lbPos=0,lbList=[];
@@ -407,7 +435,7 @@ function botReveal(){
 function srnd(seed){return function(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646}}
 function ly(s,inner,cls){return '<g class="ly '+(cls||'')+'" data-s="'+s+'">'+inner+'</g>'}
 function cyl(x,y,w,h,ry,side,top){var rx=w/2;return '<path d="M'+x+' '+y+'v'+h+'A'+rx+' '+ry+' 0 0 0 '+(x+w)+' '+(y+h)+'V'+y+'Z" fill="'+side+'"/><ellipse cx="'+(x+rx)+'" cy="'+y+'" rx="'+rx+'" ry="'+ry+'" fill="'+top+'"/>'}
-function SVG(inner,vb){return '<svg viewBox="'+(vb||'0 0 600 600')+'" role="img" focusable="false"><defs><linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".3" stop-color="#fff" stop-opacity=".35"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></linearGradient><filter id="blur8" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter><filter id="blur20" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="20"/></filter></defs>'+inner+'</svg>'}
+function SVG(inner,vb){return '<svg viewBox="'+(vb||'0 0 600 600')+'" role="img" focusable="false"><defs><linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".3" stop-color="#fff" stop-opacity=".35"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></linearGradient><filter id="ds" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity=".28"/></filter><filter id="blur8" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter><filter id="blur20" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="20"/></filter></defs>'+inner+'</svg>'}
 function star(x,y,r,c,cls){return '<path class="'+(cls||'tw')+'" d="M'+x+' '+(y-r)+' L'+(x+r*.28)+' '+(y-r*.28)+' L'+(x+r)+' '+y+' L'+(x+r*.28)+' '+(y+r*.28)+' L'+x+' '+(y+r)+' L'+(x-r*.28)+' '+(y+r*.28)+' L'+(x-r)+' '+y+' L'+(x-r*.28)+' '+(y-r*.28)+'Z" fill="'+c+'"/>'}
 function steam(x,y,c,d){return '<path class="rise" style="animation-delay:'+(d||0)+'s" d="M'+x+' '+y+' q-12 -20 0 -40 q12 -20 0 -40" fill="none" stroke="'+c+'" stroke-width="6" stroke-linecap="round" opacity=".6"/>'}
 function shadowE(cx,cy,rx){return '<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+rx+'" ry="'+(rx*.1)+'" fill="#000" opacity=".18" filter="url(#blur8)"/>'}
@@ -446,13 +474,23 @@ function sceneFood(){
 /* ---------- Khan Karyana Store: a grocery basket fills up ---------- */
 function sceneKaryana(){
   var o='',i,w='';
-  o+=ly(0,shadowE(300,530,250)+'<path d="M110 330 L150 500 Q300 540 450 500 L490 330Z" fill="#8a5a28"/><ellipse cx="300" cy="330" rx="190" ry="38" fill="#6b431c"/><ellipse cx="300" cy="332" rx="176" ry="30" fill="#3d2610"/><path d="M130 330 Q300 80 470 330" fill="none" stroke="#a8702f" stroke-width="16" stroke-linecap="round"/>');
-  o+=ly(1,'<path d="M210 250 C196 270 170 280 168 320 C168 350 172 372 180 380 H280 C288 372 292 350 292 320 C290 280 264 270 250 250Z" fill="#d9b072"/><rect x="198" y="246" width="64" height="10" rx="4" fill="#8b5a2b"/><rect x="190" y="296" width="80" height="46" rx="8" fill="#fff"/><text x="230" y="326" text-anchor="middle" font-size="22" font-weight="900" fill="#1b4d2a">ATA</text>'+'<path d="M330 270 C318 286 304 292 304 324 C304 350 308 366 314 374 H390 C396 366 400 350 400 324 C400 292 386 286 374 270Z" fill="#f4f6f8"/><rect x="324" y="296" width="66" height="40" rx="8" fill="#fff"/><text x="357" y="322" text-anchor="middle" font-size="16" font-weight="900" fill="#1b4d2a">SUGAR</text>');
-  o+=ly(2,'<rect x="406" y="214" width="26" height="30" rx="5" fill="#1b7f3b"/><path d="M400 244 h38 v14 c10 14 18 22 18 46 v70 q0 12 -12 12 h-50 q-12 0 -12 -12 v-70 c0 -24 8 -32 18 -46Z" fill="#f5c518"/><rect x="394" y="302" width="50" height="44" fill="#1b7f3b"/><circle cx="419" cy="324" r="11" fill="#ffd23f"/>'+'<rect x="124" y="296" width="70" height="84" rx="8" fill="#e8742a"/><ellipse cx="159" cy="296" rx="35" ry="8" fill="#f09a5c"/><rect x="124" y="320" width="70" height="30" fill="#fff6dc"/><text x="159" y="342" text-anchor="middle" font-size="18" font-weight="900" fill="#b4531a">GHEE</text>');
-  o+=ly(3,'<g class="fl"><rect x="262" y="196" width="46" height="70" rx="10" fill="#d00000"/><rect x="262" y="196" width="46" height="18" rx="6" fill="#fff"/><text x="285" y="244" text-anchor="middle" font-size="11" font-weight="900" fill="#fff">MIRCH</text></g><rect x="314" y="226" width="42" height="64" rx="10" fill="#ffb703"/><rect x="314" y="226" width="42" height="16" rx="6" fill="#fff"/><text x="335" y="272" text-anchor="middle" font-size="10" font-weight="900" fill="#7a4a00">HALDI</text>'+'<rect x="228" y="236" width="40" height="30" rx="8" fill="#4fc3f7" transform="rotate(-10 248 250)"/><text x="248" y="256" text-anchor="middle" font-size="9" font-weight="900" fill="#fff" transform="rotate(-10 248 250)">SOAP</text>'+star(150,210,12,'#ffd166')+star(470,210,14,'#fff'));
+  function pk(k,cx,bottom,h,rot){var c=CUTS()[k];if(!c)return '';var wd=h*c.w/c.h;return '<image href="'+cutUrl(k)+'" x="'+(cx-wd/2).toFixed(1)+'" y="'+(bottom-h)+'" width="'+wd.toFixed(1)+'" height="'+h+'" preserveAspectRatio="xMidYMid meet" filter="url(#ds)"'+(rot?' transform="rotate('+rot+' '+cx+' '+(bottom-h/2)+')"':'')+'/>'}
+  function md(k,cx,cy,r){var c=CUTS()[k];if(!c)return '';return '<g filter="url(#ds)"><clipPath id="mc_'+k+'"><circle cx="'+cx+'" cy="'+cy+'" r="'+r+'"/></clipPath><circle cx="'+cx+'" cy="'+cy+'" r="'+(r+5)+'" fill="#fff"/><image href="'+cutUrl(k)+'" x="'+(cx-r)+'" y="'+(cy-r)+'" width="'+(2*r)+'" height="'+(2*r)+'" clip-path="url(#mc_'+k+')" preserveAspectRatio="xMidYMid slice"/></g>'}
+  o+=ly(0,shadowE(300,530,250)+'<path d="M110 330 L150 500 Q300 540 450 500 L490 330Z" fill="#8a5a28"/><ellipse cx="300" cy="330" rx="190" ry="38" fill="#6b431c"/><ellipse cx="300" cy="332" rx="176" ry="30" fill="#3d2610"/><path d="M130 330 Q300 70 470 330" fill="none" stroke="#a8702f" stroke-width="16" stroke-linecap="round"/>');
+  /* back row (tall packs) */
+  o+=ly(2,pk('ghee',150,392,150)+pk('oil',392,392,236)+pk('chilli',298,392,190));
+  o+=ly(3,pk('surf',470,392,214));
+  o+=ly(1,pk('maida',222,392,196));
+  o+=ly(3,pk('paste',312,330,50,-16));
+  /* front row */
+  o+=ly(1,md('ata',178,352,40)+md('sugar',258,346,38)+md('salt',336,350,38));
+  o+=ly(3,pk('soap',420,392,92,5));
   for(i=0;i<11;i++){w+='<path d="M'+(118+i*3)+' '+(350+i*14)+' Q300 '+(380+i*14)+' '+(482-i*3)+' '+(350+i*14)+'" stroke="#6b431c" stroke-width="3" fill="none" opacity=".55"/>'}
   o+='<path d="M118 362 L150 500 Q300 540 450 500 L482 362 Q300 394 118 362Z" fill="#a8702f"/><path d="M118 362 L150 500 Q300 540 450 500 L482 362 Q300 394 118 362Z" fill="url(#shine)" opacity=".5"/>'+w+'<path d="M118 362 Q300 394 482 362" stroke="#d7a15a" stroke-width="8" fill="none"/>';
-  return SVG(o);
+  /* floating extras */
+  o+=ly(2,'<g class="fl">'+md('haldi',78,250,40)+'</g><g class="fl" style="animation-delay:-2s">'+md('zira',526,236,38)+'</g>'+star(40,170,12,'#ffd166')+star(560,160,10,'#fff'));
+  o+=ly(3,'<g class="fl" style="animation-delay:-1s">'+md('conf',64,400,42)+'</g><g class="fl" style="animation-delay:-3s">'+md('stat',538,398,40)+'</g>'+star(300,70,12,'#fff'));
+  return SVG(o,'0 40 600 540');
 }
 
 /* ---------- Smoke Bar: flavour bottles and drifting clouds (adults only) ---------- */
@@ -606,6 +644,137 @@ var STORY={
   {k:"DELIVERY",t:"AT YOUR\nDOOR",p:"Delivery is available. Please ask the shop for the price and delivery details.",a:"Delivery",bg:"#06303D",ink:"#DDF3F9"}]}
 };
 
+/* ===== Scenes built from real photos (own photos and linked stock photos) ===== */
+function RM(id){return "https://images.pexels.com/photos/"+id+"/pexels-photo-"+id+".jpeg?auto=compress&cs=tinysrgb&w=520"}
+function PS(i){return typeof i==="string"?i:photoUrl(i)}
+var _cid=0;
+function cardImg(src,cx,cy,w,h,rot,bd){
+  bd=bd==null?8:bd;var id="cc"+(++_cid),x=cx-w/2,y=cy-h/2;
+  return '<g transform="rotate('+(rot||0)+' '+cx+' '+cy+')" filter="url(#ds)"><rect x="'+(x-bd)+'" y="'+(y-bd)+'" width="'+(w+2*bd)+'" height="'+(h+2*bd)+'" rx="18" fill="#fff"/><clipPath id="'+id+'"><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="12"/></clipPath><image href="'+PS(src)+'" x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" preserveAspectRatio="xMidYMid slice" clip-path="url(#'+id+')"/></g>';
+}
+function circImg(src,cx,cy,r,ring){
+  var id="cc"+(++_cid);
+  return '<g filter="url(#ds)"><circle cx="'+cx+'" cy="'+cy+'" r="'+(r+7)+'" fill="'+(ring||"#fff")+'"/><clipPath id="'+id+'"><circle cx="'+cx+'" cy="'+cy+'" r="'+r+'"/></clipPath><image href="'+PS(src)+'" x="'+(cx-r)+'" y="'+(cy-r)+'" width="'+(2*r)+'" height="'+(2*r)+'" clip-path="url(#'+id+')" preserveAspectRatio="xMidYMid slice"/></g>';
+}
+
+/* Mama's Bake: a cake really bakes in the oven, then is layered, frosted and decorated */
+function sceneBake(){
+  var r=srnd(7),o='',i,a,x,y,cols=['#ff4d6d','#ffd166','#06d6a0','#4cc9f0','#b388eb','#ff9f1c'];
+  function T(inner){return '<g transform="translate(150 70) scale(.8)">'+inner+'</g>'}
+  /* 0: the oven - batter rises and turns golden while the window glows */
+  var knobs='';for(i=0;i<3;i++)knobs+='<circle cx="'+(70+i*50)+'" cy="276" r="11" fill="#6b7280"/><rect x="'+(68+i*50)+'" y="266" width="4" height="9" rx="2" fill="#fff"/>';
+  o+=ly(0,shadowE(125,512,120)+
+    '<rect x="20" y="250" width="210" height="262" rx="20" fill="#d5d9df"/><rect x="20" y="250" width="210" height="262" rx="20" fill="url(#shine)" opacity=".5"/><rect x="32" y="258" width="186" height="40" rx="10" fill="#aeb4bd"/>'+knobs+
+    '<rect x="44" y="312" width="162" height="160" rx="14" fill="#23242a"/><rect x="52" y="320" width="146" height="144" rx="9" fill="#ff8a1f" opacity=".5" class="tw"/>'+
+    '<rect x="62" y="420" width="126" height="10" rx="3" fill="#4b4f57"/>'+
+    '<path class="bk" d="M70 420 Q70 372 125 368 Q180 372 180 420Z" fill="#e8b765"/>'+
+    '<rect x="64" y="426" width="122" height="12" rx="3" fill="#9aa0a8"/>'+
+    '<rect x="60" y="482" width="130" height="10" rx="5" fill="#9aa0a8"/>'+
+    steam(100,250,'#fff',0)+steam(160,250,'#fff',1.4)+
+    '<circle cx="190" cy="276" r="7" fill="#ff4d4d" class="tw"/>'+
+    '<rect x="176" y="150" width="62" height="42" rx="10" fill="#fff"/><text x="207" y="178" text-anchor="middle" font-size="20" font-weight="900" fill="#3b1a0f">180°</text>'+
+    T('<ellipse cx="300" cy="498" rx="232" ry="34" fill="#fff"/><ellipse cx="300" cy="494" rx="206" ry="26" fill="#f2e7da"/>'));
+  /* 1: baked layers come out and are stacked with cream */
+  o+=ly(1,T(cyl(150,404,300,68,26,'#d99a3e','#f0c878')+'<path d="M150 404v68" stroke="#fff" stroke-opacity=".18" stroke-width="14"/><circle cx="190" cy="440" r="3" fill="#a96a1d" opacity=".6"/><circle cx="260" cy="452" r="3" fill="#a96a1d" opacity=".6"/><circle cx="360" cy="436" r="3" fill="#a96a1d" opacity=".6"/><circle cx="420" cy="456" r="3" fill="#a96a1d" opacity=".6"/>'+
+    cyl(150,390,300,14,26,'#fff7ea','#fffdf6')+cyl(150,344,300,46,26,'#d99a3e','#f0c878')+'<path d="M150 344v46" stroke="#fff" stroke-opacity=".18" stroke-width="14"/><ellipse cx="300" cy="388" rx="150" ry="26" fill="none" stroke="#d63a5a" stroke-width="6" opacity=".85"/>'));
+  /* 2: frosted by hand */
+  var fr=cyl(138,334,324,138,28,'#ffcfdc','#ffe8ef')+'<path d="M138 334v138" stroke="#fff" stroke-opacity=".5" stroke-width="16"/>';
+  for(i=0;i<20;i++){a=i/20*Math.PI*2;x=300+156*Math.cos(a);y=334+25*Math.sin(a);fr+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="10" fill="#fff"/><circle cx="'+(x-3).toFixed(1)+'" cy="'+(y-3).toFixed(1)+'" r="3" fill="#ffd1df"/>'}
+  for(i=0;i<=14;i++){a=i/14*Math.PI;x=300+150*Math.cos(a);y=472+27*Math.sin(a);fr+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="8" fill="#fff"/><circle cx="'+(x-2).toFixed(1)+'" cy="'+(y-2).toFixed(1)+'" r="2.4" fill="#ffd1df"/>'}
+  fr+='<g class="fl"><path d="M470 250 l-58 60 q-8 8 -2 14 l10 10 q6 6 14 -2 l56 -62Z" fill="#fff" stroke="#e0c6cf"/><path d="M412 312 l-34 34" stroke="#ffb3c8" stroke-width="10" stroke-linecap="round"/></g>';
+  o+=ly(2,T(fr));
+  /* 3: decorated and ready */
+  var t='';
+  for(i=0;i<34;i++){a=r()*Math.PI*2;var rr=Math.sqrt(r());x=300+rr*118*Math.cos(a);y=334+rr*20*Math.sin(a);t+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="9" height="3.6" rx="1.8" fill="'+cols[i%6]+'" transform="rotate('+Math.round(r()*180)+' '+x.toFixed(1)+' '+y.toFixed(1)+')"/>'}
+  [[250,318],[300,308],[350,318]].forEach(function(p){t+='<path d="M'+p[0]+' '+(p[1]-12)+' q8 -14 18 -14" stroke="#2d6a2e" stroke-width="3" fill="none"/><circle cx="'+p[0]+'" cy="'+p[1]+'" r="15" fill="#d90429"/><circle cx="'+(p[0]-5)+'" cy="'+(p[1]-5)+'" r="4" fill="#fff" opacity=".7"/>'});
+  t+='<rect x="293" y="250" width="14" height="60" rx="3" fill="#7bdff2"/><rect x="293" y="262" width="14" height="6" fill="#fff"/><rect x="293" y="278" width="14" height="6" fill="#fff"/><rect x="293" y="294" width="14" height="6" fill="#fff"/><ellipse class="fk" cx="300" cy="238" rx="8" ry="15" fill="#ffb703"/><ellipse class="fk" cx="300" cy="242" rx="4" ry="8" fill="#fff3b0"/>';
+  o+=ly(3,T(t)+star(180,230,14,'#ffd166')+star(560,200,16,'#fff')+star(560,330,12,'#ffd166')+star(300,120,10,'#fff'));
+  return SVG(o,'0 90 600 460');
+}
+
+/* Khan Food Point: real product photos around a paratha chana plate */
+function sceneFood(){
+  var o='';
+  o+=ly(0,'<circle cx="300" cy="320" r="158" fill="#fff" opacity=".5"/>'+circImg(53,300,320,138)+steam(262,170,'#fff',0)+steam(340,170,'#fff',1.3));
+  o+=ly(1,'<g class="fl">'+circImg(47,100,190,66)+'</g><g class="fl" style="animation-delay:-2s">'+circImg(52,500,196,62)+'</g>');
+  o+=ly(2,'<g class="fl" style="animation-delay:-1s">'+circImg(49,100,462,62)+'</g><g class="fl" style="animation-delay:-3s">'+circImg(50,500,462,62)+'</g>');
+  o+=ly(3,'<g class="fl">'+circImg(51,300,92,58)+'</g><g class="fl" style="animation-delay:-2s">'+circImg(48,300,566,52)+'</g>'+star(40,330,12,'#ffd23f')+star(560,330,12,'#ffd23f'));
+  return SVG(o,'0 20 600 600');
+}
+
+/* Warda Drink Corner: an empty glass is filled, iced, then the real products appear */
+function sceneDrink(){
+  var o='',i,bub='',g='M190 150 H410 L388 470 Q386 484 372 484 H228 Q214 484 212 470 Z';
+  for(i=0;i<14;i++){bub+='<circle class="rise" style="animation-delay:'+(i*.37).toFixed(2)+'s" cx="'+(236+((i*47)%130))+'" cy="'+(450-(i*13)%40)+'" r="'+(3+i%3)+'" fill="#fff" opacity=".7"/>'}
+  o+=ly(0,shadowE(300,492,200)+'<rect x="372" y="60" width="14" height="260" rx="7" fill="#e11d2e" transform="rotate(14 379 190)"/><path d="'+g+'" fill="#fff" fill-opacity=".1" stroke="#fff" stroke-opacity=".75" stroke-width="5"/>');
+  o+=ly(1,'<clipPath id="gc"><path d="'+g+'"/></clipPath><g clip-path="url(#gc)"><rect class="grow" x="180" y="200" width="240" height="290" fill="#5a2a0e"/><rect class="grow" x="180" y="200" width="240" height="16" fill="#8a4a1a"/></g><path d="M300 20 q0 60 0 120" class="draw" pathLength="1" stroke="#7a3a12" stroke-width="12" fill="none" stroke-linecap="round"/>');
+  o+=ly(2,'<g class="fl"><rect x="232" y="186" width="46" height="46" rx="9" fill="#cfeaff" fill-opacity=".55" stroke="#fff" stroke-width="2" transform="rotate(-12 255 209)"/><rect x="298" y="178" width="50" height="50" rx="9" fill="#cfeaff" fill-opacity=".55" stroke="#fff" stroke-width="2" transform="rotate(10 323 203)"/><rect x="276" y="220" width="44" height="44" rx="9" fill="#cfeaff" fill-opacity=".5" stroke="#fff" stroke-width="2" transform="rotate(4 298 242)"/></g>'+bub+'<circle cx="412" cy="156" r="34" fill="#ffe66d"/><circle cx="412" cy="156" r="26" fill="#fff3a6"/><path d="M412 156 L412 130 M412 156 L434 143 M412 156 L434 169 M412 156 L412 182 M412 156 L390 169 M412 156 L390 143" stroke="#ffe66d" stroke-width="3"/>');
+  o+=ly(3,'<g class="fl">'+circImg(54,110,300,92,'#ffe66d')+'</g><g class="fl" style="animation-delay:-2s">'+circImg(55,500,330,86,'#f2b441')+'</g><g class="fl" style="animation-delay:-1s">'+circImg(78,300,552,50,'#fff')+'</g>'+star(80,120,14,'#ffd36a')+star(540,120,12,'#fff')+star(300,40,12,'#ffd36a'));
+  return SVG(o,'0 10 600 600');
+}
+
+/* Ali Tailor's: the shop's own stitched pieces, with a tape measure and a stitch line */
+function sceneTailor(){
+  var o='';
+  o+=ly(0,cardImg(57,300,275,190,255,0)+'<path d="M110 470 Q300 520 490 470" stroke="#ffd23f" stroke-width="20" fill="none"/><path d="M110 470 Q300 520 490 470" stroke="#111" stroke-width="20" fill="none" stroke-dasharray="2 14" opacity=".45"/><path d="M490 470 q40 24 20 74" stroke="#ffd23f" stroke-width="16" fill="none" stroke-linecap="round"/>');
+  o+=ly(1,cardImg(60,118,175,180,135,-6)+'<g class="fl"><path d="M500 120 l60 60 M560 120 l-60 60" stroke="#c9ccd1" stroke-width="8" stroke-linecap="round"/><circle cx="500" cy="186" r="14" fill="none" stroke="#d6336c" stroke-width="6"/><circle cx="560" cy="186" r="14" fill="none" stroke="#d6336c" stroke-width="6"/></g>');
+  o+=ly(2,cardImg(58,486,330,140,190,6)+cardImg(59,114,400,140,190,-6)+'<path d="M190 440 Q300 360 420 400" pathLength="1" class="draw" fill="none" stroke="#f3c969" stroke-width="4" stroke-dasharray="1"/><g class="fl"><path d="M420 398 l34 -40" stroke="#e5e7eb" stroke-width="4" stroke-linecap="round"/></g>');
+  o+=ly(3,cardImg(56,300,555,110,140,0)+'<g class="fl"><rect x="430" y="470" width="130" height="40" rx="6" fill="#f3c969"/><circle cx="440" cy="480" r="4" fill="#37332f"/><text x="498" y="496" text-anchor="middle" font-size="12" font-weight="900" fill="#37332f">GENTS · LADIES</text></g>'+star(60,330,14,'#f3c969')+star(300,36,12,'#fff'));
+  return SVG(o,'0 10 600 630');
+}
+
+/* Shade's Beauty Parlour: lit mirror with linked stock photos */
+function sceneBeauty(){
+  var o='',i,bulbs='';
+  for(i=0;i<16;i++){var a=i/16*Math.PI*2;bulbs+='<circle class="tw" style="animation-delay:'+(i*.15).toFixed(2)+'s" cx="'+(300+176*Math.cos(a)).toFixed(1)+'" cy="'+(270+176*Math.sin(a)).toFixed(1)+'" r="9" fill="#fff3b0"/>'}
+  o+=ly(0,'<circle cx="300" cy="270" r="176" fill="none" stroke="#e8b04a" stroke-width="16"/>'+circImg(RM(29368877),300,270,160,'#fdebf3')+bulbs+star(150,140,20,'#fff')+star(450,400,14,'#fff'));
+  o+=ly(1,'<g class="fl">'+circImg(RM(7290123),90,440,68)+'</g><g class="fl" style="animation-delay:-2s">'+circImg(RM(13469411),510,440,68)+'</g>');
+  o+=ly(2,'<g class="fl" style="animation-delay:-1s">'+circImg(RM(3865548),84,110,58)+'</g><g class="fl" style="animation-delay:-3s">'+circImg(RM(34930123),520,100,58)+'</g>');
+  o+=ly(3,'<g class="fl">'+circImg(RM(2281695),300,520,64)+'</g><path d="M60 570 L250 570 L236 600 L60 600 L74 585Z" fill="#c9184a"/><text x="150" y="590" text-anchor="middle" font-size="16" font-weight="900" fill="#fff" letter-spacing="2">BRIDAL · PARTY</text>'+star(540,230,16,'#ffd166'));
+  return SVG(o,'0 20 600 600');
+}
+
+/* Kashmiri Tuition Center: classroom photos over the mountains */
+function sceneSchool(){
+  var o='';
+  o+=ly(0,'<path d="M0 520 L110 300 L180 380 L270 240 L370 400 L450 300 L600 520Z" fill="#8fa8d8" opacity=".5"/><path d="M270 240 L246 282 L270 270 L292 284Z M110 300 L92 334 L112 326 L130 338Z M450 300 L430 336 L452 328 L470 338Z" fill="#fff" opacity=".9"/>'+cardImg(RM(8423011),300,330,220,280,-2));
+  o+=ly(1,cardImg(RM(29659894),122,420,160,210,-9)+'<g class="fl"><rect x="440" y="200" width="14" height="110" rx="4" fill="#ffd166" transform="rotate(28 447 255)"/><path d="M414 306 l10 -22 l18 10Z" fill="#f2d1a5" transform="rotate(28 447 255)"/></g>');
+  o+=ly(2,'<path d="M300 90 L470 154 L300 218 L130 154Z" fill="#111"/><path d="M214 184 v46 q86 40 172 0 v-46 L300 218Z" fill="#222"/><path d="M450 162 v70" stroke="#f5c542" stroke-width="5"/><circle cx="450" cy="238" r="9" fill="#f5c542"/><path d="M300 90 L470 154 L300 218 L130 154Z" fill="url(#shine)" opacity=".4"/>');
+  o+=ly(3,cardImg(RM(5905923),480,420,150,200,8)+star(80,170,18,'#f5c542')+star(540,120,14,'#fff')+star(70,320,12,'#f5c542')+'<path d="M150 560 L450 560 L430 590 L170 590Z" fill="#1d3a8a"/><text x="300" y="581" text-anchor="middle" font-size="16" font-weight="900" fill="#fff" letter-spacing="3">PG TO MATRIC · PG TO 5TH</text>');
+  return SVG(o,'0 20 600 600');
+}
+
+/* Al-Nasir Homeo Clinic: leaf, dropper bottle, doctor, medicines */
+function sceneClinic(){
+  var o='';
+  o+=ly(0,'<circle cx="300" cy="300" r="230" fill="#f4f8e6"/><circle cx="300" cy="300" r="230" fill="none" stroke="#c7d89a" stroke-width="3"/><path d="M300 520 Q290 400 300 300" stroke="#4d7c0f" stroke-width="8" fill="none"/>'+[[300,300,-30],[296,360,50],[302,420,-52],[300,250,18]].map(function(p){return '<ellipse cx="'+(p[0]+(p[2]>0?44:-44))+'" cy="'+p[1]+'" rx="46" ry="20" fill="#5e9c1a" transform="rotate('+(p[2]>0?-24:24)+' '+(p[0]+(p[2]>0?44:-44))+' '+p[1]+')"/>'}).join('')+'<ellipse cx="300" cy="226" rx="20" ry="42" fill="#6ab023"/>','up');
+  o+=ly(1,'<g class="fl">'+circImg(RM(40557468),470,380,88,'#fff')+'</g><path class="drop" d="M470 252 q10 18 0 30 q-10 -12 0 -30Z" fill="#7dd3fc"/>');
+  o+=ly(2,'<g class="fl" style="animation-delay:-2s">'+circImg(RM(7578798),135,420,92)+'</g><circle cx="150" cy="190" r="56" fill="#fff" stroke="#d7e3b0" stroke-width="3"/><circle cx="150" cy="190" r="44" pathLength="1" class="draw" fill="none" stroke="#5e9c1a" stroke-width="9" stroke-dasharray="1" stroke-linecap="round" transform="rotate(-90 150 190)"/><text x="150" y="199" text-anchor="middle" font-size="24" font-weight="900" fill="#3f6212">12H</text>');
+  o+=ly(3,'<path d="M20 90 H170 l20 -34 l30 90 l24 -124 l26 108 l16 -34 H580" pathLength="1" class="draw" fill="none" stroke="#e63946" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1"/><g class="fl" style="animation-delay:-1s">'+circImg(RM(3873150),480,170,66)+'</g>'+star(70,330,12,'#7dd3fc')+star(540,520,12,'#fff'));
+  return SVG(o,'0 20 600 580');
+}
+
+/* Hashmi Electronics: product photos with glow and sound waves */
+function sceneTV(){
+  var o='',i,q='',cols=['#ff4d6d','#ffd166','#06d6a0','#4cc9f0','#b388eb'];
+  o+=ly(0,'<rect x="60" y="80" width="480" height="300" rx="40" fill="#4cc9f0" opacity=".3" filter="url(#blur20)"/>'+cardImg(RM(38975400),300,240,400,250,0));
+  o+=ly(1,cardImg(RM(5202925),150,500,190,130,-4));
+  o+=ly(2,circImg(RM(191877),470,500,86,'#4cc9f0')+[0,1,2].map(function(k){return '<path class="tw" style="animation-delay:'+(k*.4)+'s" d="M'+(360-k*18)+' '+(470-k*10)+' q-16 '+(26+k*12)+' 0 '+(52+k*22)+'" fill="none" stroke="#4cc9f0" stroke-width="4" stroke-linecap="round"/>'}).join(''));
+  for(i=0;i<22;i++){q+='<circle class="tw" style="animation-delay:'+(i*.2).toFixed(1)+'s" cx="'+(70+(i*83)%460)+'" cy="'+(50+(i*47)%520)+'" r="4" fill="'+cols[i%5]+'"/>'}
+  o+=ly(3,q+'<text x="300" y="418" text-anchor="middle" font-size="26" font-weight="900" fill="#e2e8f0" letter-spacing="8">Q-LED</text>'+star(50,100,12,'#fff')+star(550,60,14,'#4cc9f0'));
+  return SVG(o,'0 20 600 600');
+}
+
+/* Al-Khair Pharmacy: pharmacist, capsules and blister packs, delivery */
+function scenePharma(){
+  var o='';
+  o+=ly(0,'<circle cx="300" cy="290" r="200" fill="#0aa3c2"/><circle cx="300" cy="290" r="200" fill="url(#shine)" opacity=".5"/>'+circImg(RM(9629685),300,290,160,'#fff'));
+  o+=ly(1,'<g class="fl">'+circImg(RM(31406906),100,440,74)+'</g><circle cx="100" cy="200" r="42" fill="#fff"/><rect x="92" y="172" width="16" height="56" rx="3" fill="#16a34a"/><rect x="72" y="192" width="56" height="16" rx="3" fill="#16a34a"/>');
+  o+=ly(2,'<g class="fl" style="animation-delay:-2s">'+circImg(RM(3873150),500,440,74)+'</g>');
+  o+=ly(3,'<g class="fl"><path d="M370 540 h120 l-14 70 h-92Z" fill="#fff"/><path d="M400 540 q30 -44 60 0" stroke="#fff" stroke-width="6" fill="none"/><rect x="418" y="558" width="14" height="36" fill="#16a34a"/><rect x="407" y="569" width="36" height="14" fill="#16a34a"/></g><path class="drift" d="M340 570 h-90 M350 590 h-110 M340 610 h-60" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".7"/>'+star(520,110,14,'#fff')+star(80,90,12,'#fff'));
+  return SVG(o,'0 20 600 620');
+}
+
 /* ===== Story engine: sticky stage, step by step as you scroll ===== */
 var REDUCE=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);
 var storyEl=null,storyData=null,storyStep=-1,storySeen=false,storyTick=false;
@@ -733,20 +902,154 @@ function tourSync(h){
   botShow(14000);
 }
 
+/* ===== Polish: motion, reveals, counters, tilt, ticker, bazaar strip ===== */
+var HAS_IO="IntersectionObserver" in window;
+var RV=HAS_IO?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");RV.unobserve(e.target)}})},{threshold:.1,rootMargin:"0px 0px -4% 0px"}):null;
+var PZ=HAS_IO?new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle("paused",!e.isIntersecting)})},{rootMargin:"120px"}):null;
+var CNT=HAS_IO?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);CNT.unobserve(e.target)}})},{threshold:.4}):null;
+var SIO=HAS_IO?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){buildStrip();SIO.disconnect()}})},{rootMargin:"400px"}):null;
+var SPY=null;
+
+function revealIn(root,sel){
+  if(!root)return;
+  var els=root.querySelectorAll(sel||".card,.prod,.fact,.stp,.area,.faq details,.sec>h2,.sec>p,.cta,.rates,.note"),k=0;
+  for(var i=0;i<els.length;i++){
+    var el=els[i];if(el.classList.contains("rv"))continue;
+    el.classList.add("rv");el.style.setProperty("--d",(k%6)*70+"ms");k++;
+    if(RV)RV.observe(el);else el.classList.add("in");
+  }
+}
+function countUp(el){
+  if(el._cu)return;el._cu=1;
+  var to=+el.getAttribute("data-count")||0,suf=el.getAttribute("data-suf")||"";
+  if(REDUCE){el.textContent=to+suf;return}
+  var t0=null,dur=1400;
+  (function f(t){if(t0===null)t0=t;var p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=Math.round(to*e)+suf;if(p<1)requestAnimationFrame(f)})(performance.now());
+}
+function mqHtml(){
+  var one=SHOPS.map(function(s){return '<span><i>'+I(s.ic)+'</i>'+esc(s.name)+'</span>'}).join("");
+  return '<div class="mq" data-pause aria-hidden="true"><div class="mqt">'+one+one+'</div></div>';
+}
+function stripHtml(){
+  return '<section class="sec" id="explore"><div class="shead"><div><h2>Explore the bazaar</h2><p>Every shop has its own little world. Tap a scene to step inside.</p></div>'+
+    '<div class="sarrs"><button type="button" data-strip="-1" aria-label="Scroll left">&lsaquo;</button><button type="button" data-strip="1" aria-label="Scroll right">&rsaquo;</button></div></div>'+
+    '<div class="strip" id="strip" data-pause role="list" aria-label="Shop scenes"></div></section>';
+}
+function buildStrip(){
+  var el=$("#strip");if(!el||el.getAttribute("data-done"))return;
+  el.setAttribute("data-done","1");
+  el.innerHTML=SHOPS.map(function(s){
+    var S=STORY[s.id];if(!S)return "";var f=S.steps[3];
+    return '<a class="tile sg" role="listitem" href="#shop-'+s.id+'" style="'+st(s)+';--tbg:'+f.bg+';--tink:'+f.ink+'" aria-label="Open '+esc(s.name)+'"><div class="tart" aria-hidden="true">'+S.art()+'</div><div class="tcap"><span>'+esc(s.cat)+'</span><b>'+esc(s.name)+'</b></div></a>';
+  }).join("");
+  revealIn(el,".tile");
+}
+function heroFx(){
+  var hero=$(".hero");
+  if(!hero||REDUCE||!(window.matchMedia&&matchMedia("(pointer:fine)").matches))return;
+  hero.addEventListener("pointermove",function(e){
+    var r=hero.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+    hero.style.setProperty("--mx",(x*100).toFixed(1)+"%");hero.style.setProperty("--my",(y*100).toFixed(1)+"%");
+    var stk=hero.querySelector(".stack");if(stk){stk.style.setProperty("--px",((x-.5)*2).toFixed(2));stk.style.setProperty("--py",((y-.5)*2).toFixed(2))}
+  });
+}
+function navSpy(){
+  if(!HAS_IO)return;
+  if(SPY)SPY.disconnect();
+  var links=document.querySelectorAll(".nav a");
+  SPY=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){for(var i=0;i<links.length;i++)links[i].classList.toggle("act",links[i].getAttribute("href")==="#"+e.target.id)}
+  })},{threshold:.35});
+  ["stores","explore","how","areas","faq"].forEach(function(id){var el=document.getElementById(id);if(el)SPY.observe(el)});
+}
+function polishHome(){
+  var v=$("#view");
+  revealIn(v,".sec>h2,.sec>p,.stp,.area,.faq details,.cta,.tstrip,.shead");
+  var c=v.querySelectorAll("[data-count]"),i;
+  for(i=0;i<c.length;i++){if(CNT)CNT.observe(c[i]);else countUp(c[i])}
+  var p=v.querySelectorAll("[data-pause]");for(i=0;i<p.length;i++)if(PZ)PZ.observe(p[i]);
+  var s=$("#strip");if(s){if(SIO)SIO.observe(s);else buildStrip()}
+  heroFx();navSpy();
+}
+function polishShop(){
+  var v=$("#view");
+  revealIn(v,".fact,.rates,.note,.near,.contact,.phead");
+}
+function polishRoute(){
+  var v=$("#view");v.classList.remove("vin");void v.offsetWidth;v.classList.add("vin");
+  var links=document.querySelectorAll(".nav a");for(var i=0;i<links.length;i++)links[i].classList.remove("act");
+}
+
+/* tilt + glare on store cards */
+(function(){
+  var cur=null,v=$("#view");
+  function reset(){if(cur){["--rx","--ry"].forEach(function(k){cur.style.removeProperty(k)});cur=null}}
+  v.addEventListener("pointermove",function(e){
+    if(e.pointerType!=="mouse"||REDUCE)return;
+    var c=e.target.closest?e.target.closest(".card"):null;
+    if(c!==cur)reset();
+    if(!c)return;
+    cur=c;var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+    c.style.setProperty("--rx",((.5-y)*7).toFixed(2)+"deg");c.style.setProperty("--ry",((x-.5)*9).toFixed(2)+"deg");
+    c.style.setProperty("--gx",(x*100).toFixed(0)+"%");c.style.setProperty("--gy",(y*100).toFixed(0)+"%");
+  });
+  v.addEventListener("pointerleave",reset);
+})();
+
+/* add-to-list: flying +1 and badge bump; confetti when a request is sent */
+function flyAdd(btn){
+  if(REDUCE||!btn||!btn.getBoundingClientRect||!Element.prototype.animate)return;
+  var a=btn.getBoundingClientRect(),cb=$("#cartBtn"),c=cb.getBoundingClientRect(),el=document.createElement("div");
+  var sx=a.left+a.width/2,sy=a.top+a.height/2,dx=c.left+c.width/2-sx,dy=c.top+c.height/2-sy;
+  el.className="fly";el.textContent="+1";el.style.left=sx+"px";el.style.top=sy+"px";document.body.appendChild(el);
+  var an=el.animate([{transform:"translate(-50%,-50%) scale(1)",opacity:1},{transform:"translate(calc(-50% + "+(dx*.4)+"px),calc(-50% + "+(dy*.4-70)+"px)) scale(1.3)",opacity:1,offset:.45},{transform:"translate(calc(-50% + "+dx+"px),calc(-50% + "+dy+"px)) scale(.45)",opacity:.25}],{duration:760,easing:"cubic-bezier(.4,0,.2,1)"});
+  an.onfinish=function(){el.remove();cb.classList.remove("bump");void cb.offsetWidth;cb.classList.add("bump")};
+}
+function confetti(x,y){
+  if(REDUCE||!Element.prototype.animate)return;
+  var cols=["#ffc233","#ff7a59","#2ee6b0","#6fb2ff","#ff6fae","#b794ff"],i;
+  for(i=0;i<28;i++){
+    var p=document.createElement("i"),a=Math.random()*Math.PI*2,v=80+Math.random()*170,rot=Math.random()*600;
+    p.className="cf";p.style.left=x+"px";p.style.top=y+"px";p.style.background=cols[i%6];document.body.appendChild(p);
+    (function(p,a,v,rot){p.animate([{transform:"translate(0,0) rotate(0)",opacity:1},{transform:"translate("+(Math.cos(a)*v)+"px,"+(Math.sin(a)*v-90)+"px) rotate("+rot+"deg)",opacity:1,offset:.55},{transform:"translate("+(Math.cos(a)*v*1.15)+"px,"+(Math.sin(a)*v+130)+"px) rotate("+(rot*2)+"deg)",opacity:0}],{duration:1100+Math.random()*500,easing:"cubic-bezier(.2,.7,.3,1)"}).onfinish=function(){p.remove()}})(p,a,v,rot);
+  }
+}
+$("#cartBody").addEventListener("click",function(e){var a=e.target.closest?e.target.closest("a.wa"):null;if(a)confetti(e.clientX,e.clientY)});
+$("#view").addEventListener("click",function(e){var a=e.target.closest?e.target.closest("a.wabig,a.btn.wa"):null;if(a)confetti(e.clientX,e.clientY)});
+
+/* ripple on buttons */
+document.addEventListener("pointerdown",function(e){
+  if(REDUCE||!e.target.closest)return;
+  var t=e.target.closest(".btn,.add,.sbtn,.wabig,.cartbtn,.tourbtn,.chip,.visit");if(!t)return;
+  var r=t.getBoundingClientRect(),s=Math.max(r.width,r.height)*2,i=document.createElement("span");
+  i.className="rip";i.style.cssText="width:"+s+"px;height:"+s+"px;left:"+(e.clientX-r.left-s/2)+"px;top:"+(e.clientY-r.top-s/2)+"px";
+  t.appendChild(i);setTimeout(function(){if(i.parentNode)i.parentNode.removeChild(i)},700);
+});
+
+/* scroll progress bar + header shadow */
+(function(){
+  var bar=$("#sprog"),hd=document.querySelector(".bar"),tick=0;
+  function on(){tick=0;var max=document.documentElement.scrollHeight-innerHeight;bar.style.transform="scaleX("+(max>0?Math.min(1,scrollY/max):0)+")";hd.classList.toggle("scrolled",scrollY>16)}
+  addEventListener("scroll",function(){if(!tick){tick=1;requestAnimationFrame(on)}},{passive:true});
+  addEventListener("resize",on);on();
+})();
+try{sessionStorage.setItem("mzS","1")}catch(e){}
+
 
 /* ===== Router ===== */
-var SECTIONS={stores:1,how:1,areas:1,faq:1};
+var SECTIONS={stores:1,explore:1,how:1,areas:1,faq:1};
 function route(){
   storyEl=null;botCur=null;if(!$("#lb").hidden){$("#lb").hidden=true;document.body.style.overflow=""}
   var h=location.hash.replace("#","");
   if(SECTIONS[h]){
-    if(!$("#grid"))homeView();
+    if(!$("#grid")){homeView();polishHome()}
     var el=document.getElementById(h);if(el)el.scrollIntoView();
     return;
   }
   window.scrollTo(0,0);
-  if(h.indexOf("shop-")===0&&byId(h.slice(5)))shopView(byId(h.slice(5)));
-  else homeView();
+  if(h.indexOf("shop-")===0&&byId(h.slice(5))){shopView(byId(h.slice(5)));polishShop()}
+  else{homeView();polishHome()}
+  polishRoute();
   botThemeApply();
   if(tour.on)tourSync(h);else{$("#tbar").hidden=true;botReveal()}
 }
@@ -815,7 +1118,7 @@ function themeIcon(){$("#themeBtn").innerHTML=I(isDark()?"sun":"moon")}
 document.addEventListener("click",function(e){
   var t=e.target.closest("button");if(!t)return;
   var d=t.dataset;
-  if(d.add){cart[d.add]=(cart[d.add]||0)+1;refresh();if(cart[d.add]===1)toast("Added to your list")}
+  if(d.add){flyAdd(t);cart[d.add]=(cart[d.add]||0)+1;refresh();if(cart[d.add]===1)toast("Added to your list")}
   else if(d.dec){var k=d.dec;cart[k]=(cart[k]||0)-1;if(cart[k]<=0)delete cart[k];refresh()}
   else if(d.copy){copyText(requestText(d.copy),t)}
   else if(d.num){copyText(d.num,t)}
@@ -823,6 +1126,7 @@ document.addEventListener("click",function(e){
   else if(d.cat){cat=d.cat;syncChips();filterGrid()}
   else if(d.lb!==undefined){var sh=byId(location.hash.replace("#shop-",""));if(sh)openLb(sh,+d.lb)}
   else if(d.tour==="start"){tourStart()}
+  else if(d.strip){var sp_=$("#strip");if(sp_)sp_.scrollBy({left:+d.strip*320,behavior:"smooth"})}
   else if(d.skip){var ps_=$("#prodstart");if(ps_)ps_.scrollIntoView({behavior:"smooth"})}
   else if(d.g!==undefined){var el=document.getElementById("g-"+d.g);if(el)el.scrollIntoView({behavior:"smooth"})}
 });
@@ -852,12 +1156,12 @@ document.addEventListener("keydown",function(e){
 window.addEventListener("hashchange",route);
 
 /* ===== Init ===== */
-$("#logoIc").innerHTML=I("shop");
+$("#logoIc").innerHTML=I("shop");$("#spMk").innerHTML=I("shop");
 $("#closeCart").innerHTML=I("x");$("#lbClose").innerHTML=I("x");
 $("#toTop").innerHTML=I("up");
 $("#botListen").innerHTML=I("speaker")+"Listen";
 $("#botHide").innerHTML=I("x")+"Hide";
-$("#copy").textContent="© "+new Date().getFullYear()+" Markezo. Shop details and prices are provided by each shop.";
+$("#copy").textContent="© "+new Date().getFullYear()+" Markezo. Shop details and prices are provided by each shop. Some photos are linked from Pexels.";
 if(!window.speechSynthesis)$("#botListen").hidden=true;
 $("#botListen").addEventListener("click",botListen);
 $("#botHide").addEventListener("click",function(){$("#bot").classList.add("quiet")});

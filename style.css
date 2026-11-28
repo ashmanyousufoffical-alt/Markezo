@@ -97,7 +97,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 .card{position:relative;isolation:isolate;display:flex;flex-direction:column;min-width:0;padding:10px;border-radius:28px;color:#fff;text-decoration:none;
   background:radial-gradient(120% 90% at 100% 0%,rgba(255,255,255,.2),transparent 55%),radial-gradient(90% 70% at 0% 100%,rgba(0,0,0,.28),transparent 60%),linear-gradient(155deg,var(--c1),var(--c2));
   box-shadow:0 14px 30px rgba(0,0,0,.28),0 14px 30px color-mix(in srgb,var(--c2) 55%,transparent),inset 0 1px 0 rgba(255,255,255,.3);
-  transition:transform .2s,box-shadow .2s;animation:cardin .5s backwards;animation-delay:calc(min(var(--i,0),8)*45ms)}
+  transition:transform .2s,box-shadow .2s}
 .card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(rgba(255,255,255,.2) 1.2px,transparent 1.5px) 0 0/16px 16px;opacity:.5;z-index:-1;pointer-events:none;-webkit-mask-image:linear-gradient(160deg,#000,transparent 70%);mask-image:linear-gradient(160deg,#000,transparent 70%)}
 .card:hover{transform:translateY(-6px);box-shadow:0 24px 44px rgba(0,0,0,.34),0 24px 44px color-mix(in srgb,var(--c2) 70%,transparent),inset 0 1px 0 rgba(255,255,255,.38)}
 @keyframes cardin{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
@@ -379,6 +379,144 @@ footer small{flex-basis:100%;font-size:.82rem}
   .stick{position:relative;top:0;height:min(720px,92vh)}
   .ly,.tx,.draw,.grow,.ann{transition:none}
   .fl,.tw,.fk,.rise,.drift,.drop{animation:none}
+}
+
+.bk{transform-box:fill-box;transform-origin:50% 100%;animation:sbake 5s ease-in-out infinite}
+@keyframes sbake{0%{transform:scale(1,.3);fill:#f6e7bd}55%{transform:scale(1,1);fill:#e9b866}100%{transform:scale(1,1);fill:#c98a3c}}
+@media (prefers-reduced-motion:reduce){.bk{animation:none}}
+
+/* ===== Polish: intro, motion, reveals, ticker, bazaar strip ===== */
+/* intro splash (pure CSS so it can never get stuck) */
+#splash{position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:radial-gradient(900px 500px at 80% 0%,hsl(160 90% 42%/.4),transparent 60%),radial-gradient(700px 500px at 0% 100%,hsl(40 100% 55%/.3),transparent 60%),#0E1424;color:#fff;animation:splashOut .8s cubic-bezier(.75,0,.2,1) 1.55s forwards}
+.nosplash #splash{display:none}
+@keyframes splashOut{to{transform:translateY(-100%);visibility:hidden}}
+.sp-in{display:grid;justify-items:center;gap:16px;text-align:center;animation:spFade .5s ease 1.25s forwards}
+@keyframes spFade{to{opacity:0;transform:scale(.96)}}
+.sp-mk{width:84px;height:84px;border-radius:26px;background:linear-gradient(135deg,var(--accent,#00A37A),#FFC233);display:grid;place-items:center;color:#06231B;font-size:2.6rem;animation:spPop .8s cubic-bezier(.2,1.4,.3,1) both;box-shadow:0 20px 50px rgba(0,163,122,.45)}
+.sp-mk svg{width:1em;height:1em}
+@keyframes spPop{from{transform:scale(.2) rotate(-25deg);opacity:0}to{transform:none;opacity:1}}
+.sp-w{font-family:var(--display);font-size:clamp(2.4rem,9vw,4rem);font-weight:800;letter-spacing:-.04em;display:flex}
+.sp-w i{font-style:normal;display:inline-block;animation:spLet .6s cubic-bezier(.2,.9,.3,1) both;animation-delay:calc(.35s + var(--k)*55ms)}
+@keyframes spLet{from{transform:translateY(60%);opacity:0}to{transform:none;opacity:1}}
+.sp-t{margin:0;font-size:1rem;letter-spacing:.2em;text-transform:uppercase;opacity:0;animation:spT .6s ease .9s forwards;color:rgba(255,255,255,.75)}
+@keyframes spT{to{opacity:1}}
+
+/* scroll progress + header */
+#sprog{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),var(--mark),#ff7a59);z-index:120;pointer-events:none}
+.bar{transition:box-shadow .3s ease}
+.bar .wrap{transition:padding .3s ease}
+.bar.scrolled{box-shadow:0 10px 30px rgba(0,0,0,.14)}
+.bar.scrolled .wrap{padding-block:6px}
+.logo .mk{transition:transform .5s cubic-bezier(.2,1.4,.3,1)}
+.logo:hover .mk{transform:rotate(-12deg) scale(1.12)}
+.nav a{position:relative;transition:color .2s,background .2s}
+.nav a.act{color:var(--fg);background:var(--line)}
+
+/* page transition */
+#view.vin{animation:vin .55s cubic-bezier(.2,.8,.2,1)}
+@keyframes vin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* reveal on scroll */
+html.js .rv{opacity:0}
+html.js .rv.in{opacity:1;animation:rvin .75s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:var(--d,0ms)}
+@keyframes rvin{from{opacity:0;transform:translateY(28px) scale(.985)}to{opacity:1;transform:none}}
+
+/* hero: blobs, spotlight, word reveal */
+.hero{--mx:70%;--my:20%}
+.blob{position:absolute;border-radius:50%;filter:blur(46px);opacity:.55;pointer-events:none;animation:blobmove 16s ease-in-out infinite alternate}
+.blob.b1{width:340px;height:340px;right:-60px;top:-80px;background:#00c896}
+.blob.b2{width:300px;height:300px;left:-80px;bottom:-90px;background:#ffb347;animation-duration:19s}
+.blob.b3{width:240px;height:240px;left:38%;bottom:-120px;background:#ff5d8f;opacity:.4;animation-duration:22s}
+@keyframes blobmove{to{transform:translate(50px,-40px) scale(1.2)}}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(460px circle at var(--mx) var(--my),rgba(255,255,255,.1),transparent 60%)}
+.hero>div{position:relative;z-index:1}
+.w{display:inline-block;animation:wup .9s cubic-bezier(.2,.9,.25,1) backwards;animation-delay:calc(var(--hd,120ms) + var(--i)*80ms)}
+html:not(.nosplash) .w{--hd:1500ms}
+@keyframes wup{from{transform:translateY(70%) rotate(3deg);opacity:0}to{transform:none;opacity:1}}
+.eyebrow i{animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 9px rgba(46,230,176,0)}}
+.stack{transform:translate(calc(var(--px,0)*14px),calc(var(--py,0)*10px));transition:transform .25s ease-out}
+.stats b{display:inline-block;min-width:1ch}
+.tourbtn{animation:tourGlow 3.2s ease-in-out infinite}
+@keyframes tourGlow{50%{box-shadow:0 0 0 8px rgba(255,255,255,.08)}}
+
+/* ticker */
+.mq{overflow:hidden;margin:20px -2px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.mqt{display:flex;width:max-content;animation:mq 48s linear infinite}
+.mq:hover .mqt{animation-play-state:paused}
+.mqt span{display:inline-flex;align-items:center;gap:9px;padding:9px 20px;margin-right:12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-weight:700;font-size:.9rem;white-space:nowrap}
+.mqt i{display:grid;place-items:center;font-style:normal;color:var(--accent);font-size:1.1rem}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* cards: tilt + glare */
+.card{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.card:hover{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-6px)}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.3),transparent 55%);opacity:0;transition:opacity .25s;pointer-events:none;z-index:1}
+.card:hover::after{opacity:1}
+.lg2 img{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.card:hover .lg2 img{transform:scale(1.07)}
+
+/* Explore the bazaar strip */
+.shead{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.sarrs{display:flex;gap:8px}
+.sarrs button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;font-size:1.3rem;transition:background .2s,transform .2s}
+.sarrs button:hover{background:var(--fg);color:var(--bg);transform:scale(1.06)}
+.strip{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 24px;scrollbar-width:thin;-webkit-overflow-scrolling:touch;min-height:380px}
+.tile{flex:0 0 min(300px,76vw);scroll-snap-align:start;position:relative;display:grid;grid-template-rows:1fr auto;aspect-ratio:4/5;border-radius:28px;overflow:hidden;text-decoration:none;background:var(--tbg);color:var(--tink);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;box-shadow:0 14px 30px color-mix(in srgb,var(--c2) 40%,transparent)}
+.tile:hover{transform:translateY(-8px) scale(1.015);box-shadow:0 26px 50px color-mix(in srgb,var(--c2) 55%,transparent)}
+.tart{display:grid;place-items:center;padding:14px 10px 0;min-height:0}
+.tart svg{width:100%;height:100%;max-height:100%}
+.tile .ly{opacity:1;transform:none;transition:none}
+.tile .draw{stroke-dashoffset:0;transition:none}
+.tile .grow{transform:scaleY(1);transition:none}
+.tcap{padding:14px 18px 18px;background:linear-gradient(to top,rgba(0,0,0,.28),transparent)}
+.tcap span{display:block;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.tcap b{display:block;font-family:var(--display);font-size:1.35rem;letter-spacing:-.02em;margin-top:2px}
+
+/* micro interactions */
+.btn,.add,.sbtn,.wabig,.cartbtn,.tourbtn,.chip,.visit{position:relative;overflow:hidden}
+.rip{position:absolute;border-radius:50%;transform:scale(0);background:rgba(255,255,255,.45);animation:ripple .65s ease-out;pointer-events:none}
+@keyframes ripple{to{transform:scale(1);opacity:0}}
+.fly{position:fixed;z-index:300;pointer-events:none;background:var(--mark);color:var(--mark-fg);font-weight:800;font-size:.85rem;border-radius:999px;padding:4px 10px;transform:translate(-50%,-50%);box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.cartbtn.bump{animation:bump .5s cubic-bezier(.2,1.5,.3,1)}
+.cartbtn.bump b{animation:bumpb .5s ease}
+@keyframes bump{40%{transform:scale(1.12)}}
+@keyframes bumpb{40%{transform:scale(1.35) rotate(-8deg)}}
+.cf{position:fixed;z-index:310;width:9px;height:14px;border-radius:2px;pointer-events:none}
+.search{transition:box-shadow .3s,transform .3s}
+.search:focus-within{box-shadow:0 12px 40px rgba(0,0,0,.45),0 0 0 6px rgba(255,194,51,.25);transform:translateY(-2px)}
+.stp .n{transition:transform .5s cubic-bezier(.2,1.5,.3,1)}
+.stp:hover .n{transform:rotate(-8deg) scale(1.12)}
+.area{transition:transform .25s,box-shadow .25s}
+.area:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.faq details{transition:box-shadow .25s,background .25s}
+.faq details[open]{box-shadow:var(--shadow)}
+.fact{transition:transform .25s}
+.fact:hover{transform:translateX(4px)}
+
+/* shop banner life */
+.sh .big{animation:sfloat 7s ease-in-out infinite}
+.sh::before{animation:glowmove 14s ease-in-out infinite alternate}
+@keyframes glowmove{to{transform:translate(40px,-20px) scale(1.12)}}
+.wabig{transition:transform .25s,box-shadow .25s}
+.wabig:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(0,0,0,.3)}
+
+/* footer */
+footer{position:relative}
+footer::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--mark),#ff7a59,var(--accent));background-size:300% 100%;animation:fbar 8s linear infinite}
+@keyframes fbar{to{background-position:300% 0}}
+
+/* off-screen things stop animating */
+.paused,.paused *{animation-play-state:paused!important}
+
+@media (max-width:560px){.tile{flex-basis:78vw}.blob{opacity:.4}}
+@media (prefers-reduced-motion:reduce){
+  #splash{display:none}
+  html.js .rv{opacity:1}
+  html.js .rv.in{animation:none}
+  .w,.blob,.mqt,.eyebrow i,.tourbtn,.sh .big,.sh::before,footer::before,#view.vin{animation:none}
+  .card,.card:hover{transform:none}
+  .stack{transform:none}
 }
 
 
